@@ -9,15 +9,9 @@ documentation.
 ## Install
 
 ``` sh
-pip install DatosBook
+python3 -m venv .venv
+source .venv/bin/activate
+pip install jupyterlab
+pip install nbdev
+nbdev_preview
 ```
-
-## How to use
-
-Fill me in please! Don’t forget code examples:
-
-``` python
-1+1
-```
-
-    2
