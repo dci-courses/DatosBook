@@ -1,0 +1,151 @@
+---
+title: "Clasificador dia/noche"
+format:
+  html:
+    css: clasificador-dia-noche.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+
+```javascript
+// Video
+let video;
+let classifier;
+let modelLoaded = 'https://teachablemachine.withgoogle.com/models/bXy2kDNi/';
+let label = 'esperando...';
+
+// STEP 1: Load the model!
+function preload() {
+  classifier = ml5.imageClassifier(modelLoaded);
+}
+
+function setup() {
+  createCanvas(640, 520);
+  // Create the video
+  video = createCapture(VIDEO);
+  video.hide();
+
+  // STEP 2: Start classifying
+  classifyVideo();
+}
+
+// STEP 2: Classify!
+function classifyVideo() {
+  classifier.classify(video, gotResults); // Corrected this line
+}
+
+function draw() {
+  // Draw the video
+  image(video, 0, 0);
+
+  // STEP 4: Draw the label
+  textSize(30);
+  textAlign(CENTER, CENTER);
+  fill(255);
+  text(label, width / 2, height - 16);
+
+  // Pick an emoji, the "default" is a placeholder
+  let emoji = "🫷"; // Placeholder emoji
+  if (label == "nighttime") {
+    emoji = "☽"; // Nighttime emoji
+  } else if (label == "daytime") {
+    emoji = "🌞"; // Daytime emoji, corrected to use else if for proper conditional logic
+  }
+
+  // Draw the emoji
+  textSize(256);
+  text(emoji, width / 2, height / 2);
+}
+
+// STEP 3: Get the classification!
+function gotResults(error, results) {
+  // Something went wrong!
+  if (error) {
+    console.error(error);
+    return;
+  }
+  // Update the label with the result from the classifier
+  label = results[0].label;
+}
+```
+
+<div id="p5-sketch">
+  <div id="canvas-container"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+<script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+
+<script>
+(function() {
+  const sketch = (p) => {
+    let video;
+    let classifier;
+    let modelURL = 'https://teachablemachine.withgoogle.com/models/bXy2kDNi/model.json';
+    let label = 'esperando...';
+
+    // STEP 1: Load the model!
+    p.preload = function() {
+      classifier = ml5.imageClassifier(modelURL);
+    }
+
+    p.setup = function() {
+      p.createCanvas(640, 520).parent('canvas-container');
+      // Create the video
+      video = p.createCapture(p.VIDEO);
+      video.hide();
+
+      // STEP 2: Start classifying
+      p.classifyVideo();
+    }
+
+    // STEP 2 classify!
+    p.classifyVideo = function() {
+      classifier.classify(video, p.gotResults);
+    }
+
+    p.draw = function() {
+      // Draw the video
+      p.image(video, 0, 0);
+
+      // STEP 4: Draw the label
+      p.textSize(30);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.fill(255);
+      p.text(label, p.width / 2, p.height - 16);
+
+      // Pick an emoji, the "default" is a placeholder
+      let emoji = "🫷"; // Placeholder emoji
+      if (label == "nighttime") {
+        emoji = "☽"; // Nighttime emoji
+      } else if (label == "daytime") {
+        emoji = "🌞"; // Daytime emoji, corrected to use else if for proper conditional logic
+      }
+
+      // Draw the emoji
+      p.textSize(256);
+      p.text(emoji, p.width / 2, p.height / 2);
+    }
+
+    // STEP 3: Get the classification!
+    p.gotResults = function(error, results) {
+      // Something went wrong!
+      if (error) {
+        console.error(error);
+        return;
+      }
+      // Update the label with the result from the classifier
+      label = results[0].label;
+      // Classify again
+      p.classifyVideo();
+    }
+  };
+
+  new p5(sketch);
+})();
+</script>
