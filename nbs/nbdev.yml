@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "DatosBook"
+  site-url: "https://dci-courses.github.io/DatosBook"
+  description: "Repositorio pque recolecta el contenido de Ingeniería de Datos y lo presenta en una página web usando nbdev."
+  repo-branch: main
+  repo-url: "https://github.com/dci-courses/DatosBook"
