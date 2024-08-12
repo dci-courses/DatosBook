@@ -1,0 +1,49 @@
+ 
+---
+title: "Explorando Teachable Machine"
+format: html
+---
+
+## Introducción
+
+Bienvenidos a esta actividad en la que vamos a explorar el fascinante mundo de la inteligencia artificial de manera práctica y accesible. 
+Hoy aprenderemos a crear y entrenar un modelo de aprendizaje automático utilizando [**Teachable Machine de Google**](https://teachablemachine.withgoogle.com/train/image). 
+Esta herramienta no requiere conocimientos de programación, lo que la hace perfecta para que cualquiera pueda experimentar y entender cómo funcionan los modelos de inteligencia artificial. 
+
+
+[![Teachable Machine](imagesTM/00_tm_ilustration.png){width=50% .center}](https://teachablemachine.withgoogle.com/train/image)
+
+## Objetivo
+
+Aprender los conceptos básicos del aprendizaje automático mediante la creación y entrenamiento de un modelo simple utilizando imágenes en Teachable Machine de Google.
+
+## Instrucciones Paso a Paso
+
+### 1. Acceso a Teachable Machine
+
+En tu computadora o dispositivo móvil, abre un navegador web y visita el sitio web de Teachable Machine: [https://teachablemachine.withgoogle.com/train/image](https://teachablemachine.withgoogle.com/train/image).
+
+### 2. Crear Clases
+
+Dentro de la categoría de **Imágenes**, verás la opción para crear diferentes **Clases**.
+Haz clic en "Add Class" para agregar una nueva clase. Por ejemplo, podrías crear una clase para diferentes objetos, como un lápiz y una taza.
+Proporciona ejemplos para cada clase. Puedes tomar fotos utilizando la cámara de tu dispositivo para capturar imágenes de los objetos que deseas utilizar.
+
+### 3. Entrenar el Modelo
+
+Después de agregar suficientes ejemplos para cada clase (recomendamos al menos 10 ejemplos por clase), haz clic en el botón “**Train Model**” para comenzar el entrenamiento.
+Espera mientras Teachable Machine procesa los datos. Esto puede tardar unos minutos.
+
+### 4. Probar el Modelo
+
+Una vez que el modelo esté entrenado, utiliza la cámara para probar tu modelo.
+Prueba con nuevos objetos para ver si el modelo puede reconocer correctamente lo que le muestras.
+
+### 5. Reflexiona
+
+¿El modelo reconoció correctamente las nuevas entradas? ¿Por qué crees que funcionó o no funcionó como esperabas?
+Piensa en cómo podrías mejorar el modelo agregando más ejemplos o ajustando las clases.
+
+## Discusión en Clase
+
+Al finalizar, discutiremos en clase lo que aprendieron. Piensa en cómo podrías usar este tipo de tecnología en la vida real o en proyectos futuros.

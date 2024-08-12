@@ -1,0 +1,29 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_core.ipynb
+      - section: "Reglas de Asociaci\xF3n"
+        contents:
+          - "Reglas de Asociaci\xF3n/00_intro_reglas_asociacion.ipynb"
+          - "Reglas de Asociaci\xF3n/01_implementacion_reglas_asociacion.ipynb"
+      - section: observablejs
+        contents:
+          - observablejs/03_objs.qmd
+      - section: p5js
+        contents:
+          - p5js/02_p5testing.qmd
+      - section: semana-1
+        contents:
+          - semana-1/semana-1.qmd
+      - section: semana-2
+        contents:
+          - section: clasificador-dia-noche
+            contents:
+              - semana-2/clasificador-dia-noche/clasificador-dia-noche.qmd
+          - section: snake-game
+            contents:
+              - semana-2/snake-game/snake-game.qmd
+      - section: transformersjs
+        contents:
+          - transformersjs/04_transformers js.qmd

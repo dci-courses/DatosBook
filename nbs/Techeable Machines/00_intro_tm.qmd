@@ -1,0 +1,47 @@
+---
+title: "Introducción a Teachable Machine de Google"
+format: html
+---
+
+## ¿Qué es Teachable Machine?
+
+[**Teachable Machine**](https://teachablemachine.withgoogle.com/) es una herramienta desarrollada por Google que permite a cualquier persona, sin necesidad de conocimientos de programación, crear modelos de aprendizaje automático de forma sencilla e intuitiva. Esta herramienta está diseñada para democratizar el acceso a la inteligencia artificial, permitiendo a usuarios de todos los niveles de experiencia experimentar con la creación y entrenamiento de modelos que pueden reconocer patrones en imágenes, sonidos o poses.
+
+![Teachable Machine](imagesTM/00_tm_ilustration.png){width=50% .center}
+
+## ¿Cómo Funciona?
+
+Teachable Machine funciona mediante un proceso simple de tres pasos: **Entrenar**, **Evaluar** y **Exportar**. Aquí te explicamos cada uno de ellos:
+
+1. **Entrenar:**
+   - Los usuarios crean clases y proporcionan ejemplos para cada una, ya sea subiendo archivos, utilizando la cámara o el micrófono. Por ejemplo, podrías entrenar un modelo para reconocer diferentes objetos al mostrarle imágenes de cada uno.
+   - La herramienta utiliza estos ejemplos para aprender y formar un modelo de aprendizaje automático que pueda reconocer nuevas entradas similares.
+
+2. **Evaluar:**
+   - Una vez que el modelo está entrenado, puedes probarlo inmediatamente utilizando nuevas entradas. Por ejemplo, si entrenaste un modelo para reconocer imágenes de gatos y perros, puedes probarlo mostrando nuevas imágenes y ver si el modelo las clasifica correctamente.
+   - La evaluación se realiza en tiempo real, permitiendo ajustar y mejorar el modelo de manera iterativa.
+
+3. **Exportar:**
+   - Después de entrenar y evaluar tu modelo, Teachable Machine te permite exportarlo para su uso en proyectos más amplios. Puedes descargar el modelo y utilizarlo en aplicaciones web, dispositivos móviles, u otros entornos de desarrollo.
+   - La exportación es compatible con varias plataformas, incluyendo TensorFlow.js, lo que facilita la integración en diferentes proyectos.
+
+## Aplicaciones de Teachable Machine
+
+Teachable Machine se utiliza en una amplia variedad de aplicaciones y proyectos. Aquí algunos ejemplos de cómo puede ser utilizado:
+
+- **Educación:** Profesores y estudiantes pueden usar Teachable Machine para aprender sobre inteligencia artificial de manera práctica, creando proyectos interactivos que expliquen conceptos complejos de forma accesible.
+- **Proyectos Creativos:** Artistas y creadores pueden integrar modelos entrenados en Teachable Machine en instalaciones de arte, música generativa, o aplicaciones interactivas, donde las respuestas se basan en imágenes, sonidos o movimientos capturados en tiempo real.
+- **Prototipos Rápidos:** Desarrolladores y diseñadores pueden usar la herramienta para crear rápidamente prototipos de aplicaciones que requieren reconocimiento de patrones, como aplicaciones de clasificación de imágenes o interfaces interactivas que responden a gestos.
+
+## Ejemplos de Uso
+
+- **Clasificación de Imágenes:** Puedes entrenar un modelo para diferenciar entre diferentes tipos de frutas, y luego usarlo en una aplicación que identifique la fruta que estás sosteniendo frente a la cámara.
+- **Reconocimiento de Sonidos:** Entrena un modelo para reconocer diferentes sonidos, como aplausos o silbidos, y utiliza esos sonidos como desencadenantes para acciones específicas en un proyecto de arte interactivo.
+- **Detección de Poses:** Utiliza la herramienta para crear un modelo que detecte diferentes poses corporales, ideal para aplicaciones de fitness que necesitan monitorear y corregir posturas en tiempo real.
+
+## Recursos y Enlaces
+
+- [Página Principal de Teachable Machine](https://teachablemachine.withgoogle.com/): Visita el sitio oficial para comenzar a crear tus propios modelos.
+
+
+
