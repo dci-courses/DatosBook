@@ -1,12 +1,10 @@
 website:
   sidebar:
     contents:
-      - index.ipynb
-      - 00_core.ipynb
-      - section: "Reglas de Asociaci\xF3n"
+      - section: "Bienvenido"
         contents:
-          - "Reglas de Asociaci\xF3n/00_intro_reglas_asociacion.ipynb"
-          - "Reglas de Asociaci\xF3n/01_implementacion_reglas_asociacion.ipynb"
+          - "Boenvenido/00_Bienvenido"
+           
       - section: observablejs
         contents:
           - observablejs/03_objs.qmd
