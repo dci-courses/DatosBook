@@ -13,5 +13,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install jupyterlab
 pip install nbdev
+nbdev_install_quarto
 nbdev_preview
 ```
