@@ -1,6 +1,7 @@
 ---
 title: "Introducción a Teachable Machine de Google"
-format: html
+description: Primeros pasos
+sidebar_position: 2
 ---
 
 ## ¿Qué es Teachable Machine?

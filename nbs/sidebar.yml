@@ -2,7 +2,7 @@ website:
   sidebar:
     contents:
       - index.qmd
-      - section: Techeable Machines
+      - section: techeable-machines
         contents:
-          - Techeable Machines/00_intro_tm.qmd
-          - Techeable Machines/01_actividad_1.qmd
+          - techeable-machines/00_intro.qmd
+          - techeable-machines/01_actividad_1.qmd
