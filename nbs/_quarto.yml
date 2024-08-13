@@ -1,6 +1,7 @@
 project:
   type: website
 
+lang: es
 format:
   html:
     theme:
