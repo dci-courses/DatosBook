@@ -6,7 +6,7 @@ format:
     theme:
       light: cosmo
     css: styles.css
-    toc: false
+    toc: true
 
 website:
   twitter-card: true

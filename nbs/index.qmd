@@ -1,1 +1,18 @@
-![](Bienvenido/images/00_sub.png){width=50% .center}
+---
+title: "Bienvenido al Libro de Datos"
+format: html
+---
+
+
+Este sitio web es una introducción a tu Libro de Datos. Aquí encontrarás toda la información relevante, organizada de manera clara y accesible. 
+Este libro está diseñado para ayudarte a explorar y entender los datos, así como para guiarte a través de los conceptos clave y ejemplos prácticos.
+
+![Libro de Datos](Techeable_Machines/imagesTM/00_tm_ilustration.png){width=60% .center}
+
+## Contenido del Libro de Datos
+
+A continuación, se muestra el contenido que ya hemos compilado en este libro. Haz clic en los enlaces para acceder a las diferentes secciones:
+
+- **[Machine Learning con Teachable Machine](Techeable_Machines/00_intro_tm.html):** Una visión general de los conceptos básicos y la importancia de los datos en el análisis.
+
+ 

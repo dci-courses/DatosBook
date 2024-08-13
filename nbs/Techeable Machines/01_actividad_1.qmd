@@ -1,14 +1,13 @@
- 
 ---
 title: "Explorando Teachable Machine"
 format: html
 ---
 
-## Introducción
+## Actividad 1
 
-Bienvenidos a esta actividad en la que vamos a explorar el fascinante mundo de la inteligencia artificial de manera práctica y accesible. 
-Hoy aprenderemos a crear y entrenar un modelo de aprendizaje automático utilizando [**Teachable Machine de Google**](https://teachablemachine.withgoogle.com/train/image). 
-Esta herramienta no requiere conocimientos de programación, lo que la hace perfecta para que cualquiera pueda experimentar y entender cómo funcionan los modelos de inteligencia artificial. 
+Bienvenidos a esta actividad, cuyo objetivo es explorar los conceptos fundamentales de la inteligencia artificial mediante un enfoque práctico. 
+En esta sesión, aprenderemos a crear y entrenar un modelo de aprendizaje automático utilizando Teachable Machine de Google. 
+Esta herramienta es accesible para usuarios sin conocimientos previos de programación, lo que facilita la comprensión del funcionamiento básico de los modelos de inteligencia artificial.
 
 
 [![Teachable Machine](imagesTM/00_tm_ilustration.png){width=50% .center}](https://teachablemachine.withgoogle.com/train/image)
