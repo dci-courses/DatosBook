@@ -12,8 +12,10 @@ website:
             contents:
               - imagenes_como_dato/01_imgDato.qmd
               - imagenes_como_dato/02_imgDato.qmd
+          - section: Biblioteca P5
+            contents:
+              - p5/01_p5.qmd
           - section: Modelos TM + P5
             contents:
               - tm_p5/01_clasificador.qmd
               - tm_p5/02_codigo_clasificador.qmd
-              - tm_p5/03_p5.qmd
