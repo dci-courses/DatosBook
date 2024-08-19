@@ -1,0 +1,49 @@
+---
+title: "Parte 1: Comprensión de Imágenes en Blanco y Negro"
+format: html
+---
+
+### Parte 1: Comprensión de Imágenes en Blanco y Negro
+
+#### Introducción
+
+1. **Concepto Básico**:
+   - Un computador "ve" las imágenes como una cuadrícula de pequeños puntos llamados **píxeles**.
+   - En una imagen en blanco y negro, cada píxel tiene un valor que puede ser **0** (blanco) o **1** (negro). Estos valores permiten al computador representar diferentes áreas de la imagen.
+
+2. **Cómo se Forma una Matriz de Números**:
+   - Una **matriz** es una tabla ordenada de números, donde cada número corresponde a un píxel en la imagen.
+   - Cuando una computadora procesa una imagen, cada píxel se convierte en un número. En una imagen en blanco y negro, un píxel blanco se convierte en **0** y un píxel negro en **1**. Estos números se organizan en una tabla (matriz) que la computadora utiliza para "ver" la imagen.
+
+#### Actividad Principal
+
+1. **Paso 1: Observación de la Imagen Original**
+   - **Instrucciones**: Observa la **Imagen 1**. Esta es una forma simple y de baja resolución representada por un triángulo negro hecho de 28 píxeles (16 píxeles negros y 12 píxeles blancos).
+
+![Imagen 1: Triángulo Negro](imagesTM/Figure_2_Black_triangle_with_each_pixel_outlined_ac9f45d1bc.jpg){width=50% .center}
+
+2. **Paso 2: Delimitación de los Píxeles**
+   - **Instrucciones**: Observa la **Imagen 2**, donde cada píxel de la figura está claramente delimitado. Aquí puedes ver cómo se distribuyen los píxeles negros y blancos en la cuadrícula de 7x4.
+
+![Imagen 2: Píxeles Delimitados](imagesTM/Figure_2_Black_triangle_with_each_pixel_outlined_ff7d98e613.jpg){width=50% .center}
+
+3. **Paso 3: Representación de la Imagen como una Matriz de Píxeles**
+   - **Instrucciones**: Ahora, mira la **Imagen 3**, donde los píxeles se han convertido en una matriz de números "1" y "0". Los **1** representan los píxeles negros, y los **0** representan los píxeles blancos.
+
+![Imagen 3: Matriz de Píxeles](imagesTM/Figure_3_A_demonstration_of_the_1_s_and_0_s_in_the_matrix_that_makes_up_the_triangle_image_bbc158793c.jpg){width=50% .center}
+
+4. **Paso 4: Conversión a una Matriz Numérica Completa**
+   - **Instrucciones**: Finalmente, observa la **Imagen 4**, que presenta la matriz completa en formato numérico, con los **1** y **0** organizados de acuerdo a la cuadrícula.
+
+[0, 0, 0, 1, 0, 0, 0,
+ 0, 0, 1, 1, 1, 0, 0,
+ 0, 1, 1, 1, 1, 1, 0,
+ 1, 1, 1, 1, 1, 1, 1]
+
+
+#### Reflexión
+
+- Reflexiona sobre cómo el computador usa estos valores para "ver" y procesar la imagen. Considera cómo cambiarían las cosas si se modificaran los valores en la matriz.
+
+- Pregunta para discutir: ¿Qué sucedería si intercambiamos todos los **1** por **0** y viceversa? ¿Cómo cambiaría la imagen?
+

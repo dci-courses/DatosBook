@@ -1,0 +1,64 @@
+---
+title: "Notas sobre p5.js"
+format: html
+toc-depth: 2
+---
+ 
+
+# ¿Qué es p5.js?
+
+[p5.js](https://p5js.org/) es una librería de JavaScript que facilita la creación de gráficos y animaciones interactivas en la web. Está diseñada para ser accesible a artistas, diseñadores y educadores, permitiendo que personas con poca experiencia en programación puedan crear proyectos visuales complejos de manera intuitiva.
+
+El término "sketch" en p5.js se refiere a un programa o código corto que se utiliza para crear y experimentar con gráficos interactivos. Este enfoque de trabajo basado en "sketches" es ideal para iterar rápidamente, probar ideas creativas y visualizar conceptos sin necesidad de construir aplicaciones completas desde el principio.
+
+# Usos de p5.js
+
+p5.js se utiliza principalmente para:
+
+- **Creación de gráficos y animaciones**: Permite dibujar formas, manipular imágenes, y crear animaciones complejas en tiempo real.
+- **Interacción con el usuario**: Puedes capturar la entrada del usuario a través del teclado, ratón, cámara, micrófono, y otros dispositivos.
+- **Visualización de datos**: Es ideal para crear visualizaciones interactivas de datos, permitiendo que los usuarios exploren grandes conjuntos de datos de manera visual.
+- **Prototipado rápido**: Ideal para crear prototipos de aplicaciones visuales o interfaces interactivas rápidamente.
+- **Educación**: Es ampliamente utilizado en el ámbito educativo para enseñar conceptos de programación, especialmente en la intersección de la tecnología y el arte.
+
+# Características Principales
+
+- **Simplicidad**: p5.js está diseñado para ser fácil de aprender y usar, incluso para principiantes en programación.
+- **Interactividad**: Incluye funciones integradas para manejar la entrada del usuario, como el movimiento del ratón y las pulsaciones de teclas.
+- **Acceso a multimedia**: Facilita el trabajo con video, sonido, e imágenes, permitiendo manipulación en tiempo real.
+- **Compatibilidad con la Web**: p5.js funciona directamente en el navegador, lo que facilita compartir proyectos en línea.
+- **Extensibilidad**: La comunidad ha desarrollado una gran cantidad de extensiones y complementos que amplían las capacidades de p5.js, como [p5.sound](https://p5js.org/reference/#/libraries/p5.sound) para manipulación de audio.
+
+# Estructura Básica de un Sketch en p5.js
+
+En p5.js, un "sketch" es una pieza de código que define cómo se dibujan y se animan los elementos gráficos en la pantalla. Un sketch generalmente incluye dos funciones principales:
+
+1. **`setup()`**: Se ejecuta una vez al inicio del programa y se utiliza para inicializar variables, configurar el entorno, y crear el lienzo donde se dibujará.
+2. **`draw()`**: Se ejecuta repetidamente (por defecto, 60 veces por segundo) y se utiliza para dibujar y actualizar la visualización en el lienzo. Esta función es donde ocurre la mayor parte de la animación y la interacción en tiempo real.
+
+# Ejemplo Básico
+
+```javascript
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  ellipse(200, 200, 50, 50);
+}
+```
+
+# Documentación y Ejemplos
+
+Una de las mayores fortalezas de p5.js es su **documentación extensa y bien organizada**. La [documentación de p5.js](https://p5js.org/reference/) no solo describe detalladamente cada función y característica de la librería, sino que también incluye **numerosos ejemplos prácticos** que los usuarios pueden utilizar para aprender y experimentar. Estos ejemplos son ideales para aquellos que están comenzando, ya que permiten entender cómo funciona cada función en un contexto real.
+
+Además, la documentación incluye una sección de tutoriales que abordan desde conceptos básicos hasta técnicas avanzadas, ayudando a los usuarios a desarrollar sus habilidades paso a paso. Esta combinación de una guía completa y ejemplos prácticos hace que el aprendizaje de p5.js sea accesible y agradable.
+
+# Recursos Principales
+
+- **[Página Oficial de p5.js](https://p5js.org/)**: La mejor fuente para obtener la librería, leer la documentación oficial, y acceder a ejemplos.
+- **[Referencia de p5.js](https://p5js.org/reference/)**: Documentación completa de todas las funciones disponibles en p5.js.
+- **[p5.js Web Editor](https://editor.p5js.org/)**: Un editor en línea donde puedes escribir, ejecutar y compartir tus sketches p5.js sin necesidad de instalar nada.
+- **[p5.js GitHub Repository](https://github.com/processing/p5.js)**: El repositorio oficial de p5.js donde puedes encontrar el código fuente y contribuir al proyecto.
+- **[Foro de p5.js](https://discourse.processing.org/c/p5-js/14)**: Un lugar para hacer preguntas, compartir proyectos, y conectarse con otros usuarios de p5.js.

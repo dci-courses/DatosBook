@@ -1,0 +1,47 @@
+---
+title: "Parte 2: Comprensión de Imágenes en Color"
+format: html
+---
+
+#### Introducción
+
+1. **Concepto Básico**:
+   - Las imágenes en color se representan utilizando el modelo **RGB** (Rojo, Verde, Azul). 
+     Cada píxel en una imagen en color tiene tres valores: uno para el rojo, uno para el verde y uno para el azul. Estos valores pueden variar entre **0** (ausencia del color) y **255** (máxima intensidad del color).
+   - Combinando estos tres valores, se pueden crear diferentes colores en cada píxel.
+
+2. **Cómo se Forma una Matriz de Números en Imágenes en Color**:
+   - A diferencia de las imágenes en blanco y negro, las imágenes en color requieren tres matrices separadas: una para cada color primario (rojo, verde y azul).
+   - Cada píxel tiene tres números que representan la intensidad de cada uno de los colores rojo, verde y azul. Estas tres matrices se combinan para formar la imagen en color que vemos.
+
+#### Actividad Principal
+
+1. **Paso 1: Observación de la Imagen en Color**
+   - **Instrucciones**: Observa la **Imagen 1**. Esta es una versión en color de la figura escalonada que hemos estado utilizando. Aquí, los píxeles tienen diferentes combinaciones de rojo, verde y azul.
+
+   ![Imagen 1: Triángulo Verde](imagesTM/Figure_4_The_same_28_pixel_triangle_as_before_but_with_a_splash_of_color_6b3d8039f9.jpg){width=50% .center}
+
+2. **Paso 2: Delimitación de los Píxeles en Color**
+   - **Instrucciones**: Observa la **Imagen 2**, donde cada píxel de la figura en color está claramente delimitado.
+
+   *(Dibuja la misma figura en una cuadrícula de 7x4, pero ahora con colores visibles y delimitados para cada píxel.)*
+
+3. **Paso 3: Representación de la Imagen como Tres Matrices de Píxeles**
+   - **Instrucciones**: Ahora, observa cómo se puede representar la imagen en color mediante tres matrices separadas, una para cada canal de color (rojo, verde, azul).
+
+   *(Crea las tres matrices, una para cada color, que representen la intensidad de rojo, verde y azul en cada píxel de la cuadrícula.)*
+
+4. **Paso 4: Conversión a una Matriz Numérica Completa para Cada Color**
+   - **Instrucciones**: Finalmente, representa las matrices completas en formato numérico para cada canal de color (rojo, verde y azul), organizadas de acuerdo a la cuadrícula.
+
+   *(Genera las matrices numéricas completas en tu cuaderno, asignando los valores correctos para cada color según lo que observas en la cuadrícula.)*
+
+
+#### Reflexión
+
+- Reflexiona sobre cómo la adición de color hace que la imagen sea más compleja y sobre cómo un computador utiliza estos tres valores para interpretar y mostrar la imagen.
+
+- **Preguntas para discutir**: 
+  - ¿Cómo crees que cambiarían los colores si modificamos los valores en una de las matrices?
+  - ¿Qué sucedería si todos los valores del canal rojo fueran **255** (máxima intensidad)?
+  - ¿Qué efectos observas si uno de los canales (rojo, verde o azul) está completamente apagado (todos los valores en **0**)?

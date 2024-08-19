@@ -2,7 +2,18 @@ website:
   sidebar:
     contents:
       - index.qmd
-      - section: Teachable Machines
+      - section: C01 - Intro a Modelos Pre-Entrenados
         contents:
-          - techeable-machines/00_intro.qmd
-          - techeable-machines/01_actividad_1.qmd
+          - section: Teachable Machines
+            contents:
+              - techeable-machines/00_intro.qmd
+              - techeable-machines/01_actividad_1.qmd
+          - section: Procesamiento de Imágenes
+            contents:
+              - imagenes_como_dato/01_imgDato.qmd
+              - imagenes_como_dato/02_imgDato.qmd
+          - section: Modelos TM + P5
+            contents:
+              - tm_p5/01_clasificador.qmd
+              - tm_p5/02_codigo_clasificador.qmd
+              - tm_p5/03_p5.qmd

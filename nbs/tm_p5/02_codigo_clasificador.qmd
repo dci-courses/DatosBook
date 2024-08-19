@@ -1,0 +1,141 @@
+ 
+---
+title: "Código Clasificador día/noche"
+format:
+  html:
+    css: clasificador.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+Esta aplicación captura video en tiempo real desde la cámara del usuario y utiliza un modelo de aprendizaje automático, cargado desde Teachable Machine, 
+para clasificar cada cuadro del video como "día" o "noche". 
+El resultado de la clasificación se muestra en la pantalla junto con un emoji representativo: un sol para "día" y una luna para "noche". 
+Además, la aplicación ofrece un botón que permite reiniciar la cámara, reiniciando la captura de video y volviendo a clasificar el entorno. 
+Toda la interfaz está diseñada para actualizarse en tiempo real, proporcionando una experiencia interactiva y visualmente intuitiva para el usuario.
+
+### 1. Definición de Variables
+
+```javascript
+let video;
+let classifier;
+let modelLoaded = 'https://teachablemachine.withgoogle.com/models/bXy2kDNi/';
+let label = 'esperando...';
+let resetButton;
+```
+
+- **`video`**: Esta variable guardará la captura de video en vivo desde la cámara.
+- **`classifier`**: Guardará el clasificador de imágenes que se utilizará para identificar si es "día" o "noche".
+- **`modelLoaded`**: Es la URL donde se encuentra el modelo de aprendizaje automático que vamos a utilizar.
+- **`label`**: Almacena la etiqueta (texto) que indica si es "día" o "noche". Inicialmente se establece como "esperando...".
+- **`resetButton`**: Esta variable guardará el botón que se usará para reiniciar la cámara.
+
+### 2. Cargar el Modelo
+
+```javascript
+function preload() {
+  classifier = ml5.imageClassifier(modelLoaded);
+}
+```
+
+- **`preload()`**: Es una función que se ejecuta antes que cualquier otra cosa en el programa. Aquí, se carga el modelo de aprendizaje automático desde la URL que definimos antes en `modelLoaded` y se guarda en `classifier`.
+
+### 3. Configurar el Entorno
+
+```javascript
+function setup() {
+  createCanvas(640, 520); // Ajustar la altura del lienzo para que se ajuste al video
+  
+  // Crear el video
+  video = createCapture(VIDEO);
+  video.size(640, 480); // Ajustar el tamaño del video para que se ajuste al ancho del lienzo
+  video.hide();
+
+  // PASO 2: Comenzar a clasificar
+  classifyVideo();
+}
+```
+
+- **`setup()`**: Esta función se ejecuta una vez al principio del programa.
+  - **`createCanvas(640, 520)`**: Crea un espacio (lienzo) de 640x520 píxeles en donde se mostrará el video y otros elementos.
+  - **`video = createCapture(VIDEO)`**: Inicia la captura de video desde la cámara.
+  - **`video.size(640, 480)`**: Ajusta el tamaño del video para que encaje dentro del lienzo.
+  - **`video.hide()`**: Oculta el elemento HTML del video, ya que lo vamos a dibujar manualmente en el lienzo.
+  - **`classifyVideo()`**: Inicia el proceso de clasificación del video en vivo.
+
+### 4. Clasificar el Video
+
+```javascript
+function classifyVideo() {
+  classifier.classify(video, gotResults);
+}
+```
+
+- **`classifyVideo()`**: Esta función utiliza el clasificador (`classifier`) para analizar el video y determinar si es "día" o "noche". Cuando se obtienen resultados, se llama a la función `gotResults()`.
+
+### 5. Dibujar el Video y la Etiqueta
+
+```javascript
+function draw() {
+  // Dibujar el video
+  image(video, 0, 0);
+
+  // PASO 4: Dibujar la etiqueta
+  textSize(30);
+  textAlign(CENTER, CENTER);
+  fill(255);
+  text(label, width / 2, height - 16);
+
+  // Elegir un emoji, el "predeterminado" es un marcador de posición
+  let emoji = "🫷"; // Emoji predeterminado
+  if (label == "nighttime") {
+    emoji = "☽"; // Emoji para la noche
+  } else if (label == "daytime") {
+    emoji = "🌞"; // Emoji para el día
+  }
+
+  // Dibujar el emoji
+  textSize(256);
+  text(emoji, width / 2, height / 2);
+}
+```
+
+- **`draw()`**: Esta función se ejecuta continuamente (muchas veces por segundo) y se encarga de dibujar en el lienzo.
+  - **`image(video, 0, 0)`**: Dibuja el video en vivo en la esquina superior izquierda del lienzo.
+  - **`text(label, width / 2, height - 16)`**: Dibuja la etiqueta (por ejemplo, "día" o "noche") centrada en la parte inferior del lienzo.
+  - **`text(emoji, width / 2, height / 2)`**: Dibuja un emoji grande en el centro del lienzo. El emoji cambia según si la etiqueta indica "día" o "noche".
+
+### 6. Obtener los Resultados
+
+```javascript
+function gotResults(error, results) {
+  // Si algo salió mal
+  if (error) {
+    console.error(error);
+    return;
+  }
+  // Actualizar la etiqueta con el resultado del clasificador
+  label = results[0].label;
+}
+```
+
+- **`gotResults()`**: Esta función recibe los resultados de la clasificación. Si hay un error, lo muestra en la consola. Si la clasificación es exitosa, actualiza la etiqueta (`label`) con el resultado, que puede ser "día" o "noche".
+
+### 7. Reiniciar la Cámara
+
+```javascript
+function resetCamera() {
+  video.remove();  // Eliminar la captura de video actual
+  video = createCapture(VIDEO); // Reiniciar la captura de video
+  video.size(640, 480); // Asegurar que el nuevo video tenga el tamaño correcto
+  video.hide();
+  classifyVideo();  // Reiniciar la clasificación
+}
+```
+
+- **`resetCamera()`**: Esta función se usa para reiniciar la captura de video. Elimina la captura actual y la reinicia, asegurándose de que el nuevo video tenga el tamaño correcto, y luego reinicia el proceso de clasificación.
+
+### Resumen
+Este código toma un video en vivo desde la cámara, lo procesa usando un modelo de aprendizaje automático, y determina si la escena capturada es "día" o "noche", mostrando un emoji correspondiente en el centro del video. Es un ejemplo simple pero poderoso de cómo se puede usar la programación para interactuar con tecnología de aprendizaje automático en tiempo real.

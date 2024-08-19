@@ -1,0 +1,106 @@
+---
+title: "Clasificador de Día y Noche"
+description: Ejemplo de modelo pre-entranado funcionando
+---
+
+ 
+<div id="p5-sketch">
+  <div id="canvas-container"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+<script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+
+<script>
+(function() {
+  const sketch = (p) => {
+    let video;
+    let classifier;
+    let label = 'esperando...';
+    let resetButton;
+    let modelURL = 'https://teachablemachine.withgoogle.com/models/bXy2kDNi/model.json';
+
+    // STEP 1: Load the model!
+    p.preload = function() {
+      classifier = ml5.imageClassifier(modelURL);
+    }
+
+    p.setup = function() {
+      p.createCanvas(700, 520).parent('canvas-container');
+      // Create the video
+      video = p.createCapture(p.VIDEO);
+      video.size(650, 480);
+      video.hide();
+
+      // STEP 2: Start classifying
+      p.classifyVideo();
+
+      // Create the reset button
+      resetButton = p.createButton('Actualizar Cámara');
+      
+      resetButton.position(800, 700); // Position at the bottom, below the canvas
+      resetButton.size(300, 50); // Adjust the button to match the width of the video
+      resetButton.style('font-size', '16px'); // Set font size
+      resetButton.style('background-color', '#007BFF'); // Set background color
+      resetButton.style('color', '#FFFFFF'); // Set text color
+      resetButton.style('border', 'none'); // Remove border
+      resetButton.style('border-radius', '5px'); // Add border radius
+      resetButton.style('cursor', 'pointer'); // Change cursor to pointer when hovering
+      resetButton.mousePressed(resetCamera);
+    }
+
+    // STEP 2: Classify!
+    p.classifyVideo = function() {
+      classifier.classify(video, p.gotResults);
+    }
+
+    p.draw = function() {
+      // Draw the video
+      p.image(video, 50, 0);
+
+      // STEP 4: Draw the label
+      p.textSize(30);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.fill(255);
+      p.text(label, p.width / 2, p.height - 16);
+
+      // Pick an emoji, the "default" is a placeholder
+      let emoji = "🫷"; // Placeholder emoji
+      if (label == "nighttime") {
+        emoji = "☽"; // Nighttime emoji
+      } else if (label == "daytime") {
+        emoji = "🌞"; // Daytime emoji
+      }
+
+      // Draw the emoji
+      p.textSize(256);
+      p.text(emoji, p.width / 2, p.height / 2);
+    }
+
+    // STEP 3: Get the classification!
+    p.gotResults = function(error, results) {
+      // Something went wrong!
+      if (error) {
+        console.error(error);
+        return;
+      }
+      // Update the label with the result from the classifier
+      label = results[0].label;
+      // Classify again
+      p.classifyVideo();
+    }
+
+    function resetCamera() {
+      video.remove();  // Remove the current video capture
+      video = p.createCapture(p.VIDEO); // Restart the video capture
+      video.size(640, 480); // Ensure the new video has the correct size
+      video.hide();
+      p.classifyVideo();  // Restart classification
+    }
+  };
+
+  new p5(sketch);
+})();
+</script>
