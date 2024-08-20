@@ -15,6 +15,7 @@ website:
           - section: Biblioteca P5
             contents:
               - p5/01_p5.qmd
+              - p5/02_p5_ini_project.qmd
           - section: Modelos TM + P5
             contents:
               - tm_p5/01_clasificador.qmd

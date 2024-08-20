@@ -1,0 +1,79 @@
+---
+title: Como usar un Proyecto p5.js en VSCode
+format: html
+toc-depth: 2
+---
+
+# Introducción
+
+En esta guía, aprenderás a descargar un proyecto básico de [p5.js](https://p5js.org/), 
+configurarlo y utilizarlo con [Visual Studio Code (VSCode)](https://code.visualstudio.com/). 
+p5.js es una poderosa librería de JavaScript que facilita la creación de gráficos y animaciones interactivas en la web. 
+Utilizar [VSCode](https://code.visualstudio.com/) como tu entorno de desarrollo te permitirá aprovechar características como la autocompletación, 
+la depuración y la integración con [Git](https://git-scm.com/).
+
+# Paso 1: Descargar el Proyecto p5.js
+
+Primero, vamos a descargar un proyecto básico de p5.js desde un enlace. Puedes obtener el proyecto en un archivo ZIP y luego extraerlo en tu computadora.
+
+- [Descargar Proyecto p5.js](https://ejemplo.com/p5js-proyecto-basico.zip) <!-- Reemplaza este enlace con el enlace real al archivo ZIP -->
+
+Después de descargarlo, extrae el contenido del archivo ZIP en una carpeta de tu elección.
+
+# Paso 2: Configurar el Proyecto en VSCode
+
+Una vez que hayas descargado el proyecto, sigue estos pasos para abrirlo y configurarlo en VSCode.
+
+1. **Abrir VSCode**: Inicia Visual Studio Code en tu computadora.
+2. **Abrir la Carpeta del Proyecto**: 
+   - Haz clic en `File > Open Folder` (Archivo > Abrir Carpeta).
+   - Navega hasta la carpeta donde has extraído el proyecto y selecciónala.
+3. **Instalar Extensiones Recomendadas**:
+   - **Live Server**: Instala la extensión "Live Server" desde el marketplace de VSCode para poder ejecutar tu proyecto p5.js en un servidor local. Esto es útil para ver los cambios en tiempo real.
+   - **JavaScript (ES6) code snippets**: Instala esta extensión para obtener autocompletado y snippets de código mientras trabajas con JavaScript.
+
+# Paso 3: Ejecutar el Proyecto
+
+Con el proyecto abierto en VSCode, ahora es el momento de ejecutarlo.
+
+1. **Abrir el Archivo Principal**:
+   - Navega hasta el archivo principal de tu sketch p5.js, generalmente llamado `index.html` o `sketch.js`.
+2. **Iniciar Live Server**:
+   - Haz clic derecho en `index.html` y selecciona "Open with Live Server". Esto abrirá tu proyecto en un navegador web y ejecutará el sketch p5.js en tiempo real.
+3. **Ver los Resultados**:
+   - El navegador debería mostrar la visualización generada por tu sketch p5.js. Cada vez que hagas un cambio en tu código, el navegador se actualizará automáticamente.
+
+# Estructura del Proyecto
+
+El proyecto p5.js que has descargado tiene una estructura básica que es común para la mayoría de los sketches p5.js:
+
+```
+p5js-proyecto-basico/
+│
+├── index.html        # Archivo HTML que carga el sketch
+├── sketch.js         # Archivo JavaScript que contiene el código p5.js
+├── style.css         # Archivo CSS opcional para agregar estilos personalizados
+└── README.md         # Documentación del proyecto
+```
+
+- **`index.html`**: Este archivo HTML incluye el lienzo donde se dibuja el sketch p5.js y enlaza los archivos JavaScript y CSS.
+- **`sketch.js`**: Este archivo contiene el código p5.js donde defines las funciones `setup()` y `draw()` para crear tus gráficos y animaciones.
+- **`style.css`**: Archivo opcional para agregar estilos personalizados al proyecto.
+- **`README.md`**: Información adicional sobre el proyecto, instrucciones de uso, etc.
+
+# Paso 4: Modificar y Personalizar el Proyecto
+
+Ahora que el proyecto está funcionando, puedes empezar a modificar el código en `sketch.js` o crear nuevos archivos para expandir tu sketch. Aquí hay algunas ideas para comenzar:
+
+- **Cambiar los colores y formas**: Modifica las funciones de dibujo para cambiar cómo se ven los gráficos.
+- **Agregar interacción**: Usa funciones como `mousePressed()` o `keyPressed()` para que tu sketch responda a las acciones del usuario.
+- **Integrar multimedia**: Agrega imágenes, videos o sonido para hacer tu proyecto más interactivo.
+
+# Recursos Adicionales
+
+Si necesitas más ayuda o inspiración, aquí tienes algunos recursos útiles:
+
+- **[Documentación de p5.js](https://p5js.org/reference/)**: Referencia completa de p5.js.
+- **[p5.js GitHub Repository](https://github.com/processing/p5.js)**: Código fuente de p5.js.
+- **[Foro de p5.js](https://discourse.processing.org/c/p5-js/14)**: Comunidad de usuarios de p5.js.
+
