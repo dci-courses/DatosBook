@@ -20,3 +20,6 @@ website:
             contents:
               - tm_p5/01_clasificador.qmd
               - tm_p5/02_codigo_clasificador.qmd
+          - section: p5 + ml5
+            contents:
+              - p5_ml5/01_sound_classifier.qmd
