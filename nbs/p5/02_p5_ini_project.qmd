@@ -16,7 +16,7 @@ la depuración y la integración con [Git](https://git-scm.com/).
 
 Primero, vamos a descargar un proyecto básico de p5.js desde un enlace. Puedes obtener el proyecto en un archivo ZIP y luego extraerlo en tu computadora.
 
-- [Descargar Proyecto p5.js](https://ejemplo.com/p5js-proyecto-basico.zip) <!-- Reemplaza este enlace con el enlace real al archivo ZIP -->
+- [Descargar Proyecto p5.js](https://github.com/dci-courses/DatosBook/raw/main/code/day-night.zip)
 
 Después de descargarlo, extrae el contenido del archivo ZIP en una carpeta de tu elección.
 
