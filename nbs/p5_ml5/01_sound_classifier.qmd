@@ -49,13 +49,13 @@ format: html
       // Options for the SpeechCommands18w model, the default probabilityThreshold is 0
       let options = { probabilityThreshold: 0.7 };
       // Load SpeechCommands18w sound classifier model
-      classifier = ml5.classify("SpeechCommands18w", options);
+      classifier = ml5.soundClassifier("SpeechCommands18w", options);
     };
 
     p.setup = function() {
       p.createCanvas(650, 450);
       // Classify the sound from microphone in real time
-      classifier.classify(gotResult); // Este es el método correcto, no classifier.classifyStart
+      classifier.classifyStart(gotResult); // Este es el método correcto, no classifier.classifyStart
     };
 
     p.draw = function() {
@@ -94,11 +94,7 @@ format: html
     }
 
     // A function to run when we get any errors and the results
-    function gotResult(error, results) {
-      if (error) {
-        console.error(error);
-        return;
-      }
+    function gotResult(results) {
       // The results are in an array ordered by confidence
       console.log(results);
       // Load the first label to the text variable displayed on the canvas
@@ -107,7 +103,7 @@ format: html
       }
     }
 
-    new p5(sketch);
   }; 
+    new p5(sketch);
 })();
 </script>
