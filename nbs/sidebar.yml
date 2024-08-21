@@ -24,3 +24,8 @@ website:
             contents:
               - p5_ml5/01_sound_classifier.qmd
               - p5_ml5/02_codigo_clasificador_sonido.qmd
+      - section: C10 - Usando Github en Windows
+        contents:
+          - section: Github Desktop
+            contents:
+              - intro_github/01_github_desktop.qmd
