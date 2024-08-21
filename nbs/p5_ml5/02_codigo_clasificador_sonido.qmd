@@ -1,0 +1,181 @@
+ 
+---
+title: "Código Clasificador de Sonido"
+format:
+  html:
+    css: clasificador.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+
+ 
+
+# Introducción
+
+Esta aplicación escucha comandos de voz en tiempo real a través del micrófono del usuario y utiliza un modelo de aprendizaje automático, **SpeechCommands18w**, cargado desde `ml5.js`, para clasificar cada comando de voz en una de las 18 palabras predefinidas. El resultado de la clasificación se muestra en la pantalla, donde cada palabra reconocida se destaca en grande. Además, todas las palabras que el modelo puede reconocer se muestran en el canvas para guiar al usuario sobre qué puede decir. La interfaz está diseñada para actualizarse en tiempo real, proporcionando una experiencia interactiva y visualmente intuitiva para el usuario.
+
+## Estructura HTML
+
+Primero, necesitamos crear la estructura HTML donde se mostrará el canvas para la visualización de los resultados.
+
+```html
+<div id="p5-sketch">
+  <div id="canvas-container"></div>
+</div>
+```
+
+Este contenedor (`div`) es donde `p5.js` generará el canvas para mostrar las palabras detectadas.
+
+## Cargando las Bibliotecas
+
+Para que el proyecto funcione, es necesario incluir las bibliotecas `p5.js` y `ml5.js` en el documento. Puedes hacerlo de la siguiente manera:
+
+```javascript
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+```
+
+Estas líneas de código aseguran que ambas bibliotecas estén disponibles para su uso.
+
+## Inicialización del Modelo de Clasificación
+
+El primer paso en nuestro script es inicializar el clasificador de sonido utilizando el modelo **SpeechCommands18w**. Vamos a definir la estructura básica de nuestro script:
+
+```javascript
+<script>
+(function() {
+  const sketch = (p) => {
+    // Inicialización del método de clasificación de sonido con el modelo SpeechCommands18w
+    let classifier;
+
+    // Array con las 18 palabras del modelo SpeechCommands18w
+    let words = [
+      "zero", "one", "two", "three", "four", "five", "six", 
+      "seven", "eight", "nine", "up", "down", "left", 
+      "right", "go", "stop", "yes", "no"
+    ];
+
+    // Variable para mostrar los resultados en el canvas
+    let predictedWord = "";
+```
+
+En este bloque, definimos un array `words` que contiene las palabras que el modelo puede reconocer. La variable `predictedWord` almacenará la palabra reconocida en tiempo real.
+
+### Cargando el Modelo
+
+Para cargar el modelo de sonido, usamos la función `preload` de `p5.js`, que asegura que el modelo se cargue antes de que el sketch comience a ejecutarse.
+
+```javascript
+    p.preload = function() {
+      // Opciones para el modelo, estableciendo un umbral de probabilidad de 0.7
+      let options = { probabilityThreshold: 0.7 };
+      // Cargar el modelo de clasificación de sonido SpeechCommands18w
+      classifier = ml5.soundClassifier("SpeechCommands18w", options);
+    };
+```
+
+Aquí, configuramos el `probabilityThreshold` a 0.7, lo que significa que solo se mostrarán predicciones con una confianza del 70% o más.
+
+### Configuración del Canvas
+
+A continuación, configuramos el canvas donde se visualizarán las palabras reconocidas y las palabras que el modelo puede identificar.
+
+```javascript
+    p.setup = function() {
+      // Crear el canvas donde se mostrará la interfaz
+      let canvas = p.createCanvas(700, 520).parent("canvas-container");
+    
+      // Clasificar el sonido del micrófono en tiempo real
+      classifier.classify(gotResult);  
+    };
+```
+
+Este bloque crea un canvas de 700x520 píxeles y establece la clasificación del sonido en tiempo real.
+
+### Dibujando en el Canvas
+
+Ahora, definimos cómo se mostrarán las palabras en el canvas, tanto las opciones que el usuario puede decir como la palabra reconocida.
+
+```javascript
+    p.draw = function() {
+      // Fondo blanco
+      p.background(250);
+
+      // Mostrar las palabras posibles en el canvas
+      displayWords();
+
+      // Si el modelo ha reconocido alguna palabra, la muestra en el canvas
+      if (predictedWord !== "") {
+        p.fill(211, 107, 255);
+        p.textAlign(p.CENTER, p.CENTER);
+        p.textSize(64);
+        p.text(predictedWord, p.width / 2, 90);
+      }
+    };
+```
+
+Este código dibuja un fondo blanco en el canvas, muestra las palabras posibles en tres columnas, y si el modelo reconoce una palabra, esta se muestra en el centro del canvas.
+
+### Visualización de las Palabras
+
+Las palabras que el modelo puede reconocer se muestran en columnas en el canvas:
+
+```javascript
+    // Función para mostrar las 18 palabras posibles en el canvas
+    function displayWords() {
+      p.textAlign(p.CENTER, p.CENTER);
+      p.textSize(32);
+      p.fill(96);
+      p.text("¡Di una de estas palabras!", p.width / 2, 40);
+
+      let x = 125;
+      let y = 150;
+
+      // Las palabras aparecen en 3 columnas y 6 filas
+      for (let i = 0; i < words.length; i++) {
+        p.fill(158);
+        p.text(words[i], x, y);
+        y += 50;
+        if ((i + 1) % 6 === 0) {
+          x += 200;
+          y = 150;
+        }
+      }
+    }
+```
+
+Las palabras se distribuyen en tres columnas y seis filas, con un encabezado que indica al usuario que diga una de las palabras.
+
+### Manejo de Resultados
+
+Finalmente, definimos la función que manejará los resultados de la clasificación:
+
+```javascript
+    // Función que se ejecuta cuando hay un resultado de la clasificación
+    function gotResult(error, results) {
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      // Los resultados se ordenan por confianza, se muestra la palabra con mayor confianza
+      if (results && results.length > 0) {
+        predictedWord = results[0].label;
+      }
+    }
+
+    new p5(sketch);
+  }; 
+})();
+</script>
+```
+
+Esta función verifica si hubo un error en la clasificación y, si no lo hubo, actualiza `predictedWord` con la palabra más probable identificada por el modelo.
+
+## Referencias
+
+Para obtener más información sobre cómo utilizar `ml5.js` y los distintos modelos disponibles, puedes consultar la [documentación oficial de ml5.js](https://docs.ml5js.org/#/reference/sound-classifier). 
+Aquí encontrarás detalles sobre la configuración de diferentes modelos, opciones avanzadas y ejemplos adicionales para ayudarte a ampliar y personalizar tu aplicación.

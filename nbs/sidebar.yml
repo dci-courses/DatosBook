@@ -23,3 +23,4 @@ website:
           - section: p5 + ml5
             contents:
               - p5_ml5/01_sound_classifier.qmd
+              - p5_ml5/02_codigo_clasificador_sonido.qmd
