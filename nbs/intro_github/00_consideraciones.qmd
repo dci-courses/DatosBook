@@ -1,0 +1,6 @@
+---
+title: "Antes de empezar"
+format: html
+---
+
+**Se asume que el lector posee una cuenta de GitHub [creada](https://github.com/signup).**

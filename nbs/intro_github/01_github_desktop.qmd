@@ -1,5 +1,9 @@
 ---
-title: "Github Desktop"
+title: "Clonar a traves de HTTPS"
 format: html
 ---
 
+# Paso a paso
+
+1. Si su email no está verificado, deberá verificarlo antes de continuar.
+2. 
