@@ -1,0 +1,163 @@
+---
+title: "Snake Game"
+format:
+  html:
+    css: snake-game.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+
+
+
+<div id="p5-sketch">
+  <div id="canvas-container"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+
+<script>
+(function() {
+  const sketch = (p) => {
+    let snake;
+    let rez = 20; // Resolution factor for scaling the game
+    let food;
+    let w; // Width of the game field in "game units"
+    let h; // Height of the game field in "game units"
+
+    // Setup function: called once at the start
+    p.setup = function() {
+      p.createCanvas(400, 400).parent('canvas-container'); // Create a 400x400 pixel canvas
+      w = p.floor(p.width / rez); // Calculate the width of the game field in game units
+      h = p.floor(p.height / rez); // Calculate the height of the game field in game units
+      p.frameRate(5); // Set the game speed to 5 frames per second
+      snake = new Snake(); // Create a new instance of the Snake class
+      foodLocation(); // Place food at an initial random location
+    }
+
+    // Generate a new location for the food
+    function foodLocation() {
+      let x = p.floor(p.random(w)); // Random position on the X axis
+      let y = p.floor(p.random(h)); // Random position on the Y axis
+      food = p.createVector(x, y); // Create a vector for the food position
+    }
+
+    // Function that is called every time a key is pressed
+    p.keyPressed = function() {
+      // Change the direction of the snake based on the key pressed
+      if (p.keyCode === p.LEFT_ARROW) {
+        snake.setDir(-1, 0); // Move left
+      } else if (p.keyCode === p.RIGHT_ARROW) {
+        snake.setDir(1, 0); // Move right
+      } else if (p.keyCode === p.DOWN_ARROW) {
+        snake.setDir(0, 1); // Move down
+      } else if (p.keyCode === p.UP_ARROW) {
+        snake.setDir(0, -1); // Move up
+      } else if (p.key == ' ') {
+        snake.grow(); // Grow the snake when spacebar is pressed
+      }
+    }
+
+    // Draw function: called in a loop to animate the game
+    p.draw = function() {
+      p.scale(rez); // Scale everything by the resolution factor
+      p.background(220); // Set the background color
+      if (snake.eat(food)) {
+        foodLocation(); // If the snake eats the food, generate a new food location
+      }
+      snake.update(); // Update the snake's position
+      snake.show(); // Draw the snake
+
+      // Check if the game has ended (snake collides with itself or the edge)
+      if (snake.endGame()) {
+        console.log("END GAME"); // Print a message to the console
+        p.background(255, 0, 0); // Change the background color to red to indicate game over
+        p.noLoop(); // Stop the draw loop, ending the game
+      }
+
+      // Draw the food
+      p.noStroke(); // No border for the food
+      p.fill(255, 0, 0); // Set the food color to red
+      p.rect(food.x, food.y, 1, 1); // Draw the food as a square
+    }
+
+    // Snake class
+    class Snake {
+      constructor() {
+        this.body = []; // Array to store snake body segments
+        this.body[0] = p.createVector(p.floor(w / 2), p.floor(h / 2)); // Initial position in the center
+        this.xdir = 0; // Initial direction on the X axis
+        this.ydir = 0; // Initial direction on the Y axis
+        this.len = 0; // Initial length of the snake
+      }
+
+      // setDir: Sets the movement direction of the snake
+      setDir(x, y) {
+        this.xdir = x;
+        this.ydir = y;
+      }
+
+      // update: Updates the snake's position by moving the body
+      update() {
+        let head = this.body[this.body.length - 1].copy(); // Copy current head position
+        this.body.shift(); // Remove the oldest segment of the body
+        head.x += this.xdir; // Move the head on the X axis
+        head.y += this.ydir; // Move the head on the Y axis
+        this.body.push(head); // Add the new head position to the body
+      }
+
+      // grow: Grows the snake by adding a new segment to the body
+      grow() {
+        let head = this.body[this.body.length - 1].copy(); // Copy the current head position
+        this.len++; // Increase the length of the snake
+        this.body.push(head); // Add the new segment to the body
+      }
+
+      // endGame: Checks if the snake has collided with itself or the border of the game field
+      endGame() {
+        let x = this.body[this.body.length - 1].x; // X position of the head
+        let y = this.body[this.body.length - 1].y; // Y position of the head
+        // Check for collision with edges
+        if (x > w - 1 || x < 0 || y > h - 1 || y < 0) {
+          return true;
+        }
+        // Check for collision with itself
+        for (let i = 0; i < this.body.length - 1; i++) {
+          let part = this.body[i];
+          if (part.x == x && part.y == y) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      // eat: Checks if the snake has eaten the food
+      eat(pos) {
+        let x = this.body[this.body.length - 1].x; // X position of the head
+        let y = this.body[this.body.length - 1].y; // Y position of the head
+        // Check if the head position matches the food position
+        if (x == pos.x && y == pos.y) {
+          this.grow(); // Grow the snake
+          return true;
+        }
+        return false;
+      }
+
+      // show: Draws the snake on the game field
+      show() {
+        for (let i = 0; i < this.body.length; i++) {
+          p.fill(0); // Color for the snake
+          p.noStroke(); // No border for the segments
+          p.rect(this.body[i].x, this.body[i].y, 1, 1); // Draw each body segment
+        }
+      }
+    }
+  };
+
+  new p5(sketch);
+})();
+</script>

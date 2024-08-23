@@ -1,0 +1,120 @@
+
+---
+title: "Explicación del Código del Juego de la Serpiente en p5.js"
+format:
+  html:
+    css: clasificador.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+Esta aplicación es un sencillo juego de la serpiente implementado en p5.js. El objetivo del juego es controlar la serpiente para que coma la comida generada en posiciones aleatorias del campo de juego. A medida que la serpiente come, crece en tamaño, y el juego termina si la serpiente choca consigo misma o con el borde del campo de juego.
+
+### 1. Definición de Variables
+
+```javascript
+let snake;
+let rez = 20;
+let food;
+let w;
+let h;
+```
+
+- **`snake`**: Variable que almacenará la instancia de la serpiente.
+- **`rez`**: Factor de resolución que escala el juego. Controla el tamaño de la cuadrícula en la que se moverá la serpiente.
+- **`food`**: Almacena la posición actual de la comida en el juego.
+- **`w` y `h`**: Representan el ancho y la altura del campo de juego en unidades de juego (no en píxeles).
+
+### 2. Configurar el Entorno
+
+```javascript
+function setup() {
+  createCanvas(400, 400);
+  w = floor(width / rez);
+  h = floor(height / rez);
+  frameRate(5);
+  snake = new Snake();
+  foodLocation();
+}
+```
+
+- **`setup()`**: Esta función se ejecuta una vez al principio del programa.
+  - **`createCanvas(400, 400)`**: Crea un lienzo de 400x400 píxeles donde se dibujará el juego.
+  - **`w` y `h`**: Calculan el ancho y la altura del campo de juego en unidades de juego.
+  - **`frameRate(5)`**: Establece la velocidad de actualización del juego a 5 cuadros por segundo.
+  - **`snake = new Snake()`**: Inicializa una nueva instancia de la serpiente.
+  - **`foodLocation()`**: Coloca la comida en una ubicación inicial aleatoria.
+
+### 3. Generar la Ubicación de la Comida
+
+```javascript
+function foodLocation() {
+  let x = floor(random(w));
+  let y = floor(random(h));
+  food = createVector(x, y);
+}
+```
+
+- **`foodLocation()`**: Genera una nueva ubicación para la comida dentro de los límites del campo de juego.
+  - **`x` y `y`**: Coordenadas aleatorias dentro del campo de juego.
+  - **`food = createVector(x, y)`**: Crea un vector que almacena la posición de la comida.
+
+### 4. Control de Teclas
+
+```javascript
+function keyPressed() {
+  if (keyCode === LEFT_ARROW) {
+    snake.setDir(-1, 0);
+  } else if (keyCode === RIGHT_ARROW) {
+    snake.setDir(1, 0);
+  } else if (keyCode === DOWN_ARROW) {
+    snake.setDir(0, 1);
+  } else if (keyCode === UP_ARROW) {
+    snake.setDir(0, -1);
+  } else if (key == ' ') {
+    snake.grow();
+  }
+}
+```
+
+- **`keyPressed()`**: Detecta las teclas presionadas y cambia la dirección de la serpiente.
+  - Las flechas (`LEFT_ARROW`, `RIGHT_ARROW`, `DOWN_ARROW`, `UP_ARROW`) controlan la dirección de la serpiente.
+  - La barra espaciadora (`' '`) hace que la serpiente crezca.
+
+### 5. Dibujar el Juego
+
+```javascript
+function draw() {
+  scale(rez);
+  background(220);
+  if (snake.eat(food)) {
+    foodLocation();
+  }
+  snake.update();
+  snake.show();
+
+  if (snake.endGame()) {
+    print("END GAME");
+    background(255, 0, 0);
+    noLoop();
+  }
+
+  noStroke();
+  fill(255, 0, 0);
+  rect(food.x, food.y, 1, 1);
+}
+```
+
+- **`draw()`**: Esta función se ejecuta continuamente y se encarga de dibujar en el lienzo.
+  - **`scale(rez)`**: Escala el dibujo según el factor de resolución.
+  - **`background(220)`**: Establece un color de fondo para el lienzo.
+  - **`if (snake.eat(food))`**: Verifica si la serpiente ha comido la comida y, si es así, genera una nueva ubicación para la comida.
+  - **`snake.update()`**: Actualiza la posición de la serpiente.
+  - **`snake.show()`**: Dibuja la serpiente en el lienzo.
+  - **`if (snake.endGame())`**: Verifica si el juego ha terminado y, de ser así, imprime un mensaje y detiene el juego.
+  - **`noStroke()`**: Evita que la comida tenga un borde.
+  - **`fill(255, 0, 0)`**: Establece el color de la comida a rojo.
+  - **`rect(food.x, food.y, 1, 1)`**: Dibuja la comida como un cuadrado rojo.
+
