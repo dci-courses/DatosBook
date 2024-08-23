@@ -1,6 +1,4 @@
 Aquí tienes la explicación adaptada con la inclusión de la clase `Snake`:
-
-```markdown
 ---
 title: "Explicación del Código del Juego de la Serpiente en p5.js"
 format:
