@@ -1,4 +1,6 @@
+Aquí tienes la explicación adaptada con la inclusión de la clase `Snake`:
 
+```markdown
 ---
 title: "Explicación del Código del Juego de la Serpiente en p5.js"
 format:
@@ -25,9 +27,103 @@ let h;
 - **`snake`**: Variable que almacenará la instancia de la serpiente.
 - **`rez`**: Factor de resolución que escala el juego. Controla el tamaño de la cuadrícula en la que se moverá la serpiente.
 - **`food`**: Almacena la posición actual de la comida en el juego.
-- **`w` y `h`**: Representan el ancho y la altura del campo de juego en unidades de juego (no en píxeles).
+- **`w` y **`h`**: Representan el ancho y la altura del campo de juego en unidades de juego (no en píxeles).
 
-### 2. Configurar el Entorno
+### 2. Clase `Snake`
+
+```javascript
+class Snake {
+  
+  constructor() {
+  	this.body = [];
+    this.body[0] = createVector(floor(w/2), floor(h/2));
+    this.xdir = 0;
+    this.ydir = 0;
+    this.len = 0;
+  }
+  
+  setDir(x, y) {
+  	this.xdir = x;
+    this.ydir = y;
+  }
+  
+  update() {
+  	let head = this.body[this.body.length-1].copy();
+    this.body.shift();
+    head.x += this.xdir;
+    head.y += this.ydir;
+    this.body.push(head);
+  }
+  
+  grow() {
+  	let head = this.body[this.body.length-1].copy();
+    this.len++;
+    this.body.push(head);
+  }
+  
+  endGame() {
+  	let x = this.body[this.body.length-1].x;
+    let y = this.body[this.body.length-1].y;
+    if(x > w-1 || x < 0 || y > h-1 || y < 0) {
+       return true;
+    }
+    for(let i = 0; i < this.body.length-1; i++) {
+    	let part = this.body[i];
+      if(part.x == x && part.y == y) {
+      	return true;
+      }
+    }
+    return false;
+  }
+  
+  eat(pos) {
+  	let x = this.body[this.body.length-1].x;
+    let y = this.body[this.body.length-1].y;
+    if(x == pos.x && y == pos.y) {
+      this.grow();
+      return true;
+    }
+    return false;
+  }
+  
+  show() {
+  	for(let i = 0; i < this.body.length; i++) {
+    	fill(0);
+      noStroke();
+      rect(this.body[i].x, this.body[i].y, 1, 1)
+    }
+  }
+
+}
+```
+
+#### Constructor y Variables de la Clase
+
+- **`constructor()`**: Define el comportamiento inicial de la serpiente al crear una instancia.
+  - **`body`**: Es un array que guarda las posiciones de los segmentos de la serpiente. Inicialmente, contiene solo un segmento en el centro del campo de juego.
+  - **`xdir` y `ydir`**: Definen la dirección en la que se mueve la serpiente. Inicialmente, son `0` para que la serpiente no se mueva.
+  - **`len`**: Guarda la longitud actual de la serpiente.
+
+#### Métodos de la Clase
+
+- **`setDir(x, y)`**: Establece la dirección en la que la serpiente se moverá, basada en las entradas del usuario.
+
+- **`update()`**: Actualiza la posición de la serpiente:
+  - La cabeza de la serpiente se mueve en la dirección actual, y se añade una nueva cabeza en la nueva posición.
+  - El último segmento de la serpiente (la cola) se elimina, a menos que la serpiente haya comido, en cuyo caso crece.
+
+- **`grow()`**: Aumenta la longitud de la serpiente al agregar un nuevo segmento en la posición donde estaba la cabeza.
+
+- **`endGame()`**: Comprueba si el juego ha terminado:
+  - El juego termina si la cabeza de la serpiente choca con los bordes del campo de juego o si se choca consigo misma.
+
+- **`eat(pos)`**: Comprueba si la serpiente ha comido la comida:
+  - Si la cabeza de la serpiente está en la misma posición que la comida, la serpiente crece y la función devuelve `true`. Si no, devuelve `false`.
+
+- **`show()`**: Dibuja la serpiente en el lienzo:
+  - Recorre todos los segmentos del cuerpo de la serpiente y dibuja un rectángulo negro para cada uno.
+
+### 3. Configurar el Entorno
 
 ```javascript
 function setup() {
@@ -47,7 +143,7 @@ function setup() {
   - **`snake = new Snake()`**: Inicializa una nueva instancia de la serpiente.
   - **`foodLocation()`**: Coloca la comida en una ubicación inicial aleatoria.
 
-### 3. Generar la Ubicación de la Comida
+### 4. Generar la Ubicación de la Comida
 
 ```javascript
 function foodLocation() {
@@ -61,7 +157,7 @@ function foodLocation() {
   - **`x` y `y`**: Coordenadas aleatorias dentro del campo de juego.
   - **`food = createVector(x, y)`**: Crea un vector que almacena la posición de la comida.
 
-### 4. Control de Teclas
+### 5. Control de Teclas
 
 ```javascript
 function keyPressed() {
@@ -83,7 +179,7 @@ function keyPressed() {
   - Las flechas (`LEFT_ARROW`, `RIGHT_ARROW`, `DOWN_ARROW`, `UP_ARROW`) controlan la dirección de la serpiente.
   - La barra espaciadora (`' '`) hace que la serpiente crezca.
 
-### 5. Dibujar el Juego
+### 6. Dibujar el Juego
 
 ```javascript
 function draw() {
@@ -117,4 +213,3 @@ function draw() {
   - **`noStroke()`**: Evita que la comida tenga un borde.
   - **`fill(255, 0, 0)`**: Establece el color de la comida a rojo.
   - **`rect(food.x, food.y, 1, 1)`**: Dibuja la comida como un cuadrado rojo.
-
