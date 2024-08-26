@@ -3,4 +3,5 @@ title: "Antes de empezar"
 format: html
 ---
 
-**Se asume que el lector posee una cuenta de GitHub [creada](https://github.com/signup).**
+**Se asume que el lector posee una cuenta de GitHub [creada](https://github.com/signup).**</br>
+**Se asume que el lector ha instalado git en su maquina.**

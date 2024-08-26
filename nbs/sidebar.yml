@@ -2,7 +2,7 @@ website:
   sidebar:
     contents:
       - index.qmd
-      - section: C01 - Intro a Modelos Pre-Entrenados
+      - section: C00 - Intro a Modelos Pre-Entrenados
         contents:
           - section: Teachable Machines
             contents:
@@ -27,6 +27,6 @@ website:
       - section: C10 - Usando Github en Windows
         contents:
           - intro_github/00_consideraciones.qmd
-          - section: Clonar
+          - section: Métodos
             contents:
               - intro_github/01_github_desktop.qmd
