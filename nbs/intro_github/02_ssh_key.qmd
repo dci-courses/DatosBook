@@ -9,7 +9,7 @@ Para utilizar SSH con github, debemos primero generar el par de llaves, luego ag
 
 Para generar un par de llave privada/publica ssh, podemos usar OpenSSH, abriendo primero Git Bash e ingresando los siguientes comandos:
 
-**Generar llave ssh**: ``` ssh-keygen -t ed25519 -C "tu_email@ejemplo.com" ```, ésto creará un par de llaves usando el email proporcionado. </br>
+**Generar llave ssh**: ``` ssh-keygen -t ed25519 -C "tu_email@ejemplo.com" ```, esto creará un par de llaves usando el email proporcionado. </br>
 ```
 > Generating public/private ALGORITHM key pair.
 ```
@@ -46,11 +46,11 @@ Luego de tener todo esto configurado, podemos agregar nuestra llave publica a la
 2. En la esquina superior derecha de GitHub, nos vamos a **Settings**.
 3. En la sección de Acceso, nos dirigimos a **SSH and GPG keys.**.
 3. Clickeamos **New SSH key**.
-4. En el campo "Title" podemos añadir una descripción para la llave, por ejemplo "laptop personal" o "desktop casa".
+4. En el campo **Title** podemos añadir una descripción para la llave, por ejemplo "laptop personal" o "desktop casa".
 5. Seleccionamos el tipo de llave (Autenticación o Firma).
-6. En el campo "Key", pegamos la lalve que copiamos previamente.
+6. En el campo **Key**, pegamos la lalve que copiamos previamente.
 7. Clickeamos **Add SSH key.**
-8. Puede que GitHub pida confirmación de acceso a la cuenta, ésto se puede hacer de multiples maneras que deberiamos tener si hemos configurado nuestra autenticación de dos pasos.
+8. Puede que GitHub pida confirmación de acceso a la cuenta, esto se puede hacer de multiples maneras que deberiamos tener si hemos configurado nuestra autenticación de dos pasos.
 
 Para información sobre firma de commits puede revisar [**ésta**](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification) documentación.
 
