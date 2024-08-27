@@ -236,4 +236,4 @@ class Snake {
 
 ### Descargar el Código Completo
 
-Puedes descargar el código completo acá: [Código fuente](https://example.com/download/snake-game-code).
+Puedes descargar el código completo acá: [Código fuente](https://github.com/dci-courses/DatosBook/raw/main/code/snake-game-gestures.zip).
