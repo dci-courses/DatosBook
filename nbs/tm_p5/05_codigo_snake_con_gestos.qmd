@@ -1,0 +1,239 @@
+---
+title: "Explicación del Código del Juego de la Serpiente en p5.js (Con gestos)"
+format:
+  html:
+    css: clasificador.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+
+## Explicación del Código
+
+Este código implementa un juego de la serpiente, donde el usuario puede controlar la dirección de la serpiente utilizando gestos capturados por la cámara o, alternativamente, mediante las teclas de flecha del teclado. A continuación se describe cómo funciona el código en detalle.
+
+### Configuración Inicial
+
+```javascript
+let imageModelURL = "https://teachablemachine.withgoogle.com/models/rfrmQGqz_/";
+let keyboard_control = false;
+let speed = 5;
+```
+
+- **`imageModelURL`**: Esta variable contiene la URL del modelo de Teachable Machine que se utilizará para el reconocimiento de gestos. Este modelo será cargado más adelante en el código.
+- **`keyboard_control`**: Define si la serpiente se controla con gestos (`false`) o con el teclado (`true`).
+- **`speed`**: Establece la velocidad del juego. Un valor más bajo significa que la serpiente se moverá más rápido.
+
+### Carga del Modelo
+
+```javascript
+function preload() {
+  classifier = ml5.imageClassifier(imageModelURL + "model.json");
+}
+```
+
+- **`preload()`**: Esta función es parte del ciclo de `p5.js` y se ejecuta antes de `setup()`. Aquí se carga el modelo de Teachable Machine especificado por `imageModelURL`. El modelo se utilizará para clasificar las imágenes capturadas por la cámara y determinar la dirección en la que debe moverse la serpiente.
+
+### Configuración del Canvas y Video
+
+```javascript
+function setup() {
+  createCanvas(640, 480);
+  video = createCapture(VIDEO);
+  video.size(320, 240);
+  video.hide();
+  
+  flippedVideo = ml5.flipImage(video);
+  classifyVideo();
+  
+  w = floor(width / rez);
+  h = floor(height / rez);
+  snake = new Snake();
+  foodLocation();
+}
+```
+
+- **`setup()`**: 
+  - Se crea un Canvas de 640x480 píxeles para el juego.
+  - Se captura el video de la cámara y se ajusta su tamaño a 320x240 píxeles. Este video se oculta porque solo se utiliza para la clasificación.
+  - **`ml5.flipImage(video)`**: Invierte la imagen del video horizontalmente para que los gestos reflejen movimientos naturales.
+  - **`classifyVideo()`**: Inicia el proceso de clasificación de video, lo que permite que el modelo detecte gestos en tiempo real.
+  - Se inicializa la serpiente en el centro del Canvas y se coloca la comida en una posición aleatoria.
+
+### Clasificación de Video
+
+```javascript
+function classifyVideo() {
+  flippedVideo = ml5.flipImage(video);
+  classifier.classify(flippedVideo, gotResult);
+}
+```
+
+- **`classifyVideo()`**: 
+  - Vuelve a invertir la imagen del video.
+  - Utiliza el clasificador (`classifier`) para analizar el video invertido y determinar el gesto capturado. El resultado se maneja en la función `gotResult`.
+
+### Manejo de Resultados de la Clasificación
+
+```javascript
+function gotResult(error, results) {
+  if (error) {
+    console.error(error);
+    return;
+  }
+  label = results[0].label;
+  controlSnake();
+  classifyVideo();
+}
+```
+
+- **`gotResult()`**: 
+  - Si ocurre un error durante la clasificación, se muestra en la consola.
+  - Si no hay error, se actualiza la etiqueta (`label`) con el resultado de la clasificación, que indica el gesto detectado (por ejemplo, "UP", "DOWN").
+  - Se llama a la función `controlSnake()` para ajustar la dirección de la serpiente según el gesto detectado.
+  - Se repite el proceso de clasificación para capturar el siguiente fotograma del video.
+
+### Control de la Serpiente
+
+```javascript
+function controlSnake() {
+  if (!keyboard_control) {
+    if (label === "UP") {
+      snake.setDir(0, -1);
+    } else if (label === "RIGHT") {
+      snake.setDir(1, 0);
+    } else if (label === "LEFT") {
+      snake.setDir(-1, 0);
+    } else if (label === "DOWN") {
+      snake.setDir(0, 1);
+    }
+  }
+}
+```
+
+- **`controlSnake()`**: 
+  - Si el control del teclado está desactivado (`keyboard_control == false`), la dirección de la serpiente se ajusta en función de la etiqueta (`label`) detectada por el modelo. Por ejemplo, si la etiqueta es "UP", la serpiente se moverá hacia arriba.
+
+### Dibujo y Actualización del Juego
+
+```javascript
+function draw() {
+  background(220);
+  if (!keyboard_control) {
+    image(flippedVideo, 0, 0, 160, 120);
+    textSize(32);
+    fill(255);
+    stroke(0);
+    text(label, 10, 40);
+  }
+
+  scale(rez);
+  if (snake.eat(food)) {
+    foodLocation();
+    snake.update();
+  }
+  if (frameCount % speed == 0) {
+    snake.update();
+  }
+  snake.show();
+
+  if (snake.endGame()) {
+    print("END GAME");
+    background(255, 0, 0);
+    noLoop();
+  }
+
+  noStroke();
+  fill(255, 0, 0);
+  rect(food.x, food.y, 1, 1);
+}
+```
+
+- **`draw()`**:
+  - El Canvas se refresca en cada fotograma.
+  - Si el control del teclado está desactivado, se muestra la imagen del video invertido junto con la etiqueta del gesto detectado.
+  - La serpiente se escala y se dibuja en el Canvas.
+  - Si la serpiente come la comida, se genera una nueva ubicación para la comida, y la serpiente crece.
+  - La velocidad del juego se controla mediante la variable `speed`, actualizando la posición de la serpiente en función del número de fotogramas.
+  - Si la serpiente choca con el borde o consigo misma, el juego termina.
+
+### Clase `Snake`
+
+```javascript
+class Snake {
+  constructor() {
+    this.body = [];
+    this.body[0] = createVector(floor(w/2), floor(h/2));
+    this.xdir = 0;
+    this.ydir = 0;
+    this.len = 0;
+  }
+
+  setDir(x, y) {
+    this.xdir = x;
+    this.ydir = y;
+  }
+
+  update() {
+    let head = this.body[this.body.length-1].copy();
+    this.body.shift();
+    head.x += this.xdir;
+    head.y += this.ydir;
+    this.body.push(head);
+  }
+
+  grow() {
+    let head = this.body[this.body.length-1].copy();
+    this.len++;
+    this.body.push(head);
+  }
+
+  endGame() {
+    let x = this.body[this.body.length-1].x;
+    let y = this.body[this.body.length-1].y;
+    if(x > w-1 || x < 0 || y > h-1 || y < 0) {
+       return true;
+    }
+    for(let i = 0; i < this.body.length-1; i++) {
+      let part = this.body[i];
+      if(part.x == x && part.y == y) {
+          return true;
+      }
+    }
+    return false;
+  }
+
+  eat(pos) {
+    let x = this.body[this.body.length-1].x;
+    let y = this.body[this.body.length-1].y;
+    if(x == pos.x && y == pos.y) {
+      this.grow();
+      return true;
+    }
+    return false;
+  }
+
+  show() {
+    for(let i = 0; i < this.body.length; i) {
+      fill(0);
+      noStroke();
+      rect(this.body[i].x, this.body[i].y, 1, 1);
+    }
+  }
+}
+```
+
+- **`Snake`**: Esta clase define la serpiente en el juego.
+  - **Constructor**: Inicializa la serpiente con un solo segmento ubicado en el centro del Canvas.
+  - **`setDir(x, y)`**: Cambia la dirección de la serpiente según los valores proporcionados para `x` e `y`.
+  - **`update()`**: Mueve la serpiente en la dirección actual, eliminando el segmento más antiguo y añadiendo uno nuevo en la posición actual de la cabeza.
+  - **`grow()`**: Añade un nuevo segmento al cuerpo de la serpiente cada vez que come.
+  - **`endGame()`**: Verifica si la serpiente ha chocado con el borde del Canvas o consigo misma, en cuyo caso el juego termina.
+  - **`eat(pos)`**: Determina si la serpiente ha comido la comida, comprobando si la posición de la cabeza coincide con la de la comida.
+  - **`show()`**: Dibuja cada segmento del cuerpo de la serpiente en el Canvas.
+
+### Descargar el Código Completo
+
+Puedes descargar el código completo acá: [Código fuente](https://example.com/download/snake-game-code).

@@ -22,6 +22,7 @@ website:
               - tm_p5/02_codigo_clasificador.qmd
               - tm_p5/03_snake.qmd 
               - tm_p5/04_codigo_snake.qmd 
+              - tm_p5/05_codigo_snake_con_gestos.qmd 
 
           - section: p5 + ml5
             contents:
