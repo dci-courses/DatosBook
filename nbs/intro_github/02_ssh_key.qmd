@@ -1,0 +1,60 @@
+---
+title: "SSH"
+format: html
+---
+
+Para utilizar SSH con github, debemos primero generar el par de llaves, luego agregarla a nuestro agente ssh y finalmente agregarla a GitHub.
+
+# Crear una llave SSH
+
+Para generar un par de llave privada/publica ssh, podemos usar OpenSSH, abriendo primero Git Bash e ingresando los siguientes comandos:
+
+**Generar llave ssh**: ``` ssh-keyben -t ed25519 -C "tu_email@ejemplo.com" ```, ésto creará un par de llaves usando el email proporcionado. </br>
+```
+> Generating public/private ALGORITHM key pair.
+```
+Cuando se pida ingresar el archivo en que se guardará la llave, podemos presionar enter para guardarla en la ubicación por defecto o podemos escribir la ruta/nombre para los archivos.</br>
+```
+> Enter file in which to save the key (/c/Users/NOMBRE/.ssh/nombre_llave):[Press enter]
+```
+Tambien es posible asignar una **contraseña**, cuando se pida ingresar una _passphrase_ podemos ingresar una contraseña o presionar enter para dejarlo vacío.</br>
+```
+> Enter passphrase (empty for no passphrase): [Type a passphrase]
+> Enter same passphrase again: [Type passphrase again]
+ ```
+
+# Agregar una llave al agente SSH
+
+1. Luego de abrir una PowerShell como administrador, primero debemos verificar que un agente ssh esté en ejecución de la siguiente forma:
+```
+Get-Service -Name ssh-agent | Set-Service -StartupType Manual
+Start-Service ssh-agent
+```
+
+Para mas información sobre agentes ssh y cómo iniciarlo automáticamente puede visitar la [**documentacion**](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases?platform=windows) de GitHub.
+
+2. En una terminal sin permisos de administrador, podemos añadir nuestra llave privada al agente ssh:
+```
+ssh-add c:/Users/NOMBRE/.ssh/nombre_llave
+```
+
+# Agregar una llave a GitHub
+
+Luego de tener todo esto configurado, podemos agregar nuestra llave publica a la interfaz de GitHub.
+
+    1. Copiamos la llave publica.
+    2. En la esquina superior derecha de GitHub, nos vamos a **Settings**.
+    3. En la sección de Acceso, nos dirigimos a **SSH and GPG keys.**.
+    3. Clickeamos **New SSH key**.
+    4. En el campo "Title" podemos añadir una descripción para la llave, por ejemplo "laptop personal" o "desktop casa".
+    5. Seleccionamos el tipo de llave (Autenticación o Firma).
+    6. En el campo "Key", pegamos la lalve que copiamos previamente.
+    7. Clickeamos **Add SSH key.**
+    8. Puede que GitHub pida confirmación de acceso a la cuenta, ésto se puede hacer de multiples maneras que deberiamos tener si hemos configurado nuestra autenticación de dos pasos.
+
+Para información sobre firma de commits puede revisar [**ésta**](https://docs.github.com/en/authentication/managing-commit-signature-verification/about-commit-signature-verification) documentación.
+
+# Usando la llave para trabajar con un repositorio
+
+Para utilizar nuestra llave ssh para clonar y hacer commits a nuestro repositorio podemos usar el mismo comando ``` git clone ``` que usamos con HTTPS, pero ésta vez usaremos el link sssh que provee GitHub.</br>
+<img src="./resources/SSH/clone.png" alt="Clone URL" title="Clone URL" width="300" />

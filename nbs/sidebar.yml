@@ -29,4 +29,5 @@ website:
           - intro_github/00_consideraciones.qmd
           - section: Métodos
             contents:
-              - intro_github/01_github_desktop.qmd
+              - intro_github/01_personal_token.qmd
+              - intro_github/02_ssh_key.qmd
