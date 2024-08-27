@@ -2,7 +2,7 @@ website:
   sidebar:
     contents:
       - index.qmd
-      - section: C01 - Intro a Modelos Pre-Entrenados
+      - section: C00 - Intro a Modelos Pre-Entrenados
         contents:
           - section: Teachable Machines
             contents:
@@ -28,3 +28,11 @@ website:
             contents:
               - p5_ml5/01_sound_classifier.qmd
               - p5_ml5/02_codigo_clasificador_sonido.qmd
+      - section: C10 - Usando Github en Windows
+        contents:
+          - intro_github/00_consideraciones.qmd
+          - section: Métodos
+            contents:
+              - intro_github/01_personal_token.qmd
+              - intro_github/02_ssh_key.qmd
+              - intro_github/03_github_desktop.qmd

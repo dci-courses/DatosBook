@@ -1,0 +1,29 @@
+---
+title: "GitHub Desktop"
+format: html
+---
+
+[Github Desktop](https://docs.github.com/en/desktop/overview/about-github-desktop) es una aplicación que permite trabajar con servicios Git, especialmente GitHub, mediante una interfaz gráfica en vez de la linea de comandos.
+
+# Usando GitHub Desktop
+
+Luego de [descargar e instalar](https://github.com/apps/desktop) GitHub Desktop, podemos utilizarlo de la siguiente manera:
+
+## Configuración inicial
+En el menú "File", vamos a "Options". En la ventana de Options, nos dirigimos a "Accounts" y seguimos los pasos para iniciar sesión haciendo click en "Sign in".</br>
+<img src="./resources/Desktop/windows-sign-in-github.png" alt="Sign-in" title="Sign-in" width="500" />
+
+## Clonar un repositorio
+En el menú "File", podemos hacer click en "Clone repository":
+<img src="./resources/Desktop/clone-file-menu-windows.png" alt="Clone option" title="Clone option" width="500" />
+
+Luego podemos elegir la opcion que corresponda a la localización del repositorio que queremos clonar. También podemos elegir "URL" para ingresar directamente la URL del repositorio.
+<img src="./resources/Desktop/choose-repository-location-mac.png" alt="Choose option" title="Choose option" width="500" />
+
+De la lista de repositorios, podemos elegir el repositorio que queremos clonar.
+<img src="./resources/Desktop/clone-a-repository-list-mac.png" alt="Choose repo" title="Choose repo" width="500" />
+
+Para elegir un directorio local en donde guardar el repositorio clonado, podemos clickear "Choose" en la opcion "Local Path" y elegir un directorio de nuestra preferencia.
+<img src="./resources/Desktop/clone-choose-button-mac.png" alt="Local choose" title="Local choose" width="500" />
+
+Por ultimo hacemos click en el botón "Clone" abajo a la derecha y ésto clonará el repositorio a nuestro sistema.

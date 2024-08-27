@@ -1,0 +1,37 @@
+---
+title: "HTTPS"
+format: html
+---
+
+# Crear un Token de Acceso Personal
+
+1. Si nuestro email no está verificado, deberemos verificarlo antes de continuar.
+2. En la esquina superior derecha de cualquier página de GitHub, podemos clickear nuestra foto de perfil y luego dirigirnos a **Settings**.</br>
+<img src="./resources/HTTPS/settings.png" alt="Settings button" title="Settings button" width="200" />
+3. En la barra izquierda, nos dirigimos a **Developer Settings**.</br>
+<img src="./resources/HTTPS/devset.png" alt="Developer settings" title="Developer settings" width="200" />
+4. En la barra izquierda, en **Personal access tokens** hacemos click en **Tokens (classic)**.
+<img src="./resources/HTTPS/token.png" alt="PAT" title="Personal Access Token" width="200" />
+5. Seleccionamos **Generate new token**, luego hacemos click en **Generate new token (classic)**.</br>
+<img src="./resources/HTTPS/generate.png" alt="Generate token" title="Generate token" width="200" />
+6. En la seccion "Note" podemos dar a nuestro token un nombre descriptivo.
+7. Podemos dar una fecha de expiracion seleccionando **Expiration**.
+8. Seleccionamos el alcance que tendrá el token, para que tenga acceso a nuestros repositorios a traves de la linea de comandos, seleccionaremos **repo**.</br>
+<img src="./resources/HTTPS/perms.png" alt="Permissions" title="Permissions" width="300" />
+9. Hacemos click en **Generate Token**.
+10. Copiamos el token para utilizarlo posteriormente.</br>
+<img src="./resources/HTTPS/finish.png" alt="Copy token" title="Copy token" width="300" />
+
+# Usar un Token de Acceso Personal
+
+Una vez creado el token de acceso, podemos utilizarlo en lugar de nuestra contraseña para ejecutar operaciones Git a traves de HTTPS.
+
+Por ejemplo, para clonar un repositorio utilizando la linea de comandos podemos usar el comando ``` git clone ```. Ahora se nos solicitará ingresar nuestro usuario y contraseña. Cuando se requiera nuestra contraseña, ingresamos nuestro token de acceso en lugar de nuestra contraseña.
+
+```
+$ git clone https://github.com/USUARIO/REPO.git
+Username: NOMBRE-USUARIO
+Password: TOKEN-ACCESO
+```
+
+**Para más información sobre tokens y sus usos, puede dirigirse a [la página de Github](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).**
