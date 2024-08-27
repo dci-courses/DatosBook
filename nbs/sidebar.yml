@@ -31,3 +31,4 @@ website:
             contents:
               - intro_github/01_personal_token.qmd
               - intro_github/02_ssh_key.qmd
+              - intro_github/03_github_desktop.qmd
