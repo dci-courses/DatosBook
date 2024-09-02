@@ -1,0 +1,53 @@
+---
+title: "Desplegando con nbdev"
+format: html
+---
+
+# Instalación
+
+Se requiere de las siguientes herramientas para utilizar nbdev:
+
+1. Python
+2. Un administrador de paquetes (Ej. conda o pip)
+3. Jupyter Notebook
+4. nbdev
+5. Quarto
+
+# Instalar JupyterLab
+
+Abramos nuestro ambiente virtual e instalemos jupyterlab:
+```
+pip install jupyterlab
+```
+o
+```
+conda install -c conda-forge -y jupyterlab
+```
+
+**Se recomienda usar pip**
+
+Ahora podemos abrir jupyter lab usando:
+```
+jupyter lab
+```
+esto deberia abrir JupyterLab en una pestaña de navegador nueva. JupyterLab nos ayuda a tener un ambiente especializado para notebooks de Jupyter, si utilizamos VSCode no es estrictamente necesario trabajar con jupyterlab a menos que ya tengamos notebooks iniciados de ésta forma.
+
+# Instalar nbdev
+
+El siguiente paso es instalar nbdev. JupyterLab viene con su propia terminal, pero para éste tutorial utilizaremos la que ya tenemos abierta con nuestro ambiente virtual (venv).
+```
+pip install nbdev
+```
+o
+```
+conda install -c fastai -y nbdev
+```
+
+# Instalar Quarto
+
+nbdev nos proporciona un comando para instalar directamente la última versión de Quarto, asi que luego de instalar nbdev, podemos usar:
+```
+nbdev_install_quarto
+```
+
+es posible que se requiera ingresar nuestra contraseña de sistema. (Si esto le causa problemas, puede que prefiera seguir las [instrucciones oficiales de Quarto](https://quarto.org/docs/get-started/))
