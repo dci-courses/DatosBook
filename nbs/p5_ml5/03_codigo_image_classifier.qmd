@@ -1,0 +1,92 @@
+ 
+---
+title: "Código Clasificador de Imágenes"
+format:
+  html:
+    css: clasificador.css
+    code-overflow: scroll
+
+toc: true
+toc-location: right
+toc-depth: 2
+---
+## Declaración de Variables
+
+Primero, declaramos las variables necesarias:
+
+
+```javascript
+let classifier;
+
+let img;
+
+let label = "";
+let confidence = "";
+```
+
+- `classifier`: Variable que almacenará el clasificador de imágenes utilizando el modelo MobileNet.
+- `img`: Variable que almacenará la imagen que se va a clasificar.
+- `label` y `confidence`: Estas variables se utilizan para almacenar y mostrar la etiqueta del objeto detectado y la confianza de la predicción, respectivamente.
+
+## Función `preload`
+
+La función `preload` se ejecuta antes de que el programa comience a funcionar. Su objetivo es cargar los recursos necesarios, como el modelo y la imagen:
+
+```javascript
+function preload() {
+  // Se inicializa el clasificador con el modelo MobileNet.
+  classifier = ml5.imageClassifier("MobileNet");
+
+  // Se carga la imagen "bird.jpg" en la variable img.
+  img = loadImage("images/bird.jpg");
+}
+```
+
+- **classifier** se inicializa con el modelo MobileNet usando `ml5.imageClassifier("MobileNet")`.
+- **img** carga la imagen "bird.jpg" para ser clasificada.
+
+## Función `setup`
+
+La función `setup` configura el canvas y realiza la clasificación de la imagen:
+
+```javascript
+function setup() {
+  // Configura el canvas donde se mostrará la imagen y los resultados.
+  createCanvas(400, 400);
+
+  // Clasifica la imagen cargada y define la función callback `gotResult` para manejar los resultados.
+  classifier.classify(img, gotResult);
+
+  // Muestra la imagen en el canvas.
+  image(img, 0, 0, width, height);
+}
+```
+
+- **createCanvas(400, 400)**: Crea un canvas de 400x400 píxeles.
+- **classifier.classify(img, gotResult)**: Clasifica la imagen cargada y llama a la función `gotResult` cuando la clasificación se completa.
+- **image(img, 0, 0, width, height)**: Muestra la imagen en el canvas.
+
+## Función `gotResult`
+
+Finalmente, la función `gotResult` se encarga de procesar y mostrar los resultados de la clasificación:
+
+```javascript
+function gotResult(results) {
+  // Los resultados se almacenan en un array `results`, ordenados por confianza.
+  console.log(results);
+
+  // Se actualizan las variables `label` y `confidence` con los resultados de la clasificación.
+  label = "Label: " + results[0].label;
+  confidence = "Confidence: " + nf(results[0].confidence, 0, 2);
+
+  // Se dibujan la etiqueta y la confianza en el canvas.
+  fill(255);
+  stroke(0);
+  textSize(18);
+  text(label, 10, 360);
+  text(confidence, 10, 380);
+}
+```
+
+- **results**: Un array que contiene los resultados de la clasificación, ordenados por nivel de confianza.
+- **label** y **confidence**: Se actualizan y luego se muestran en el canvas usando la función `text()`.
