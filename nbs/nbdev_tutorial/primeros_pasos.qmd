@@ -1,0 +1,29 @@
+---
+title: "Primeros pasos"
+format: html
+---
+
+# Crear un repositorio vacío de GitHub
+El primer paso es crear un repositorio de GitHub vacío. No deberia incluir un README, .gitignore o licencia aún.
+
+# Inicializar con nbdev
+Clonaremos nuestro repositorio y navegaremos a su directorio. En este punto podriamos ver un mensaje como:
+```
+You appear to have cloned an empty repository.
+```
+... ya que el repositorio está vacio.
+
+Luego podemos inicializar el proyecto usando ``` nbdev_new ```, ésto usará el repositorio de GitHub para inferir algunos datos sobre el proyecto, tambien nos pedirá información extra cuando sea necesaria.
+Despues de inicializar el proyecto, deberiamos revisar el archivo **settings.ini** y asegurarnos de que tenga la información correcta, luego subir nuestros cambios al repositorio remoto usando:
+```
+git add .
+git commit -m "Initial commit"
+git push
+```
+
+# Habilitar GitHub Pages
+Para habilitar GitHub Pages en nuestro repositorio, debemos dirigirnos a **Settings** en la página de nuestro repositorio, luego en el apartado de **Code and automation** nos vamos a **Pages** y cambiar la opcion de **Branch** a la rama **gh-pages**. Finalmente clickeamos **Save** y habremos desplegado nuestros docs.
+Si no vemos la rama **gh-pages**, sólo tendremos que esperar unos minutos ya que deberia ser configurada automáticamente por una pipeline de github.
+
+# Revisar nuestra página
+Para revisar nuestros docs desplegados, podemos dirigirnos a ``` https://{usuario}.github.io/{repo} ```.

@@ -1,0 +1,39 @@
+---
+title: "Primera edición"
+format: html
+---
+
+# Cómo hacer cambios
+Antes de empezar a hacer cambios deberiamos instalar los hooks para GitHub, nbdev nos provee un comando para hacer precisamente esto:
+```
+nbdev_install_hooks
+```
+
+# Viendo cambios en tiempo real
+nbdev nos brinda la capacidad de ver los cambios hechos en nuestros docs a medida que los vamos haciendo, para utilizar esta herramienta podemos hacer uso de el siguiente comando:
+```
+nbdev_preview
+```
+Esto abrirá un servidor local y automaticamente abrirá nuestro navegador con nuestra página web. Podremos ver los cambios que hacemos reflejados en ésta página.
+
+Ahora podemos editar los archivos en el directorio **nbs/** para hacer nuestros cambios.
+
+# Finalmente
+Por ultimo se recomienda utilizar el comando ``` nbdev_prepare ``` antes de subir cualquier cambio hecho a nuestro repositorio, éste comando junta los siguientes comandos:
+```
+nbdev_export: Compila los modulos python desde los notebooks
+nbdev_test: Hace tests a los notebooks
+nbdev_clean: Limpia los notebooks para git
+nbdev_readme: Actualiza el README.md desde nuestro index.ipynb (archivo que "controla" nuestro readme)
+```
+
+Luego de preparar nuestros cambios podemos subirlos a nuestro repositorio:
+
+```
+git add .
+git commit -m "mensaje"
+git push
+```
+
+# Ultimas palabras
+nbdev es una herramienta mucho mas grande de lo que he descrito en éste mini-tutorial, si le interesa explorar más de sus funcionalidades puede dirijirse al [tutorial oficial de nvdev](https://nbdev.fast.ai/tutorials/tutorial.html).
