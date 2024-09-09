@@ -1,5 +1,5 @@
 ---
-title: "Desplegando con nbdev"
+title: "Antes de usar nbdev"
 format: html
 ---
 
@@ -13,7 +13,24 @@ Se requiere de las siguientes herramientas para utilizar nbdev:
 4. nbdev
 5. Quarto
 
-# Instalar JupyterLab
+# (Importante) Ambiente virtual
+Antes de ingresar cualquier comando para instalar dependencias a nuestro proyecto o trabajar con comandos nbdev, es importante que estemos trabajando en nuestro ambiente virtual, la forma de hacer esto es (se asume python instalado):
+```
+python -m venv .venv
+```
+(es posible que se necesite usar python3 en vez de python en algunos casos)
+
+Esto creará un directorio llamado **.venv**, el cual podremos utilizar para la creacion de nuestro ambiente virtual:
+```
+source ./.venv/bin/activate
+o
+.\.venv\Scripts\activate
+```
+qué comando se use depende de si utilizamos linux o windows y de nuestra terminal.
+
+Ahora estamos en nuestro ambiente virtual y podemos ejecutar los siguientes comandos. Cada vez que haya un comando en éste documento, se asume que se está ejecutando dentro del ambiente virtual.
+
+# (Opcional) Instalar JupyterLab
 
 Abramos nuestro ambiente virtual e instalemos jupyterlab:
 ```
@@ -51,3 +68,10 @@ nbdev_install_quarto
 ```
 
 es posible que se requiera ingresar nuestra contraseña de sistema. (Si esto le causa problemas, puede que prefiera seguir las [instrucciones oficiales de Quarto](https://quarto.org/docs/get-started/))
+
+# (Opcional) Extension de Quarto para JupyterLab
+
+Quarto provee su propia extension para JupyterLab, para instalarla podemos usar:
+```
+pip install jupyterlab-quarto
+```
