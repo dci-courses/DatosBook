@@ -42,3 +42,8 @@ website:
           - nbdev_tutorial/antes_de_usar.qmd
           - nbdev_tutorial/primeros_pasos.qmd
           - nbdev_tutorial/primera_edicion.qmd
+      - section: C12 - Exploración de Datos
+        contents:
+          - section: API Getonbrd
+            contents:
+              - exploracion_de_datos/getonbrd/getonbrd.qmd
