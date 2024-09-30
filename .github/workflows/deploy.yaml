@@ -18,10 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Instalar las dependencias necesarias (Jupyter y nbformat)
-      - name: Install Jupyter and nbformat
+      # 2. Instalar las dependencias necesarias (Jupyter, nbformat, y platformdirs)
+      - name: Install Jupyter, nbformat, and platformdirs
         run: |
-          pip install jupyter nbformat
+          pip install jupyter nbformat platformdirs
 
       # 3. Desplegar con Quarto
       - name: Deploy with Quarto
