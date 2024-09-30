@@ -17,6 +17,7 @@ Importamos `pandas` para manejar los datos del archivo CSV.
 ```{python}
 # Importar la biblioteca pandas
 import pandas as pd
+import platformdirs
 ```
 
 ## 2. Leer el archivo CSV
