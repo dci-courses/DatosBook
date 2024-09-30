@@ -8,7 +8,27 @@ on:
   push:
     branches: [ "main", "master" ]
   workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps: [uses: fastai/workflows/quarto-ghp@master]
+
+    steps:
+      # 1. Comprobar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Instalar dependencias necesarias (Jupyter y nbformat)
+      - name: Install dependencies
+        run: |
+          pip install jupyter nbformat
+
+      # 3. Instalar Quarto
+      - name: Install Quarto
+        run: |
+          wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.57/quarto-linux-amd64.deb
+          sudo dpkg -i quarto-linux-amd64.deb
+
+      # 4. Desplegar con Quarto
+      - name: Deploy with Quarto
+        uses: fastai/workflows/quarto-ghp@master
