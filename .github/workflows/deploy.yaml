@@ -18,17 +18,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Instalar Jupyter y todas sus dependencias clave, incluyendo platformdirs
+      # 2. Instalar Jupyter y todas sus dependencias clave
       - name: Install Jupyter and dependencies
         run: |
           pip install --upgrade pip
-          pip install jupyter nbformat platformdirs jupyterlab jupyter-client jupyter-console jupyter-core nbclient notebook
+          pip install jupyter nbformat jupyterlab jupyter-client jupyter-console jupyter-core nbclient notebook
 
-      # 3. Verificar que platformdirs esté correctamente instalado
+      # 3. Actualizar platformdirs a la última versión
+      - name: Update platformdirs
+        run: |
+          pip install -U platformdirs
+
+      # 4. Verificar que platformdirs esté correctamente instalado
       - name: Verify platformdirs installation
         run: |
           python -c "import platformdirs; print(platformdirs.__version__)"
 
-      # 4. Desplegar con Quarto
+      # 5. Desplegar con Quarto
       - name: Deploy with Quarto
         uses: fastai/workflows/quarto-ghp@master
