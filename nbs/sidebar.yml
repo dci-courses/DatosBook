@@ -36,6 +36,7 @@ website:
             contents:
               - eda/00_intro.qmd
               - eda/01_simple_api.qmd
+              - eda/02_eda_basico.qmd
               
 
       - section: C10 - Usando Github en Windows

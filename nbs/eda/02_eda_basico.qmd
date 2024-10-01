@@ -1,0 +1,222 @@
+---
+title: "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+## Introducción
+
+### ¿Qué es un EDA?
+
+Exploratory Data Analysis (EDA) es un proceso fundamental para analizar un conjunto de datos antes de aplicar modelos o técnicas más avanzadas. Consiste en resumir las características principales del dataset utilizando estadísticas descriptivas y técnicas de visualización.
+
+El propósito de un EDA es identificar patrones, detectar valores atípicos, comprender la distribución de los datos y descubrir relaciones interesantes entre variables. Este análisis ayuda a formular hipótesis iniciales que pueden guiar el análisis posterior.
+
+### ¿Por qué es importante realizar un EDA?
+
+Un EDA siempre debe realizarse porque:
+1. **Comprensión de los datos**: Te permite entender mejor la estructura y las propiedades del conjunto de datos.
+2. **Identificación de valores faltantes y atípicos**: Puedes detectar problemas con los datos que podrían afectar el rendimiento de modelos futuros.
+3. **Formulación de hipótesis**: Permite identificar relaciones entre variables que podrían ser útiles para el análisis posterior.
+4. **Selección de variables**: Ayuda a identificar qué variables son más importantes y pueden tener mayor impacto en un análisis más profundo o un modelo.
+
+## Cargar los Datos
+
+```python
+import pandas as pd
+
+netflix_df = pd.read_csv('../eda/netflix_titles.csv')
+
+# Mostrar las primeras filas del dataset
+netflix_df.head()
+```
+
+## Paso 1: Información General del Dataset
+
+```python
+# Ver la estructura y tipos de datos
+netflix_df.info()
+
+# Ver los valores faltantes en cada columna
+missing_values = netflix_df.isnull().sum()
+print("Valores faltantes por columna:")
+print(missing_values)
+
+# Verificar si hay filas duplicadas
+duplicated_rows = netflix_df.duplicated().sum()
+print(f"Número de filas duplicadas: {duplicated_rows}")
+```
+
+## Paso 2: Valores Únicos en Columnas Importantes
+
+```python
+# Verificar los valores únicos en columnas clave
+type_unique = netflix_df['type'].unique()
+rating_unique = netflix_df['rating'].unique()
+country_unique = netflix_df['country'].unique()
+
+print(f"Valores únicos en la columna 'type': {type_unique}")
+print(f"Valores únicos en la columna 'rating': {rating_unique}")
+print(f"Ejemplo de valores únicos en la columna 'country': {country_unique[:10]}")  # Mostrar los primeros 10 países
+```
+
+## Paso 3: Resumen Estadístico de Datos Numéricos y Categóricos
+
+```python
+# Resumen estadístico para las columnas numéricas
+netflix_df.describe()
+
+# Resumen estadístico para las columnas categóricas
+netflix_df.describe(include=['object'])
+```
+
+## Paso 4: Análisis de Valores Faltantes
+
+```python
+# Proporción de valores faltantes
+missing_percentage = (netflix_df.isnull().sum() / len(netflix_df)) * 100
+print("Porcentaje de valores faltantes por columna:")
+print(missing_percentage)
+```
+
+## Paso 5: Análisis Univariado
+
+### Distribución de Tipo de Contenido (Película vs TV Show)
+
+```python
+# Cargar librerías para visualización
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Distribución de 'type'
+plt.figure(figsize=(6,4))
+sns.countplot(data=netflix_df, x='type')
+plt.title('Distribución de Tipo de Contenido (Película vs TV Show)')
+plt.show()
+```
+
+### Distribución de Clasificación (Rating)
+
+```python
+# Distribución de 'rating'
+plt.figure(figsize=(10,6))
+sns.countplot(data=netflix_df, x='rating', order=netflix_df['rating'].value_counts().index)
+plt.title('Distribución de Clasificación')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+### Distribución del Año de Estreno
+
+```python
+# Distribución del 'release_year'
+plt.figure(figsize=(10,6))
+sns.histplot(netflix_df['release_year'], bins=20, kde=True)
+plt.title('Distribución del Año de Estreno')
+plt.show()
+```
+
+## Paso 6: Análisis Bivariado
+
+### Relación entre 'type' y 'rating'
+
+```python
+# Relación entre 'type' y 'rating'
+plt.figure(figsize=(12,6))
+sns.countplot(data=netflix_df, x='rating', hue='type', order=netflix_df['rating'].value_counts().index)
+plt.title('Relación entre Tipo de Contenido y Clasificación')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+### Relación entre País y Tipo de Contenido
+
+```python
+# Agrupar por país y tipo de contenido
+country_type = netflix_df.groupby(['country', 'type']).size().unstack().fillna(0)
+country_type.nlargest(10, 'Movie').plot(kind='bar', stacked=True, figsize=(12,6))
+plt.title('Top 10 Países con Más Contenido por Tipo (Película vs TV Show)')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+## Paso 7: Análisis Temporal
+
+### Número de Contenidos Añadidos por Año
+
+```python
+# Convertir la columna 'date_added' a formato de fecha
+netflix_df['date_added'] = pd.to_datetime(netflix_df['date_added'], errors='coerce')
+
+# Contar el número de películas y shows añadidos por año
+added_per_year = netflix_df['date_added'].dt.year.value_counts().sort_index()
+
+# Visualizar el número de contenidos añadidos por año
+plt.figure(figsize=(10,6))
+added_per_year.plot(kind='bar')
+plt.title('Número de Contenidos Añadidos por Año')
+plt.show()
+```
+
+## Paso 8: Análisis de Duración
+
+### Duración de Películas
+
+```python
+# Filtrar películas
+movies = netflix_df[netflix_df['type'] == 'Movie']
+
+# Convertir duración a número de minutos
+movies['duration'] = movies['duration'].str.replace(' min', '').astype(int)
+
+# Graficar la duración de las películas
+plt.figure(figsize=(10,6))
+sns.histplot(movies['duration'], bins=30, kde=True)
+plt.title('Distribución de la Duración de Películas (en minutos)')
+plt.show()
+```
+
+### Duración de Programas de TV (Temporadas)
+
+```python
+# Filtrar TV shows
+tv_shows = netflix_df[netflix_df['type'] == 'TV Show']
+
+# Convertir duración a número de temporadas
+tv_shows['duration'] = tv_shows['duration'].str.replace(' Season', '').str.replace('s', '').astype(int)
+
+plt.figure(figsize=(10,6))
+sns.histplot(tv_shows['duration'], bins=10, kde=True)
+plt.title('Distribución de la Cantidad de Temporadas en TV Shows')
+plt.show()
+```
+
+## Paso 9: Directores y Actores más Frecuentes
+
+### Directores más Frecuentes
+
+```python
+# Directores más frecuentes
+top_directors = netflix_df['director'].value_counts().head(10)
+plt.figure(figsize=(10,6))
+top_directors.plot(kind='bar')
+plt.title('Top 10 Directores con Más Contenidos')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+### Actores más Frecuentes
+
+```python
+# Actores más frecuentes
+cast_members = netflix_df['cast'].dropna().str.split(', ').explode()
+top_actors = cast_members.value_counts().head(10)
+
+plt.figure(figsize=(10,6))
+top_actors.plot(kind='bar')
+plt.title('Top 10 Actores Más Frecuentes')
+plt.xticks(rotation=45)
+plt.show()
+```
