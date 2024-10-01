@@ -1,0 +1,111 @@
+---
+title: "Lectura y procesamiento de datos desde un archivo CSV"
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+# Introducción
+
+En este documento, leeremos un conjunto de datos desde un archivo CSV, procesaremos y limpiaremos los datos directamente utilizando los métodos de `pandas`.
+
+## 1. Importación de bibliotecas necesarias
+
+Importamos `pandas` para manejar los datos del archivo CSV.
+
+```{python}
+# Importar la biblioteca pandas
+import pandas as pd
+import platformdirs
+```
+
+## 2. Leer el archivo CSV
+
+Usamos el método `pd.read_csv()` de `pandas` para leer el archivo CSV y cargar los datos en un DataFrame. Asegúrate de reemplazar la ruta con el archivo CSV correcto.
+
+```{python}
+# Ruta al archivo CSV (reemplaza con la ruta correcta)
+# https://www.kaggle.com/datasets/shivamb/netflix-shows
+csv_file_path = '../eda/netflix_titles.csv'
+
+# Leer el archivo CSV
+df = pd.read_csv(csv_file_path)
+df
+```
+
+## 3. Mostrar las primeras filas del DataFrame
+
+Utilizamos el método `head()` de `pandas` para mostrar las primeras filas del DataFrame y obtener una vista previa del conjunto de datos.
+
+```{python}
+# Mostrar las primeras 5 filas del conjunto de datos
+df.head()
+```
+
+## 4. Mostrar información general del DataFrame
+
+El método `info()` de `pandas` proporciona una descripción de las columnas del DataFrame, incluyendo los tipos de datos y si hay valores faltantes.
+
+```{python}
+# Mostrar información general del DataFrame
+df.info()
+```
+
+## 5. Mostrar estadísticas descriptivas del DataFrame
+
+Utilizamos el método `describe()` de `pandas` para obtener estadísticas descriptivas de las columnas numéricas del DataFrame.
+
+```{python}
+# Mostrar estadísticas descriptivas del DataFrame
+df.describe()
+```
+
+## 6. Limpiar el DataFrame eliminando filas con valores faltantes
+
+Usamos el método `dropna()` para eliminar las filas que contienen valores faltantes (NaN) en cualquier columna.
+
+```{python}
+# Eliminar filas con valores faltantes
+df_cleaned = df.dropna()
+
+# Mostrar las primeras filas del DataFrame limpio
+df_cleaned.head()
+```
+
+## 7. Mostrar el DataFrame limpio
+
+Finalmente, mostramos el DataFrame después de haber eliminado las filas con valores faltantes para ver el resultado.
+
+```{python}
+# Mostrar el DataFrame limpio
+df_cleaned
+```
+
+### Explicación paso a paso:
+
+1. **Leer el archivo CSV**: Usamos `pd.read_csv()` para leer el archivo CSV y cargar los datos en un DataFrame llamado `df`.
+2. **Mostrar las primeras filas**: Usamos el método `head()` de `pandas` para mostrar una vista previa del conjunto de datos (primeras 5 filas).
+3. **Información general**: Con `df.info()`, obtenemos información sobre el DataFrame, como el número de filas, columnas, tipos de datos y valores nulos.
+4. **Estadísticas descriptivas**: Usamos `describe()` para ver estadísticas como el promedio, desviación estándar, mínimo, máximo, etc., de las columnas numéricas.
+5. **Limpieza del DataFrame**: Con `dropna()`, eliminamos todas las filas que contienen valores faltantes.
+6. **Mostrar el DataFrame limpio**: Finalmente, mostramos el DataFrame limpio para observar los cambios después de la eliminación de valores nulos.
+
+### Consideraciones
+
+- **Ruta del archivo**: Asegúrate de ajustar la ruta del archivo CSV para que apunte al lugar correcto en tu sistema.
+- **Sin métodos personalizados**: El código ejecuta directamente los métodos de `pandas` sin encapsularlos en funciones adicionales, proporcionando un flujo claro y directo para trabajar con los datos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

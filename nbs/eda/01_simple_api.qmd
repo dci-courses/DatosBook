@@ -1,0 +1,97 @@
+---
+title: "Extracción de datos de la API REST Countries"
+
+format:
+  html:
+    code-fold: true
+jupyter: python3
+---
+
+En este documento, extraeremos información de la API pública REST Countries, que no requiere una clave de API, y utilizaremos `pandas` para convertir directamente la respuesta JSON en un DataFrame.
+
+## 1. Importación de bibliotecas necesarias
+
+Primero, importamos las bibliotecas `requests` para realizar solicitudes HTTP y `pandas` para manejar los datos en formato tabular.
+
+```{python}
+# Importar las bibliotecas necesarias
+import requests
+import pandas as pd
+```
+
+## 2. Hacer una solicitud a la API y obtener datos
+
+Hacemos una solicitud a la API REST Countries utilizando `requests.get()` y convertimos la respuesta en formato JSON.
+
+```{python}
+# Definir la URL de la API de REST Countries
+url = "https://restcountries.com/v3.1/all"
+
+# Realizar la solicitud GET a la API
+response = requests.get(url)
+
+# Comprobar si la solicitud fue exitosa y convertir a JSON
+if response.status_code == 200:
+    data = response.json()
+else:
+    data = None
+    print("No se pudieron obtener los datos.")
+```
+
+## 3. Parsear la respuesta JSON a un DataFrame usando pandas
+
+Utilizamos `pandas.json_normalize()` para convertir la respuesta JSON en un DataFrame, extrayendo las columnas que nos interesan, como el nombre del país, la población, la región y la capital.
+
+```{python}
+if data:
+    # Parsear el JSON a un DataFrame usando pandas.json_normalize()
+    df = pd.json_normalize(
+        data, 
+        record_path=None, 
+        meta=None, 
+        errors='ignore'
+    )
+
+    # Seleccionar solo las columnas que nos interesan
+    df_filtered = df[['name.common', 'population', 'region', 'capital']]
+
+    # Renombrar las columnas para mayor claridad
+    df_filtered.columns = ['Country', 'Population', 'Region', 'Capital']
+
+    # Mostrar las primeras filas del DataFrame
+    df_filtered.head()
+```
+
+## 4. Mostrar información general y estadísticas descriptivas
+
+Utilizamos los métodos de `pandas` para obtener información general y estadísticas descriptivas del DataFrame.
+
+```{python}
+# Mostrar información general del DataFrame
+df_filtered.info()
+
+# Mostrar estadísticas descriptivas
+df_filtered.describe()
+```
+
+## 5. Mostrar el DataFrame completo o un subconjunto
+
+Finalmente, mostramos el DataFrame completo o un subconjunto de los datos extraídos.
+
+```{python}
+# Mostrar las primeras 10 filas del DataFrame
+df_filtered.head(10)
+```
+
+# Explicación paso a paso
+
+1. **Importación de bibliotecas**: Importamos `requests` y `pandas` para hacer solicitudes HTTP y manejar los datos tabulares.
+2. **Solicitud a la API**: Realizamos una solicitud a la API REST Countries utilizando `requests.get()` y obtenemos los datos en formato JSON.
+3. **Parseo a DataFrame**: Utilizamos `pandas.json_normalize()` para parsear la respuesta JSON a un DataFrame y seleccionamos solo las columnas relevantes (nombre del país, población, región y capital).
+4. **Análisis del DataFrame**: Usamos los métodos `info()` y `describe()` de `pandas` para obtener información general y estadísticas descriptivas del DataFrame.
+5. **Visualización de datos**: Mostramos las primeras filas del DataFrame utilizando `head()`.
+
+### Consideraciones:
+
+- **Uso de `pandas.json_normalize()`**: Esta función es ideal para convertir estructuras JSON anidadas en un `DataFrame` plano y fácilmente manejable.
+- **Selección de columnas**: Filtramos el DataFrame para mostrar solo las columnas más relevantes (nombre del país, población, región y capital) y renombramos las columnas para mayor claridad.

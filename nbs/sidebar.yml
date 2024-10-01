@@ -29,6 +29,15 @@ website:
               - p5_ml5/01_sound_classifier.qmd
               - p5_ml5/02_codigo_clasificador_sonido.qmd
               - p5_ml5/03_codigo_image_classifier.qmd
+      
+      - section: C01 - Intro EDA
+        contents:
+          - section: Intro
+            contents:
+              - eda/00_intro.qmd
+              - eda/01_simple_api.qmd
+              
+
       - section: C10 - Usando Github en Windows
         contents:
           - intro_github/00_consideraciones.qmd
