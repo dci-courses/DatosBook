@@ -1,0 +1,66 @@
+---
+title: "Exploración de Datos (spotify api)"
+description: "Ejemplo de utilización de una api con tokens"
+format: html
+jypyter: python3
+---
+
+Las requests http pueden tener distintos métodos de autenticación, a continuación veremos cómo hacer requests a una api usando tokens de acceso, para ello estaremos usando la api de [Spotify](https://developer.spotify.com/documentation/web-api).
+
+Siguiendo los pasos descritos en la documentación, crearemos nuestra cuenta, configuraremos nuestro dashboard, crearemos una app, ingresaremos nombre, descripción y URL de redirección (pueden usar https://example.com) y elegiremos "Web API" en las opciones de api.
+
+Una vez que demos a guardar, nos redirigirá a nuestra página de la app que acabamos de crear.
+Para obtener nuestro token de acceso, debemos ir a Settings en nuestra app, aqui podremos encontrar una Client ID y un Client secret el cual podemos ver haciendo click en el hyperlink del mismo nombre.
+
+Utilizando estos dos elementos, podemos obtener un token de acceso valido por una hora:
+
+```{python}
+import requests
+
+#Nuestras credenciales
+client_id = "5ced241e4bda44c18c9145e6dae1aea2"
+client_secret = "c1e19a1b83164fdb9990015db5691f00"
+
+#URL para obtencion de tokens
+url = "https://accounts.spotify.com/api/token"
+#Headers necesarios para la request
+headers = {
+    "Content-Type": "application/x-www-form-urlencoded"
+}
+#Datos a enviar en la request, aqui van las credenciales
+data = {
+    "grant_type": "client_credentials",
+    "client_id": client_id,
+    "client_secret": client_secret
+}
+
+#Hacemos la request
+response = requests.post(url, headers=headers, data=data)
+
+#Guardamos el token
+access_token = response.json().get("access_token")
+
+#Mostramos el resultado
+print(access_token)
+```
+
+Esto nos devolverá como respuesta nuestro token de acceso, el cual será valido por una hora y podemos utilizar de la sigueinte manera para obtener la informacion de un artista:
+
+```{python}
+#Biblioteca para formatear json, sólo necesaria por claridad
+import json
+
+#Necesitamos la id del artista para poder obtener su información. Para ésto podemos irnos a un artista en spotify, clickear los tres puntos y copiar su id.
+artist_id = "4Z8W4fKeB5YxbusRsdQVPb"
+url_artist = f"https://api.spotify.com/v1/artists/{artist_id}"
+headers_artist = {
+    "Authorization": f"Bearer {access_token}"
+}
+
+response_artist = requests.get(url_artist, headers=headers_artist)
+
+print(json.dumps(response_artist.json(), indent=4))
+```
+
+De esta forma podemos utilizar nuestro token para realizar requests a la API de Spotify.
+Para explorar los distintos endpoints y requests que se pueden hacer, podemos revisar la [documentacion de Spotify](https://developer.spotify.com/documentation/web-api).

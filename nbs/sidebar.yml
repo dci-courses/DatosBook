@@ -47,3 +47,6 @@ website:
           - section: API Getonbrd
             contents:
               - exploracion_de_datos/getonbrd/getonbrd.qmd
+          - section: API Spotify
+            contents:
+              - exploracion_de_datos/spotify/spotify.qmd
