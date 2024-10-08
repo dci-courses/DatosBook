@@ -8,7 +8,32 @@ on:
   push:
     branches: [ "main", "master" ]
   workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps: [uses: fastai/workflows/quarto-ghp@master]
+
+    steps:
+      # 1. Comprobar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Actualizar pip e instalar platformdirs
+      - name: Install and update dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -U platformdirs
+
+      # 3. Verificar que platformdirs esté correctamente instalado
+      - name: Verify platformdirs installation
+        run: |
+          python -c "import platformdirs; print(platformdirs.__version__)"
+
+      # 4. Instalar Jupyter y todas sus dependencias clave
+      - name: Install Jupyter and dependencies
+        run: |
+          pip install jupyter nbformat jupyterlab jupyter-client jupyter-console jupyter-core nbclient notebook
+
+      # 5. Desplegar con Quarto
+      - name: Deploy with Quarto
+        uses: fastai/workflows/quarto-ghp@master

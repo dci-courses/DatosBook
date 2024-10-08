@@ -8,13 +8,3 @@ Este sitio web es una introducción a tu Libro de Datos. Aquí encontrarás toda
 Este libro está diseñado para ayudarte a explorar y entender los datos, así como para guiarte a través de los conceptos clave y ejemplos prácticos.
 
 ![Generada con Canva](techeable-machines/imagesTM/logo.png){width=100% .center}
-
-
-
-## Contenido del Libro de Datos
-
-A continuación, se muestra el contenido que ya hemos compilado en este libro. Haz clic en los enlaces para acceder a las diferentes secciones:
-
-- **[Machine Learning con Teachable Machine](teachablemachine/00_intro_tm.html):** Una visión general de los conceptos básicos y la importancia de los datos en el análisis.
-
- 
