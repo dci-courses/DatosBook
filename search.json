@@ -1,0 +1,800 @@
+[
+  {
+    "objectID": "exploracion_de_datos/getonbrd/getonbrd.html",
+    "href": "exploracion_de_datos/getonbrd/getonbrd.html",
+    "title": "Exploración de Datos (getonbrd api)",
+    "section": "",
+    "text": "Getonbrd es una página que permite a sus usuarios buscar y publicar trabajos en Latino America, tiene información sobre trabajos de mas de 12.000 compañias.\nA continuación veremos cómo usar su API para obtener datos los cuales podemos parsear y analizar usando otras herramientas.\n\nRequest básica\nPara la creación de peticiones http usarémos la biblioteca de python llamada requests, la cual nos permite hacer peticiones simplemente con la url de la api a la que queremos llamar. (La biblioteca incluye muchas otras opciones, pero por brevedad, sólo observaremos las funcionalidades básicas)\n\n#Importamos la biblioteca\nimport requests\n\n#Definimos la URL a la que queremos hacer peticiones\nurl = \"https://www.getonbrd.com/api/v0/categories?per_page=10&page=1\"\n\n#Hacemos la peticion y la guardamos en una variable\nresponse = requests.get(url)\n\n#Obtenemos el json de la respuesta\nresponse.json()\n\n{'data': [{'id': 'programming',\n   'type': 'category',\n   'attributes': {'name': 'Programming', 'dimension': 'programming'}},\n  {'id': 'digital-marketing',\n   'type': 'category',\n   'attributes': {'name': 'Digital Marketing',\n    'dimension': 'digital_marketing'}},\n  {'id': 'cybersecurity',\n   'type': 'category',\n   'attributes': {'name': 'Cybersecurity', 'dimension': 'cybersecurity'}},\n  {'id': 'customer-support',\n   'type': 'category',\n   'attributes': {'name': 'Customer Support',\n    'dimension': 'customer_support'}},\n  {'id': 'sysadmin-devops-qa',\n   'type': 'category',\n   'attributes': {'name': 'SysAdmin / DevOps / QA', 'dimension': 'sysadmin'}},\n  {'id': 'data-science-analytics',\n   'type': 'category',\n   'attributes': {'name': 'Data Science / Analytics',\n    'dimension': 'data_analytics'}},\n  {'id': 'operations-management',\n   'type': 'category',\n   'attributes': {'name': 'Operations / Management',\n    'dimension': 'operations'}},\n  {'id': 'design-ux',\n   'type': 'category',\n   'attributes': {'name': 'Design / UX', 'dimension': 'design'}},\n  {'id': 'sales',\n   'type': 'category',\n   'attributes': {'name': 'Sales', 'dimension': 'sales'}},\n  {'id': 'mobile-developer',\n   'type': 'category',\n   'attributes': {'name': 'Mobile Developer', 'dimension': 'mobile'}}],\n 'meta': {'page': 1, 'per_page': 10, 'total_pages': 2}}\n\n\nEsto nos dará como respuesta la lista de categorias que getonbrd ofrece, los muchos otros endpoints están explicados con gran detalle en su API.\n\n\nIndexado de JSON\nAlgo a tener en cuenta al momento de parsear respuestas https es que, al ser JSON, pueden ser tratadas como diccionarios/objetos/arrays. Por ejemplo, si quisieramos obtener sólo la primera categoría de la respuesta:\n\nimport requests\n\nurl = \"https://www.getonbrd.com/api/v0/categories?per_page=10&page=1\"\n\n#Podemos reducir la asignación y formato de los datos en una linea\nresponse = requests.get(url).json()\n\n#Tratamos el JSON como un objeto, podemos indexarlo como tal\nprimera_categoria = response['data'][0]['attributes']['name']\n\nprimera_categoria\n\n'Programming'\n\n\nDe esta manera podemos parsear y obtener exactamente lo que nosotros queramos de las peticiones, lo que nos permite luego pasarlo como parámetro a otras herramientas de análisis.\n\n\nGuardado a archivo\nPor último veremos como guardar la información a un archivo, el cual luego podremos utilizar con otras herramientas.\n\nimport requests, json\n\nurl = \"https://www.getonbrd.com/api/v0/categories?per_page=10&page=1\"\n\nresponse = requests.get(url).json()\n\n#Nos aseguramos de que lo que estamos intenando guardar sea un diccionario (json)\nif isinstance(response, dict):\n    #Guardamos los datos en un archivo json\n    with open('./categorias.json', 'w', encoding='utf-8') as file:\n        json.dump(response, file, ensure_ascii=False, indent=4)\n\nCon esto deberiamos ser capaces de obtener todos los datos que querramos de cualquier API.\n\n\nOtros tutoriales utiles\n\nMás sobre parseo de JSON\nVariables dentro de una String",
+    "crumbs": [
+      "C12 - Exploración de Datos",
+      "API Getonbrd",
+      "Exploración de Datos (getonbrd api)"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/01_actividad_1.html",
+    "href": "techeable-machines/01_actividad_1.html",
+    "title": "Explorando Teachable Machine",
+    "section": "",
+    "text": "Bienvenidos a esta actividad, cuyo objetivo es explorar los conceptos fundamentales de la inteligencia artificial mediante un enfoque práctico. En esta sesión, aprenderemos a crear y entrenar un modelo de aprendizaje automático utilizando Teachable Machine de Google. Esta herramienta es accesible para usuarios sin conocimientos previos de programación, lo que facilita la comprensión del funcionamiento básico de los modelos de inteligencia artificial.\n\n\n\nTeachable Machine",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Explorando Teachable Machine"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/01_actividad_1.html#actividad-1",
+    "href": "techeable-machines/01_actividad_1.html#actividad-1",
+    "title": "Explorando Teachable Machine",
+    "section": "",
+    "text": "Bienvenidos a esta actividad, cuyo objetivo es explorar los conceptos fundamentales de la inteligencia artificial mediante un enfoque práctico. En esta sesión, aprenderemos a crear y entrenar un modelo de aprendizaje automático utilizando Teachable Machine de Google. Esta herramienta es accesible para usuarios sin conocimientos previos de programación, lo que facilita la comprensión del funcionamiento básico de los modelos de inteligencia artificial.\n\n\n\nTeachable Machine",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Explorando Teachable Machine"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/01_actividad_1.html#objetivo",
+    "href": "techeable-machines/01_actividad_1.html#objetivo",
+    "title": "Explorando Teachable Machine",
+    "section": "Objetivo",
+    "text": "Objetivo\nAprender los conceptos básicos del aprendizaje automático mediante la creación y entrenamiento de un modelo simple utilizando imágenes en Teachable Machine de Google.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Explorando Teachable Machine"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/01_actividad_1.html#instrucciones-paso-a-paso",
+    "href": "techeable-machines/01_actividad_1.html#instrucciones-paso-a-paso",
+    "title": "Explorando Teachable Machine",
+    "section": "Instrucciones Paso a Paso",
+    "text": "Instrucciones Paso a Paso\n\n1. Acceso a Teachable Machine\nEn tu computadora o dispositivo móvil, abre un navegador web y visita el sitio web de Teachable Machine: https://teachablemachine.withgoogle.com/train/image.\n\n\n2. Crear Clases\nDentro de la categoría de Imágenes, verás la opción para crear diferentes Clases. Haz clic en “Add Class” para agregar una nueva clase. Por ejemplo, podrías crear una clase para diferentes objetos, como un lápiz y una taza. Proporciona ejemplos para cada clase. Puedes tomar fotos utilizando la cámara de tu dispositivo para capturar imágenes de los objetos que deseas utilizar.\n\n\n3. Entrenar el Modelo\nDespués de agregar suficientes ejemplos para cada clase (recomendamos al menos 10 ejemplos por clase), haz clic en el botón “Train Model” para comenzar el entrenamiento. Espera mientras Teachable Machine procesa los datos. Esto puede tardar unos minutos.\n\n\n4. Probar el Modelo\nUna vez que el modelo esté entrenado, utiliza la cámara para probar tu modelo. Prueba con nuevos objetos para ver si el modelo puede reconocer correctamente lo que le muestras.\n\n\n5. Reflexiona\n¿El modelo reconoció correctamente las nuevas entradas? ¿Por qué crees que funcionó o no funcionó como esperabas? Piensa en cómo podrías mejorar el modelo agregando más ejemplos o ajustando las clases.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Explorando Teachable Machine"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/01_actividad_1.html#discusión-en-clase",
+    "href": "techeable-machines/01_actividad_1.html#discusión-en-clase",
+    "title": "Explorando Teachable Machine",
+    "section": "Discusión en Clase",
+    "text": "Discusión en Clase\nAl finalizar, discutiremos en clase lo que aprendieron. Piensa en cómo podrías usar este tipo de tecnología en la vida real o en proyectos futuros.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Explorando Teachable Machine"
+    ]
+  },
+  {
+    "objectID": "tm_p5/04_codigo_snake.html",
+    "href": "tm_p5/04_codigo_snake.html",
+    "title": "Explicación del Código del Juego de la Serpiente en p5.js",
+    "section": "",
+    "text": "Esta aplicación es un sencillo juego de la serpiente implementado en p5.js. El objetivo del juego es controlar la serpiente para que coma la comida generada en posiciones aleatorias del campo de juego. A medida que la serpiente come, crece en tamaño, y el juego termina si la serpiente choca consigo misma o con el borde del campo de juego.\n\n1. Definición de Variables\nlet snake;\nlet rez = 20;\nlet food;\nlet w;\nlet h;\n\nsnake: Variable que almacenará la instancia de la serpiente.\nrez: Factor de resolución que escala el juego. Controla el tamaño de la cuadrícula en la que se moverá la serpiente.\nfood: Almacena la posición actual de la comida en el juego.\nw y h**: Representan el ancho y la altura del campo de juego en unidades de juego (no en píxeles).\n\n\n\n2. Clase Snake\nclass Snake {\n  \n  constructor() {\n    this.body = [];\n    this.body[0] = createVector(floor(w/2), floor(h/2));\n    this.xdir = 0;\n    this.ydir = 0;\n    this.len = 0;\n  }\n  \n  setDir(x, y) {\n    this.xdir = x;\n    this.ydir = y;\n  }\n  \n  update() {\n    let head = this.body[this.body.length-1].copy();\n    this.body.shift();\n    head.x += this.xdir;\n    head.y += this.ydir;\n    this.body.push(head);\n  }\n  \n  grow() {\n    let head = this.body[this.body.length-1].copy();\n    this.len++;\n    this.body.push(head);\n  }\n  \n  endGame() {\n    let x = this.body[this.body.length-1].x;\n    let y = this.body[this.body.length-1].y;\n    if(x &gt; w-1 || x &lt; 0 || y &gt; h-1 || y &lt; 0) {\n       return true;\n    }\n    for(let i = 0; i &lt; this.body.length-1; i++) {\n        let part = this.body[i];\n      if(part.x == x && part.y == y) {\n        return true;\n      }\n    }\n    return false;\n  }\n  \n  eat(pos) {\n    let x = this.body[this.body.length-1].x;\n    let y = this.body[this.body.length-1].y;\n    if(x == pos.x && y == pos.y) {\n      this.grow();\n      return true;\n    }\n    return false;\n  }\n  \n  show() {\n    for(let i = 0; i &lt; this.body.length; i++) {\n        fill(0);\n      noStroke();\n      rect(this.body[i].x, this.body[i].y, 1, 1)\n    }\n  }\n\n}\n\nConstructor y Variables de la Clase\n\nconstructor(): Define el comportamiento inicial de la serpiente al crear una instancia.\n\nbody: Es un array que guarda las posiciones de los segmentos de la serpiente. Inicialmente, contiene solo un segmento en el centro del campo de juego.\nxdir y ydir: Definen la dirección en la que se mueve la serpiente. Inicialmente, son 0 para que la serpiente no se mueva.\nlen: Guarda la longitud actual de la serpiente.\n\n\n\n\nMétodos de la Clase\n\nsetDir(x, y): Establece la dirección en la que la serpiente se moverá, basada en las entradas del usuario.\nupdate(): Actualiza la posición de la serpiente:\n\nLa cabeza de la serpiente se mueve en la dirección actual, y se añade una nueva cabeza en la nueva posición.\nEl último segmento de la serpiente (la cola) se elimina, a menos que la serpiente haya comido, en cuyo caso crece.\n\ngrow(): Aumenta la longitud de la serpiente al agregar un nuevo segmento en la posición donde estaba la cabeza.\nendGame(): Comprueba si el juego ha terminado:\n\nEl juego termina si la cabeza de la serpiente choca con los bordes del campo de juego o si se choca consigo misma.\n\neat(pos): Comprueba si la serpiente ha comido la comida:\n\nSi la cabeza de la serpiente está en la misma posición que la comida, la serpiente crece y la función devuelve true. Si no, devuelve false.\n\nshow(): Dibuja la serpiente en el lienzo:\n\nRecorre todos los segmentos del cuerpo de la serpiente y dibuja un rectángulo negro para cada uno.\n\n\n\n\n\n3. Configurar el Entorno\nfunction setup() {\n  createCanvas(400, 400);\n  w = floor(width / rez);\n  h = floor(height / rez);\n  frameRate(5);\n  snake = new Snake();\n  foodLocation();\n}\n\nsetup(): Esta función se ejecuta una vez al principio del programa.\n\ncreateCanvas(400, 400): Crea un lienzo de 400x400 píxeles donde se dibujará el juego.\nw y h: Calculan el ancho y la altura del campo de juego en unidades de juego.\nframeRate(5): Establece la velocidad de actualización del juego a 5 cuadros por segundo.\nsnake = new Snake(): Inicializa una nueva instancia de la serpiente.\nfoodLocation(): Coloca la comida en una ubicación inicial aleatoria.\n\n\n\n\n4. Generar la Ubicación de la Comida\nfunction foodLocation() {\n  let x = floor(random(w));\n  let y = floor(random(h));\n  food = createVector(x, y);\n}\n\nfoodLocation(): Genera una nueva ubicación para la comida dentro de los límites del campo de juego.\n\nx y y: Coordenadas aleatorias dentro del campo de juego.\nfood = createVector(x, y): Crea un vector que almacena la posición de la comida.\n\n\n\n\n5. Control de Teclas\nfunction keyPressed() {\n  if (keyCode === LEFT_ARROW) {\n    snake.setDir(-1, 0);\n  } else if (keyCode === RIGHT_ARROW) {\n    snake.setDir(1, 0);\n  } else if (keyCode === DOWN_ARROW) {\n    snake.setDir(0, 1);\n  } else if (keyCode === UP_ARROW) {\n    snake.setDir(0, -1);\n  } else if (key == ' ') {\n    snake.grow();\n  }\n}\n\nkeyPressed(): Detecta las teclas presionadas y cambia la dirección de la serpiente.\n\nLas flechas (LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, UP_ARROW) controlan la dirección de la serpiente.\nLa barra espaciadora (' ') hace que la serpiente crezca.\n\n\n\n\n6. Dibujar el Juego\nfunction draw() {\n  scale(rez);\n  background(220);\n  if (snake.eat(food)) {\n    foodLocation();\n  }\n  snake.update();\n  snake.show();\n\n  if (snake.endGame()) {\n    print(\"END GAME\");\n    background(255, 0, 0);\n    noLoop();\n  }\n\n  noStroke();\n  fill(255, 0, 0);\n  rect(food.x, food.y, 1, 1);\n}\n\ndraw(): Esta función se ejecuta continuamente y se encarga de dibujar en el lienzo.\n\nscale(rez): Escala el dibujo según el factor de resolución.\nbackground(220): Establece un color de fondo para el lienzo.\nif (snake.eat(food)): Verifica si la serpiente ha comido la comida y, si es así, genera una nueva ubicación para la comida.\nsnake.update(): Actualiza la posición de la serpiente.\nsnake.show(): Dibuja la serpiente en el lienzo.\nif (snake.endGame()): Verifica si el juego ha terminado y, de ser así, imprime un mensaje y detiene el juego.\nnoStroke(): Evita que la comida tenga un borde.\nfill(255, 0, 0): Establece el color de la comida a rojo.\nrect(food.x, food.y, 1, 1): Dibuja la comida como un cuadrado rojo.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Modelos TM + P5",
+      "Explicación del Código del Juego de la Serpiente en p5.js"
+    ]
+  },
+  {
+    "objectID": "intro_github/01_personal_token.html",
+    "href": "intro_github/01_personal_token.html",
+    "title": "HTTPS",
+    "section": "",
+    "text": "Crear un Token de Acceso Personal\n\nSi nuestro email no está verificado, deberemos verificarlo antes de continuar.\nEn la esquina superior derecha de cualquier página de GitHub, podemos clickear nuestra foto de perfil y luego dirigirnos a Settings. \nEn la barra izquierda, nos dirigimos a Developer Settings. \nEn la barra izquierda, en Personal access tokens hacemos click en Tokens (classic). \nSeleccionamos Generate new token, luego hacemos click en Generate new token (classic). \nEn la seccion “Note” podemos dar a nuestro token un nombre descriptivo.\nPodemos dar una fecha de expiracion seleccionando Expiration.\nSeleccionamos el alcance que tendrá el token, para que tenga acceso a nuestros repositorios a traves de la linea de comandos, seleccionaremos repo. \nHacemos click en Generate Token.\nCopiamos el token para utilizarlo posteriormente. \n\n\n\nUsar un Token de Acceso Personal\nUna vez creado el token de acceso, podemos utilizarlo en lugar de nuestra contraseña para ejecutar operaciones Git a traves de HTTPS.\nPor ejemplo, para clonar un repositorio utilizando la linea de comandos podemos usar el comando git clone. Ahora se nos solicitará ingresar nuestro usuario y contraseña. Cuando se requiera nuestra contraseña, ingresamos nuestro token de acceso en lugar de nuestra contraseña.\n$ git clone https://github.com/USUARIO/REPO.git\nUsername: NOMBRE-USUARIO\nPassword: TOKEN-ACCESO\nPara más información sobre tokens y sus usos, puede dirigirse a la página de Github.",
+    "crumbs": [
+      "C10 - Usando Github en Windows",
+      "Métodos",
+      "HTTPS"
+    ]
+  },
+  {
+    "objectID": "intro_github/03_github_desktop.html",
+    "href": "intro_github/03_github_desktop.html",
+    "title": "GitHub Desktop",
+    "section": "",
+    "text": "Github Desktop es una aplicación que permite trabajar con servicios Git, especialmente GitHub, mediante una interfaz gráfica en vez de la linea de comandos.",
+    "crumbs": [
+      "C10 - Usando Github en Windows",
+      "Métodos",
+      "GitHub Desktop"
+    ]
+  },
+  {
+    "objectID": "intro_github/03_github_desktop.html#configuración-inicial",
+    "href": "intro_github/03_github_desktop.html#configuración-inicial",
+    "title": "GitHub Desktop",
+    "section": "Configuración inicial",
+    "text": "Configuración inicial\nEn el menú File, vamos a Options. En la ventana de Options, nos dirigimos a Accounts y seguimos los pasos para iniciar sesión haciendo click en Sign in.",
+    "crumbs": [
+      "C10 - Usando Github en Windows",
+      "Métodos",
+      "GitHub Desktop"
+    ]
+  },
+  {
+    "objectID": "intro_github/03_github_desktop.html#clonar-un-repositorio",
+    "href": "intro_github/03_github_desktop.html#clonar-un-repositorio",
+    "title": "GitHub Desktop",
+    "section": "Clonar un repositorio",
+    "text": "Clonar un repositorio\nEn el menú File, podemos hacer click en Clone repository: \nLuego podemos elegir la opcion que corresponda a la localización del repositorio que queremos clonar. También podemos elegir URL para ingresar directamente la URL del repositorio. \nDe la lista de repositorios, podemos elegir el repositorio que queremos clonar. \nPara elegir un directorio local en donde guardar el repositorio clonado, podemos clickear Choose en la opcion Local Path y elegir un directorio de nuestra preferencia. \nPor ultimo hacemos click en el botón Clone abajo a la derecha y esto clonará el repositorio a nuestro sistema.",
+    "crumbs": [
+      "C10 - Usando Github en Windows",
+      "Métodos",
+      "GitHub Desktop"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html",
+    "href": "eda/02_eda_basico.html",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "",
+    "text": "Exploratory Data Analysis (EDA) es un proceso fundamental para analizar un conjunto de datos antes de aplicar modelos o técnicas más avanzadas. Consiste en resumir las características principales del dataset utilizando estadísticas descriptivas y técnicas de visualización.\nEl propósito de un EDA es identificar patrones, detectar valores atípicos, comprender la distribución de los datos y descubrir relaciones interesantes entre variables. Este análisis ayuda a formular hipótesis iniciales que pueden guiar el análisis posterior.\n\n\n\nUn EDA siempre debe realizarse porque: 1. Comprensión de los datos: Te permite entender mejor la estructura y las propiedades del conjunto de datos. 2. Identificación de valores faltantes y atípicos: Puedes detectar problemas con los datos que podrían afectar el rendimiento de modelos futuros. 3. Formulación de hipótesis: Permite identificar relaciones entre variables que podrían ser útiles para el análisis posterior. 4. Selección de variables: Ayuda a identificar qué variables son más importantes y pueden tener mayor impacto en un análisis más profundo o un modelo.",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#introducción",
+    "href": "eda/02_eda_basico.html#introducción",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "",
+    "text": "Exploratory Data Analysis (EDA) es un proceso fundamental para analizar un conjunto de datos antes de aplicar modelos o técnicas más avanzadas. Consiste en resumir las características principales del dataset utilizando estadísticas descriptivas y técnicas de visualización.\nEl propósito de un EDA es identificar patrones, detectar valores atípicos, comprender la distribución de los datos y descubrir relaciones interesantes entre variables. Este análisis ayuda a formular hipótesis iniciales que pueden guiar el análisis posterior.\n\n\n\nUn EDA siempre debe realizarse porque: 1. Comprensión de los datos: Te permite entender mejor la estructura y las propiedades del conjunto de datos. 2. Identificación de valores faltantes y atípicos: Puedes detectar problemas con los datos que podrían afectar el rendimiento de modelos futuros. 3. Formulación de hipótesis: Permite identificar relaciones entre variables que podrían ser útiles para el análisis posterior. 4. Selección de variables: Ayuda a identificar qué variables son más importantes y pueden tener mayor impacto en un análisis más profundo o un modelo.",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#cargar-los-datos",
+    "href": "eda/02_eda_basico.html#cargar-los-datos",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Cargar los Datos",
+    "text": "Cargar los Datos\nimport pandas as pd\n\nnetflix_df = pd.read_csv('../eda/netflix_titles.csv')\n\n# Mostrar las primeras filas del dataset\nnetflix_df.head()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-1-información-general-del-dataset",
+    "href": "eda/02_eda_basico.html#paso-1-información-general-del-dataset",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 1: Información General del Dataset",
+    "text": "Paso 1: Información General del Dataset\n# Ver la estructura y tipos de datos\nnetflix_df.info()\n\n# Ver los valores faltantes en cada columna\nmissing_values = netflix_df.isnull().sum()\nprint(\"Valores faltantes por columna:\")\nprint(missing_values)\n\n# Verificar si hay filas duplicadas\nduplicated_rows = netflix_df.duplicated().sum()\nprint(f\"Número de filas duplicadas: {duplicated_rows}\")",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-2-valores-únicos-en-columnas-importantes",
+    "href": "eda/02_eda_basico.html#paso-2-valores-únicos-en-columnas-importantes",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 2: Valores Únicos en Columnas Importantes",
+    "text": "Paso 2: Valores Únicos en Columnas Importantes\n# Verificar los valores únicos en columnas clave\ntype_unique = netflix_df['type'].unique()\nrating_unique = netflix_df['rating'].unique()\ncountry_unique = netflix_df['country'].unique()\n\nprint(f\"Valores únicos en la columna 'type': {type_unique}\")\nprint(f\"Valores únicos en la columna 'rating': {rating_unique}\")\nprint(f\"Ejemplo de valores únicos en la columna 'country': {country_unique[:10]}\")  # Mostrar los primeros 10 países",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-3-resumen-estadístico-de-datos-numéricos-y-categóricos",
+    "href": "eda/02_eda_basico.html#paso-3-resumen-estadístico-de-datos-numéricos-y-categóricos",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 3: Resumen Estadístico de Datos Numéricos y Categóricos",
+    "text": "Paso 3: Resumen Estadístico de Datos Numéricos y Categóricos\n# Resumen estadístico para las columnas numéricas\nnetflix_df.describe()\n\n# Resumen estadístico para las columnas categóricas\nnetflix_df.describe(include=['object'])",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-4-análisis-de-valores-faltantes",
+    "href": "eda/02_eda_basico.html#paso-4-análisis-de-valores-faltantes",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 4: Análisis de Valores Faltantes",
+    "text": "Paso 4: Análisis de Valores Faltantes\n# Proporción de valores faltantes\nmissing_percentage = (netflix_df.isnull().sum() / len(netflix_df)) * 100\nprint(\"Porcentaje de valores faltantes por columna:\")\nprint(missing_percentage)",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-5-análisis-univariado",
+    "href": "eda/02_eda_basico.html#paso-5-análisis-univariado",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 5: Análisis Univariado",
+    "text": "Paso 5: Análisis Univariado\n\nDistribución de Tipo de Contenido (Película vs TV Show)\n# Cargar librerías para visualización\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Distribución de 'type'\nplt.figure(figsize=(6,4))\nsns.countplot(data=netflix_df, x='type')\nplt.title('Distribución de Tipo de Contenido (Película vs TV Show)')\nplt.show()\n\n\nDistribución de Clasificación (Rating)\n# Distribución de 'rating'\nplt.figure(figsize=(10,6))\nsns.countplot(data=netflix_df, x='rating', order=netflix_df['rating'].value_counts().index)\nplt.title('Distribución de Clasificación')\nplt.xticks(rotation=45)\nplt.show()\n\n\nDistribución del Año de Estreno\n# Distribución del 'release_year'\nplt.figure(figsize=(10,6))\nsns.histplot(netflix_df['release_year'], bins=20, kde=True)\nplt.title('Distribución del Año de Estreno')\nplt.show()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-6-análisis-bivariado",
+    "href": "eda/02_eda_basico.html#paso-6-análisis-bivariado",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 6: Análisis Bivariado",
+    "text": "Paso 6: Análisis Bivariado\n\nRelación entre ‘type’ y ‘rating’\n# Relación entre 'type' y 'rating'\nplt.figure(figsize=(12,6))\nsns.countplot(data=netflix_df, x='rating', hue='type', order=netflix_df['rating'].value_counts().index)\nplt.title('Relación entre Tipo de Contenido y Clasificación')\nplt.xticks(rotation=45)\nplt.show()\n\n\nRelación entre País y Tipo de Contenido\n# Agrupar por país y tipo de contenido\ncountry_type = netflix_df.groupby(['country', 'type']).size().unstack().fillna(0)\ncountry_type.nlargest(10, 'Movie').plot(kind='bar', stacked=True, figsize=(12,6))\nplt.title('Top 10 Países con Más Contenido por Tipo (Película vs TV Show)')\nplt.xticks(rotation=45)\nplt.show()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-7-análisis-temporal",
+    "href": "eda/02_eda_basico.html#paso-7-análisis-temporal",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 7: Análisis Temporal",
+    "text": "Paso 7: Análisis Temporal\n\nNúmero de Contenidos Añadidos por Año\n# Convertir la columna 'date_added' a formato de fecha\nnetflix_df['date_added'] = pd.to_datetime(netflix_df['date_added'], errors='coerce')\n\n# Contar el número de películas y shows añadidos por año\nadded_per_year = netflix_df['date_added'].dt.year.value_counts().sort_index()\n\n# Visualizar el número de contenidos añadidos por año\nplt.figure(figsize=(10,6))\nadded_per_year.plot(kind='bar')\nplt.title('Número de Contenidos Añadidos por Año')\nplt.show()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-8-análisis-de-duración",
+    "href": "eda/02_eda_basico.html#paso-8-análisis-de-duración",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 8: Análisis de Duración",
+    "text": "Paso 8: Análisis de Duración\n\nDuración de Películas\n# Filtrar películas\nmovies = netflix_df[netflix_df['type'] == 'Movie']\n\n# Convertir duración a número de minutos\nmovies['duration'] = movies['duration'].str.replace(' min', '').astype(int)\n\n# Graficar la duración de las películas\nplt.figure(figsize=(10,6))\nsns.histplot(movies['duration'], bins=30, kde=True)\nplt.title('Distribución de la Duración de Películas (en minutos)')\nplt.show()\n\n\nDuración de Programas de TV (Temporadas)\n# Filtrar TV shows\ntv_shows = netflix_df[netflix_df['type'] == 'TV Show']\n\n# Convertir duración a número de temporadas\ntv_shows['duration'] = tv_shows['duration'].str.replace(' Season', '').str.replace('s', '').astype(int)\n\nplt.figure(figsize=(10,6))\nsns.histplot(tv_shows['duration'], bins=10, kde=True)\nplt.title('Distribución de la Cantidad de Temporadas en TV Shows')\nplt.show()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "eda/02_eda_basico.html#paso-9-directores-y-actores-más-frecuentes",
+    "href": "eda/02_eda_basico.html#paso-9-directores-y-actores-más-frecuentes",
+    "title": "Exploratory Data Analysis (EDA) de Títulos de Netflix",
+    "section": "Paso 9: Directores y Actores más Frecuentes",
+    "text": "Paso 9: Directores y Actores más Frecuentes\n\nDirectores más Frecuentes\n# Directores más frecuentes\ntop_directors = netflix_df['director'].value_counts().head(10)\nplt.figure(figsize=(10,6))\ntop_directors.plot(kind='bar')\nplt.title('Top 10 Directores con Más Contenidos')\nplt.xticks(rotation=45)\nplt.show()\n\n\nActores más Frecuentes\n# Actores más frecuentes\ncast_members = netflix_df['cast'].dropna().str.split(', ').explode()\ntop_actors = cast_members.value_counts().head(10)\n\nplt.figure(figsize=(10,6))\ntop_actors.plot(kind='bar')\nplt.title('Top 10 Actores Más Frecuentes')\nplt.xticks(rotation=45)\nplt.show()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Exploratory Data Analysis (EDA) de Títulos de Netflix"
+    ]
+  },
+  {
+    "objectID": "p5/01_p5.html",
+    "href": "p5/01_p5.html",
+    "title": "Notas sobre p5.js",
+    "section": "",
+    "text": "¿Qué es p5.js?\np5.js es una librería de JavaScript que facilita la creación de gráficos y animaciones interactivas en la web. Está diseñada para ser accesible a artistas, diseñadores y educadores, permitiendo que personas con poca experiencia en programación puedan crear proyectos visuales complejos de manera intuitiva.\nEl término “sketch” en p5.js se refiere a un programa o código corto que se utiliza para crear y experimentar con gráficos interactivos. Este enfoque de trabajo basado en “sketches” es ideal para iterar rápidamente, probar ideas creativas y visualizar conceptos sin necesidad de construir aplicaciones completas desde el principio.\n\n\nUsos de p5.js\np5.js se utiliza principalmente para:\n\nCreación de gráficos y animaciones: Permite dibujar formas, manipular imágenes, y crear animaciones complejas en tiempo real.\nInteracción con el usuario: Puedes capturar la entrada del usuario a través del teclado, ratón, cámara, micrófono, y otros dispositivos.\nVisualización de datos: Es ideal para crear visualizaciones interactivas de datos, permitiendo que los usuarios exploren grandes conjuntos de datos de manera visual.\nPrototipado rápido: Ideal para crear prototipos de aplicaciones visuales o interfaces interactivas rápidamente.\nEducación: Es ampliamente utilizado en el ámbito educativo para enseñar conceptos de programación, especialmente en la intersección de la tecnología y el arte.\n\n\n\nCaracterísticas Principales\n\nSimplicidad: p5.js está diseñado para ser fácil de aprender y usar, incluso para principiantes en programación.\nInteractividad: Incluye funciones integradas para manejar la entrada del usuario, como el movimiento del ratón y las pulsaciones de teclas.\nAcceso a multimedia: Facilita el trabajo con video, sonido, e imágenes, permitiendo manipulación en tiempo real.\nCompatibilidad con la Web: p5.js funciona directamente en el navegador, lo que facilita compartir proyectos en línea.\nExtensibilidad: La comunidad ha desarrollado una gran cantidad de extensiones y complementos que amplían las capacidades de p5.js, como p5.sound para manipulación de audio.\n\n\n\nEstructura Básica de un Sketch en p5.js\nEn p5.js, un “sketch” es una pieza de código que define cómo se dibujan y se animan los elementos gráficos en la pantalla. Un sketch generalmente incluye dos funciones principales:\n\nsetup(): Se ejecuta una vez al inicio del programa y se utiliza para inicializar variables, configurar el entorno, y crear el lienzo donde se dibujará.\ndraw(): Se ejecuta repetidamente (por defecto, 60 veces por segundo) y se utiliza para dibujar y actualizar la visualización en el lienzo. Esta función es donde ocurre la mayor parte de la animación y la interacción en tiempo real.\n\n\n\nEjemplo Básico\nfunction setup() {\n  createCanvas(400, 400);\n}\n\nfunction draw() {\n  background(220);\n  ellipse(200, 200, 50, 50);\n}\n\n\nDocumentación y Ejemplos\nUna de las mayores fortalezas de p5.js es su documentación extensa y bien organizada. La documentación de p5.js no solo describe detalladamente cada función y característica de la librería, sino que también incluye numerosos ejemplos prácticos que los usuarios pueden utilizar para aprender y experimentar. Estos ejemplos son ideales para aquellos que están comenzando, ya que permiten entender cómo funciona cada función en un contexto real.\nAdemás, la documentación incluye una sección de tutoriales que abordan desde conceptos básicos hasta técnicas avanzadas, ayudando a los usuarios a desarrollar sus habilidades paso a paso. Esta combinación de una guía completa y ejemplos prácticos hace que el aprendizaje de p5.js sea accesible y agradable.\n\n\nRecursos Principales\n\nPágina Oficial de p5.js: La mejor fuente para obtener la librería, leer la documentación oficial, y acceder a ejemplos.\nReferencia de p5.js: Documentación completa de todas las funciones disponibles en p5.js.\np5.js Web Editor: Un editor en línea donde puedes escribir, ejecutar y compartir tus sketches p5.js sin necesidad de instalar nada.\np5.js GitHub Repository: El repositorio oficial de p5.js donde puedes encontrar el código fuente y contribuir al proyecto.\nForo de p5.js: Un lugar para hacer preguntas, compartir proyectos, y conectarse con otros usuarios de p5.js.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Biblioteca P5",
+      "Notas sobre p5.js"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bienvenido al Libro de Datos",
+    "section": "",
+    "text": "Este sitio web es una introducción a tu Libro de Datos. Aquí encontrarás toda la información relevante, organizada de manera clara y accesible. Este libro está diseñado para ayudarte a explorar y entender los datos, así como para guiarte a través de los conceptos clave y ejemplos prácticos.\n\n\n\nGenerada con Canva",
+    "crumbs": [
+      "Bienvenido al Libro de Datos"
+    ]
+  },
+  {
+    "objectID": "nbdev_tutorial/primera_edicion.html",
+    "href": "nbdev_tutorial/primera_edicion.html",
+    "title": "Primera edición",
+    "section": "",
+    "text": "Cómo hacer cambios\nAntes de empezar a hacer cambios deberiamos instalar los hooks para GitHub, nbdev nos provee un comando para hacer precisamente esto:\nnbdev_install_hooks\n\n\nViendo cambios en tiempo real\nnbdev nos brinda la capacidad de ver los cambios hechos en nuestros docs a medida que los vamos haciendo, para utilizar esta herramienta podemos hacer uso de el siguiente comando:\nnbdev_preview\nEsto abrirá un servidor local y automaticamente abrirá nuestro navegador con nuestra página web. Podremos ver los cambios que hacemos reflejados en ésta página.\nAhora podemos editar los archivos en el directorio nbs/ para hacer nuestros cambios.\n\n\nFinalmente\nPor ultimo se recomienda utilizar el comando nbdev_prepare antes de subir cualquier cambio hecho a nuestro repositorio, éste comando junta los siguientes comandos:\nnbdev_export: Compila los modulos python desde los notebooks\nnbdev_test: Hace tests a los notebooks\nnbdev_clean: Limpia los notebooks para git\nnbdev_readme: Actualiza el README.md desde nuestro index.ipynb (archivo que \"controla\" nuestro readme)\nLuego de preparar nuestros cambios podemos subirlos a nuestro repositorio:\ngit add .\ngit commit -m \"mensaje\"\ngit push\n\n\nUltimas palabras\nnbdev es una herramienta mucho mas grande de lo que he descrito en éste mini-tutorial, si le interesa explorar más de sus funcionalidades puede dirijirse al tutorial oficial de nvdev.",
+    "crumbs": [
+      "C11 - Usando nbdev",
+      "Primera edición"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/02_codigo_clasificador_sonido.html",
+    "href": "p5_ml5/02_codigo_clasificador_sonido.html",
+    "title": "Código Clasificador de Sonido",
+    "section": "",
+    "text": "Esta aplicación escucha comandos de voz en tiempo real a través del micrófono del usuario y utiliza un modelo de aprendizaje automático, SpeechCommands18w, cargado desde ml5.js, para clasificar cada comando de voz en una de las 18 palabras predefinidas. El resultado de la clasificación se muestra en la pantalla, donde cada palabra reconocida se destaca en grande. Además, todas las palabras que el modelo puede reconocer se muestran en el canvas para guiar al usuario sobre qué puede decir. La interfaz está diseñada para actualizarse en tiempo real, proporcionando una experiencia interactiva y visualmente intuitiva para el usuario.\n\n\nPrimero, necesitamos crear la estructura HTML donde se mostrará el canvas para la visualización de los resultados.\n&lt;div id=\"p5-sketch\"&gt;\n  &lt;div id=\"canvas-container\"&gt;&lt;/div&gt;\n&lt;/div&gt;\nEste contenedor (div) es donde p5.js generará el canvas para mostrar las palabras detectadas.\n\n\n\nPara que el proyecto funcione, es necesario incluir las bibliotecas p5.js y ml5.js en el documento. Puedes hacerlo de la siguiente manera:\n&lt;script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"https://unpkg.com/ml5@latest/dist/ml5.min.js\"&gt;&lt;/script&gt;\nEstas líneas de código aseguran que ambas bibliotecas estén disponibles para su uso.\n\n\n\nEl primer paso en nuestro script es inicializar el clasificador de sonido utilizando el modelo SpeechCommands18w. Vamos a definir la estructura básica de nuestro script:\n&lt;script&gt;\n(function() {\n  const sketch = (p) =&gt; {\n    // Inicialización del método de clasificación de sonido con el modelo SpeechCommands18w\n    let classifier;\n\n    // Array con las 18 palabras del modelo SpeechCommands18w\n    let words = [\n      \"zero\", \"one\", \"two\", \"three\", \"four\", \"five\", \"six\", \n      \"seven\", \"eight\", \"nine\", \"up\", \"down\", \"left\", \n      \"right\", \"go\", \"stop\", \"yes\", \"no\"\n    ];\n\n    // Variable para mostrar los resultados en el canvas\n    let predictedWord = \"\";\nEn este bloque, definimos un array words que contiene las palabras que el modelo puede reconocer. La variable predictedWord almacenará la palabra reconocida en tiempo real.\n\n\nPara cargar el modelo de sonido, usamos la función preload de p5.js, que asegura que el modelo se cargue antes de que el sketch comience a ejecutarse.\n    p.preload = function() {\n      // Opciones para el modelo, estableciendo un umbral de probabilidad de 0.7\n      let options = { probabilityThreshold: 0.7 };\n      // Cargar el modelo de clasificación de sonido SpeechCommands18w\n      classifier = ml5.soundClassifier(\"SpeechCommands18w\", options);\n    };\nAquí, configuramos el probabilityThreshold a 0.7, lo que significa que solo se mostrarán predicciones con una confianza del 70% o más.\n\n\n\nA continuación, configuramos el canvas donde se visualizarán las palabras reconocidas y las palabras que el modelo puede identificar.\n    p.setup = function() {\n      // Crear el canvas donde se mostrará la interfaz\n      let canvas = p.createCanvas(700, 520).parent(\"canvas-container\");\n    \n      // Clasificar el sonido del micrófono en tiempo real\n      classifier.classify(gotResult);  \n    };\nEste bloque crea un canvas de 700x520 píxeles y establece la clasificación del sonido en tiempo real.\n\n\n\nAhora, definimos cómo se mostrarán las palabras en el canvas, tanto las opciones que el usuario puede decir como la palabra reconocida.\n    p.draw = function() {\n      // Fondo blanco\n      p.background(250);\n\n      // Mostrar las palabras posibles en el canvas\n      displayWords();\n\n      // Si el modelo ha reconocido alguna palabra, la muestra en el canvas\n      if (predictedWord !== \"\") {\n        p.fill(211, 107, 255);\n        p.textAlign(p.CENTER, p.CENTER);\n        p.textSize(64);\n        p.text(predictedWord, p.width / 2, 90);\n      }\n    };\nEste código dibuja un fondo blanco en el canvas, muestra las palabras posibles en tres columnas, y si el modelo reconoce una palabra, esta se muestra en el centro del canvas.\n\n\n\nLas palabras que el modelo puede reconocer se muestran en columnas en el canvas:\n    // Función para mostrar las 18 palabras posibles en el canvas\n    function displayWords() {\n      p.textAlign(p.CENTER, p.CENTER);\n      p.textSize(32);\n      p.fill(96);\n      p.text(\"¡Di una de estas palabras!\", p.width / 2, 40);\n\n      let x = 125;\n      let y = 150;\n\n      // Las palabras aparecen en 3 columnas y 6 filas\n      for (let i = 0; i &lt; words.length; i++) {\n        p.fill(158);\n        p.text(words[i], x, y);\n        y += 50;\n        if ((i + 1) % 6 === 0) {\n          x += 200;\n          y = 150;\n        }\n      }\n    }\nLas palabras se distribuyen en tres columnas y seis filas, con un encabezado que indica al usuario que diga una de las palabras.\n\n\n\nFinalmente, definimos la función que manejará los resultados de la clasificación:\n    // Función que se ejecuta cuando hay un resultado de la clasificación\n    function gotResult(error, results) {\n      if (error) {\n        console.error(error);\n        return;\n      }\n\n      // Los resultados se ordenan por confianza, se muestra la palabra con mayor confianza\n      if (results && results.length &gt; 0) {\n        predictedWord = results[0].label;\n      }\n    }\n\n    new p5(sketch);\n  }; \n})();\n&lt;/script&gt;\nEsta función verifica si hubo un error en la clasificación y, si no lo hubo, actualiza predictedWord con la palabra más probable identificada por el modelo.\n\n\n\n\nPara obtener más información sobre cómo utilizar ml5.js y los distintos modelos disponibles, puedes consultar la documentación oficial de ml5.js. Aquí encontrarás detalles sobre la configuración de diferentes modelos, opciones avanzadas y ejemplos adicionales para ayudarte a ampliar y personalizar tu aplicación.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Sonido"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/02_codigo_clasificador_sonido.html#estructura-html",
+    "href": "p5_ml5/02_codigo_clasificador_sonido.html#estructura-html",
+    "title": "Código Clasificador de Sonido",
+    "section": "",
+    "text": "Primero, necesitamos crear la estructura HTML donde se mostrará el canvas para la visualización de los resultados.\n&lt;div id=\"p5-sketch\"&gt;\n  &lt;div id=\"canvas-container\"&gt;&lt;/div&gt;\n&lt;/div&gt;\nEste contenedor (div) es donde p5.js generará el canvas para mostrar las palabras detectadas.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Sonido"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/02_codigo_clasificador_sonido.html#cargando-las-bibliotecas",
+    "href": "p5_ml5/02_codigo_clasificador_sonido.html#cargando-las-bibliotecas",
+    "title": "Código Clasificador de Sonido",
+    "section": "",
+    "text": "Para que el proyecto funcione, es necesario incluir las bibliotecas p5.js y ml5.js en el documento. Puedes hacerlo de la siguiente manera:\n&lt;script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js\"&gt;&lt;/script&gt;\n&lt;script src=\"https://unpkg.com/ml5@latest/dist/ml5.min.js\"&gt;&lt;/script&gt;\nEstas líneas de código aseguran que ambas bibliotecas estén disponibles para su uso.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Sonido"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/02_codigo_clasificador_sonido.html#inicialización-del-modelo-de-clasificación",
+    "href": "p5_ml5/02_codigo_clasificador_sonido.html#inicialización-del-modelo-de-clasificación",
+    "title": "Código Clasificador de Sonido",
+    "section": "",
+    "text": "El primer paso en nuestro script es inicializar el clasificador de sonido utilizando el modelo SpeechCommands18w. Vamos a definir la estructura básica de nuestro script:\n&lt;script&gt;\n(function() {\n  const sketch = (p) =&gt; {\n    // Inicialización del método de clasificación de sonido con el modelo SpeechCommands18w\n    let classifier;\n\n    // Array con las 18 palabras del modelo SpeechCommands18w\n    let words = [\n      \"zero\", \"one\", \"two\", \"three\", \"four\", \"five\", \"six\", \n      \"seven\", \"eight\", \"nine\", \"up\", \"down\", \"left\", \n      \"right\", \"go\", \"stop\", \"yes\", \"no\"\n    ];\n\n    // Variable para mostrar los resultados en el canvas\n    let predictedWord = \"\";\nEn este bloque, definimos un array words que contiene las palabras que el modelo puede reconocer. La variable predictedWord almacenará la palabra reconocida en tiempo real.\n\n\nPara cargar el modelo de sonido, usamos la función preload de p5.js, que asegura que el modelo se cargue antes de que el sketch comience a ejecutarse.\n    p.preload = function() {\n      // Opciones para el modelo, estableciendo un umbral de probabilidad de 0.7\n      let options = { probabilityThreshold: 0.7 };\n      // Cargar el modelo de clasificación de sonido SpeechCommands18w\n      classifier = ml5.soundClassifier(\"SpeechCommands18w\", options);\n    };\nAquí, configuramos el probabilityThreshold a 0.7, lo que significa que solo se mostrarán predicciones con una confianza del 70% o más.\n\n\n\nA continuación, configuramos el canvas donde se visualizarán las palabras reconocidas y las palabras que el modelo puede identificar.\n    p.setup = function() {\n      // Crear el canvas donde se mostrará la interfaz\n      let canvas = p.createCanvas(700, 520).parent(\"canvas-container\");\n    \n      // Clasificar el sonido del micrófono en tiempo real\n      classifier.classify(gotResult);  \n    };\nEste bloque crea un canvas de 700x520 píxeles y establece la clasificación del sonido en tiempo real.\n\n\n\nAhora, definimos cómo se mostrarán las palabras en el canvas, tanto las opciones que el usuario puede decir como la palabra reconocida.\n    p.draw = function() {\n      // Fondo blanco\n      p.background(250);\n\n      // Mostrar las palabras posibles en el canvas\n      displayWords();\n\n      // Si el modelo ha reconocido alguna palabra, la muestra en el canvas\n      if (predictedWord !== \"\") {\n        p.fill(211, 107, 255);\n        p.textAlign(p.CENTER, p.CENTER);\n        p.textSize(64);\n        p.text(predictedWord, p.width / 2, 90);\n      }\n    };\nEste código dibuja un fondo blanco en el canvas, muestra las palabras posibles en tres columnas, y si el modelo reconoce una palabra, esta se muestra en el centro del canvas.\n\n\n\nLas palabras que el modelo puede reconocer se muestran en columnas en el canvas:\n    // Función para mostrar las 18 palabras posibles en el canvas\n    function displayWords() {\n      p.textAlign(p.CENTER, p.CENTER);\n      p.textSize(32);\n      p.fill(96);\n      p.text(\"¡Di una de estas palabras!\", p.width / 2, 40);\n\n      let x = 125;\n      let y = 150;\n\n      // Las palabras aparecen en 3 columnas y 6 filas\n      for (let i = 0; i &lt; words.length; i++) {\n        p.fill(158);\n        p.text(words[i], x, y);\n        y += 50;\n        if ((i + 1) % 6 === 0) {\n          x += 200;\n          y = 150;\n        }\n      }\n    }\nLas palabras se distribuyen en tres columnas y seis filas, con un encabezado que indica al usuario que diga una de las palabras.\n\n\n\nFinalmente, definimos la función que manejará los resultados de la clasificación:\n    // Función que se ejecuta cuando hay un resultado de la clasificación\n    function gotResult(error, results) {\n      if (error) {\n        console.error(error);\n        return;\n      }\n\n      // Los resultados se ordenan por confianza, se muestra la palabra con mayor confianza\n      if (results && results.length &gt; 0) {\n        predictedWord = results[0].label;\n      }\n    }\n\n    new p5(sketch);\n  }; \n})();\n&lt;/script&gt;\nEsta función verifica si hubo un error en la clasificación y, si no lo hubo, actualiza predictedWord con la palabra más probable identificada por el modelo.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Sonido"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/02_codigo_clasificador_sonido.html#referencias",
+    "href": "p5_ml5/02_codigo_clasificador_sonido.html#referencias",
+    "title": "Código Clasificador de Sonido",
+    "section": "",
+    "text": "Para obtener más información sobre cómo utilizar ml5.js y los distintos modelos disponibles, puedes consultar la documentación oficial de ml5.js. Aquí encontrarás detalles sobre la configuración de diferentes modelos, opciones avanzadas y ejemplos adicionales para ayudarte a ampliar y personalizar tu aplicación.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Sonido"
+    ]
+  },
+  {
+    "objectID": "imagenes_como_dato/02_imgDato.html",
+    "href": "imagenes_como_dato/02_imgDato.html",
+    "title": "Parte 2: Comprensión de Imágenes en Color",
+    "section": "",
+    "text": "Introducción\n\nConcepto Básico:\n\nLas imágenes en color se representan utilizando el modelo RGB (Rojo, Verde, Azul). Cada píxel en una imagen en color tiene tres valores: uno para el rojo, uno para el verde y uno para el azul. Estos valores pueden variar entre 0 (ausencia del color) y 255 (máxima intensidad del color).\nCombinando estos tres valores, se pueden crear diferentes colores en cada píxel.\n\nCómo se Forma una Matriz de Números en Imágenes en Color:\n\nA diferencia de las imágenes en blanco y negro, las imágenes en color requieren tres matrices separadas: una para cada color primario (rojo, verde y azul).\nCada píxel tiene tres números que representan la intensidad de cada uno de los colores rojo, verde y azul. Estas tres matrices se combinan para formar la imagen en color que vemos.\n\n\n\n\nActividad Principal\n\nPaso 1: Observación de la Imagen en Color\n\nInstrucciones: Observa la Imagen 1. Esta es una versión en color de la figura escalonada que hemos estado utilizando. Aquí, los píxeles tienen diferentes combinaciones de rojo, verde y azul.\n\n\n\n\nImagen 1: Triángulo Verde\n\n\nPaso 2: Delimitación de los Píxeles en Color\n\nInstrucciones: Observa la Imagen 2, donde cada píxel de la figura en color está claramente delimitado.\n\n(Dibuja la misma figura en una cuadrícula de 7x4, pero ahora con colores visibles y delimitados para cada píxel.)\nPaso 3: Representación de la Imagen como Tres Matrices de Píxeles\n\nInstrucciones: Ahora, observa cómo se puede representar la imagen en color mediante tres matrices separadas, una para cada canal de color (rojo, verde, azul).\n\n(Crea las tres matrices, una para cada color, que representen la intensidad de rojo, verde y azul en cada píxel de la cuadrícula.)\nPaso 4: Conversión a una Matriz Numérica Completa para Cada Color\n\nInstrucciones: Finalmente, representa las matrices completas en formato numérico para cada canal de color (rojo, verde y azul), organizadas de acuerdo a la cuadrícula.\n\n(Genera las matrices numéricas completas en tu cuaderno, asignando los valores correctos para cada color según lo que observas en la cuadrícula.)\n\n\n\nReflexión\n\nReflexiona sobre cómo la adición de color hace que la imagen sea más compleja y sobre cómo un computador utiliza estos tres valores para interpretar y mostrar la imagen.\nPreguntas para discutir:\n\n¿Cómo crees que cambiarían los colores si modificamos los valores en una de las matrices?\n¿Qué sucedería si todos los valores del canal rojo fueran 255 (máxima intensidad)?\n¿Qué efectos observas si uno de los canales (rojo, verde o azul) está completamente apagado (todos los valores en 0)?",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Procesamiento de Imágenes",
+      "Parte 2: Comprensión de Imágenes en Color"
+    ]
+  },
+  {
+    "objectID": "imagenes_como_dato/01_imgDato.html",
+    "href": "imagenes_como_dato/01_imgDato.html",
+    "title": "Parte 1: Comprensión de Imágenes en Blanco y Negro",
+    "section": "",
+    "text": "Parte 1: Comprensión de Imágenes en Blanco y Negro\n\nIntroducción\n\nConcepto Básico:\n\nUn computador “ve” las imágenes como una cuadrícula de pequeños puntos llamados píxeles.\nEn una imagen en blanco y negro, cada píxel tiene un valor que puede ser 0 (blanco) o 1 (negro). Estos valores permiten al computador representar diferentes áreas de la imagen.\n\nCómo se Forma una Matriz de Números:\n\nUna matriz es una tabla ordenada de números, donde cada número corresponde a un píxel en la imagen.\nCuando una computadora procesa una imagen, cada píxel se convierte en un número. En una imagen en blanco y negro, un píxel blanco se convierte en 0 y un píxel negro en 1. Estos números se organizan en una tabla (matriz) que la computadora utiliza para “ver” la imagen.\n\n\n\n\nActividad Principal\n\nPaso 1: Observación de la Imagen Original\n\nInstrucciones: Observa la Imagen 1. Esta es una forma simple y de baja resolución representada por un triángulo negro hecho de 28 píxeles (16 píxeles negros y 12 píxeles blancos).\n\n\n\n\n\nImagen 1: Triángulo Negro\n\n\n\nPaso 2: Delimitación de los Píxeles\n\nInstrucciones: Observa la Imagen 2, donde cada píxel de la figura está claramente delimitado. Aquí puedes ver cómo se distribuyen los píxeles negros y blancos en la cuadrícula de 7x4.\n\n\n\n\n\nImagen 2: Píxeles Delimitados\n\n\n\nPaso 3: Representación de la Imagen como una Matriz de Píxeles\n\nInstrucciones: Ahora, mira la Imagen 3, donde los píxeles se han convertido en una matriz de números “1” y “0”. Los 1 representan los píxeles negros, y los 0 representan los píxeles blancos.\n\n\n\n\n\nImagen 3: Matriz de Píxeles\n\n\n\nPaso 4: Conversión a una Matriz Numérica Completa\n\nInstrucciones: Finalmente, observa la Imagen 4, que presenta la matriz completa en formato numérico, con los 1 y 0 organizados de acuerdo a la cuadrícula.\n\n\n[0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1]\n\n\nReflexión\n\nReflexiona sobre cómo el computador usa estos valores para “ver” y procesar la imagen. Considera cómo cambiarían las cosas si se modificaran los valores en la matriz.\nPregunta para discutir: ¿Qué sucedería si intercambiamos todos los 1 por 0 y viceversa? ¿Cómo cambiaría la imagen?",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Procesamiento de Imágenes",
+      "Parte 1: Comprensión de Imágenes en Blanco y Negro"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/03_codigo_image_classifier.html",
+    "href": "p5_ml5/03_codigo_image_classifier.html",
+    "title": "Código Clasificador de Imágenes",
+    "section": "",
+    "text": "Primero, declaramos las variables necesarias:\nlet classifier;\n\nlet img;\n\nlet label = \"\";\nlet confidence = \"\";\n\nclassifier: Variable que almacenará el clasificador de imágenes utilizando el modelo MobileNet.\nimg: Variable que almacenará la imagen que se va a clasificar.\nlabel y confidence: Estas variables se utilizan para almacenar y mostrar la etiqueta del objeto detectado y la confianza de la predicción, respectivamente.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Imágenes"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/03_codigo_image_classifier.html#declaración-de-variables",
+    "href": "p5_ml5/03_codigo_image_classifier.html#declaración-de-variables",
+    "title": "Código Clasificador de Imágenes",
+    "section": "",
+    "text": "Primero, declaramos las variables necesarias:\nlet classifier;\n\nlet img;\n\nlet label = \"\";\nlet confidence = \"\";\n\nclassifier: Variable que almacenará el clasificador de imágenes utilizando el modelo MobileNet.\nimg: Variable que almacenará la imagen que se va a clasificar.\nlabel y confidence: Estas variables se utilizan para almacenar y mostrar la etiqueta del objeto detectado y la confianza de la predicción, respectivamente.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Imágenes"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/03_codigo_image_classifier.html#función-preload",
+    "href": "p5_ml5/03_codigo_image_classifier.html#función-preload",
+    "title": "Código Clasificador de Imágenes",
+    "section": "Función preload",
+    "text": "Función preload\nLa función preload se ejecuta antes de que el programa comience a funcionar. Su objetivo es cargar los recursos necesarios, como el modelo y la imagen:\nfunction preload() {\n  // Se inicializa el clasificador con el modelo MobileNet.\n  classifier = ml5.imageClassifier(\"MobileNet\");\n\n  // Se carga la imagen \"bird.jpg\" en la variable img.\n  img = loadImage(\"images/bird.jpg\");\n}\n\nclassifier se inicializa con el modelo MobileNet usando ml5.imageClassifier(\"MobileNet\").\nimg carga la imagen “bird.jpg” para ser clasificada.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Imágenes"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/03_codigo_image_classifier.html#función-setup",
+    "href": "p5_ml5/03_codigo_image_classifier.html#función-setup",
+    "title": "Código Clasificador de Imágenes",
+    "section": "Función setup",
+    "text": "Función setup\nLa función setup configura el canvas y realiza la clasificación de la imagen:\nfunction setup() {\n  // Configura el canvas donde se mostrará la imagen y los resultados.\n  createCanvas(400, 400);\n\n  // Clasifica la imagen cargada y define la función callback `gotResult` para manejar los resultados.\n  classifier.classify(img, gotResult);\n\n  // Muestra la imagen en el canvas.\n  image(img, 0, 0, width, height);\n}\n\ncreateCanvas(400, 400): Crea un canvas de 400x400 píxeles.\nclassifier.classify(img, gotResult): Clasifica la imagen cargada y llama a la función gotResult cuando la clasificación se completa.\nimage(img, 0, 0, width, height): Muestra la imagen en el canvas.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Imágenes"
+    ]
+  },
+  {
+    "objectID": "p5_ml5/03_codigo_image_classifier.html#función-gotresult",
+    "href": "p5_ml5/03_codigo_image_classifier.html#función-gotresult",
+    "title": "Código Clasificador de Imágenes",
+    "section": "Función gotResult",
+    "text": "Función gotResult\nFinalmente, la función gotResult se encarga de procesar y mostrar los resultados de la clasificación:\nfunction gotResult(results) {\n  // Los resultados se almacenan en un array `results`, ordenados por confianza.\n  console.log(results);\n\n  // Se actualizan las variables `label` y `confidence` con los resultados de la clasificación.\n  label = \"Label: \" + results[0].label;\n  confidence = \"Confidence: \" + nf(results[0].confidence, 0, 2);\n\n  // Se dibujan la etiqueta y la confianza en el canvas.\n  fill(255);\n  stroke(0);\n  textSize(18);\n  text(label, 10, 360);\n  text(confidence, 10, 380);\n}\n\nresults: Un array que contiene los resultados de la clasificación, ordenados por nivel de confianza.\nlabel y confidence: Se actualizan y luego se muestran en el canvas usando la función text().",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "p5 + ml5",
+      "Código Clasificador de Imágenes"
+    ]
+  },
+  {
+    "objectID": "nbdev_tutorial/primeros_pasos.html",
+    "href": "nbdev_tutorial/primeros_pasos.html",
+    "title": "Primeros pasos",
+    "section": "",
+    "text": "Crear un repositorio vacío de GitHub\nEl primer paso es crear un repositorio de GitHub vacío. No deberia incluir un README, .gitignore o licencia aún.\n\n\nInicializar con nbdev\nClonaremos nuestro repositorio y navegaremos a su directorio. En este punto podriamos ver un mensaje como:\nYou appear to have cloned an empty repository.\n… ya que el repositorio está vacio.\nLuego podemos inicializar el proyecto usando nbdev_new, ésto usará el repositorio de GitHub para inferir algunos datos sobre el proyecto, tambien nos pedirá información extra cuando sea necesaria. Despues de inicializar el proyecto, deberiamos revisar el archivo settings.ini y asegurarnos de que tenga la información correcta, luego subir nuestros cambios al repositorio remoto usando:\ngit add .\ngit commit -m \"Initial commit\"\ngit push\n\n\nHabilitar GitHub Pages\nPara habilitar GitHub Pages en nuestro repositorio, debemos dirigirnos a Settings en la página de nuestro repositorio, luego en el apartado de Code and automation nos vamos a Pages y cambiar la opcion de Branch a la rama gh-pages. Finalmente clickeamos Save y habremos desplegado nuestros docs. Si no vemos la rama gh-pages, sólo tendremos que esperar unos minutos ya que deberia ser configurada automáticamente por una pipeline de github.\n\n\nRevisar nuestra página\nPara revisar nuestros docs desplegados, podemos dirigirnos a https://{usuario}.github.io/{repo}.",
+    "crumbs": [
+      "C11 - Usando nbdev",
+      "Primeros pasos"
+    ]
+  },
+  {
+    "objectID": "nbdev_tutorial/antes_de_usar.html",
+    "href": "nbdev_tutorial/antes_de_usar.html",
+    "title": "Antes de usar nbdev",
+    "section": "",
+    "text": "Instalación\nSe requiere de las siguientes herramientas para utilizar nbdev:\n\nPython\nUn administrador de paquetes (Ej. conda o pip)\nJupyter Notebook\nnbdev\nQuarto\n\n\n\n(Importante) Ambiente virtual\nAntes de ingresar cualquier comando para instalar dependencias a nuestro proyecto o trabajar con comandos nbdev, es importante que estemos trabajando en nuestro ambiente virtual, la forma de hacer esto es (se asume python instalado):\npython -m venv .venv\n(es posible que se necesite usar python3 en vez de python en algunos casos)\nEsto creará un directorio llamado .venv, el cual podremos utilizar para la creacion de nuestro ambiente virtual:\nsource ./.venv/bin/activate\no\n.\\.venv\\Scripts\\activate\nqué comando se use depende de si utilizamos linux o windows y de nuestra terminal.\nAhora estamos en nuestro ambiente virtual y podemos ejecutar los siguientes comandos. Cada vez que haya un comando en éste documento, se asume que se está ejecutando dentro del ambiente virtual.\n\n\n(Opcional) Instalar JupyterLab\nAbramos nuestro ambiente virtual e instalemos jupyterlab:\npip install jupyterlab\no\nconda install -c conda-forge -y jupyterlab\nSe recomienda usar pip\nAhora podemos abrir jupyter lab usando:\njupyter lab\nesto deberia abrir JupyterLab en una pestaña de navegador nueva. JupyterLab nos ayuda a tener un ambiente especializado para notebooks de Jupyter, si utilizamos VSCode no es estrictamente necesario trabajar con jupyterlab a menos que ya tengamos notebooks iniciados de ésta forma.\n\n\nInstalar nbdev\nEl siguiente paso es instalar nbdev. JupyterLab viene con su propia terminal, pero para éste tutorial utilizaremos la que ya tenemos abierta con nuestro ambiente virtual (venv).\npip install nbdev\no\nconda install -c fastai -y nbdev\n\n\nInstalar Quarto\nnbdev nos proporciona un comando para instalar directamente la última versión de Quarto, asi que luego de instalar nbdev, podemos usar:\nnbdev_install_quarto\nes posible que se requiera ingresar nuestra contraseña de sistema. (Si esto le causa problemas, puede que prefiera seguir las instrucciones oficiales de Quarto)\n\n\n(Opcional) Extension de Quarto para JupyterLab\nQuarto provee su propia extension para JupyterLab, para instalarla podemos usar:\npip install jupyterlab-quarto",
+    "crumbs": [
+      "C11 - Usando nbdev",
+      "Antes de usar nbdev"
+    ]
+  },
+  {
+    "objectID": "p5/02_p5_ini_project.html",
+    "href": "p5/02_p5_ini_project.html",
+    "title": "Como usar un Proyecto p5.js en VSCode",
+    "section": "",
+    "text": "Introducción\nEn esta guía, aprenderás a descargar un proyecto básico de p5.js, configurarlo y utilizarlo con Visual Studio Code (VSCode). p5.js es una poderosa librería de JavaScript que facilita la creación de gráficos y animaciones interactivas en la web. Utilizar VSCode como tu entorno de desarrollo te permitirá aprovechar características como la autocompletación, la depuración y la integración con Git.\n\n\nPaso 1: Descargar el Proyecto p5.js\nPrimero, vamos a descargar un proyecto básico de p5.js desde un enlace. Puedes obtener el proyecto en un archivo ZIP y luego extraerlo en tu computadora.\n\nDescargar Proyecto p5.js\n\nDespués de descargarlo, extrae el contenido del archivo ZIP en una carpeta de tu elección.\n\n\nPaso 2: Configurar el Proyecto en VSCode\nUna vez que hayas descargado el proyecto, sigue estos pasos para abrirlo y configurarlo en VSCode.\n\nAbrir VSCode: Inicia Visual Studio Code en tu computadora.\nAbrir la Carpeta del Proyecto:\n\nHaz clic en File &gt; Open Folder (Archivo &gt; Abrir Carpeta).\nNavega hasta la carpeta donde has extraído el proyecto y selecciónala.\n\nInstalar Extensiones Recomendadas:\n\nLive Server: Instala la extensión “Live Server” desde el marketplace de VSCode para poder ejecutar tu proyecto p5.js en un servidor local. Esto es útil para ver los cambios en tiempo real.\nJavaScript (ES6) code snippets: Instala esta extensión para obtener autocompletado y snippets de código mientras trabajas con JavaScript.\n\n\n\n\nPaso 3: Ejecutar el Proyecto\nCon el proyecto abierto en VSCode, ahora es el momento de ejecutarlo.\n\nAbrir el Archivo Principal:\n\nNavega hasta el archivo principal de tu sketch p5.js, generalmente llamado index.html o sketch.js.\n\nIniciar Live Server:\n\nHaz clic derecho en index.html y selecciona “Open with Live Server”. Esto abrirá tu proyecto en un navegador web y ejecutará el sketch p5.js en tiempo real.\n\nVer los Resultados:\n\nEl navegador debería mostrar la visualización generada por tu sketch p5.js. Cada vez que hagas un cambio en tu código, el navegador se actualizará automáticamente.\n\n\n\n\nEstructura del Proyecto\nEl proyecto p5.js que has descargado tiene una estructura básica que es común para la mayoría de los sketches p5.js:\np5js-proyecto-basico/\n│\n├── index.html        # Archivo HTML que carga el sketch\n├── sketch.js         # Archivo JavaScript que contiene el código p5.js\n├── style.css         # Archivo CSS opcional para agregar estilos personalizados\n└── README.md         # Documentación del proyecto\n\nindex.html: Este archivo HTML incluye el lienzo donde se dibuja el sketch p5.js y enlaza los archivos JavaScript y CSS.\nsketch.js: Este archivo contiene el código p5.js donde defines las funciones setup() y draw() para crear tus gráficos y animaciones.\nstyle.css: Archivo opcional para agregar estilos personalizados al proyecto.\nREADME.md: Información adicional sobre el proyecto, instrucciones de uso, etc.\n\n\n\nPaso 4: Modificar y Personalizar el Proyecto\nAhora que el proyecto está funcionando, puedes empezar a modificar el código en sketch.js o crear nuevos archivos para expandir tu sketch. Aquí hay algunas ideas para comenzar:\n\nCambiar los colores y formas: Modifica las funciones de dibujo para cambiar cómo se ven los gráficos.\nAgregar interacción: Usa funciones como mousePressed() o keyPressed() para que tu sketch responda a las acciones del usuario.\nIntegrar multimedia: Agrega imágenes, videos o sonido para hacer tu proyecto más interactivo.\n\n\n\nRecursos Adicionales\nSi necesitas más ayuda o inspiración, aquí tienes algunos recursos útiles:\n\nDocumentación de p5.js: Referencia completa de p5.js.\np5.js GitHub Repository: Código fuente de p5.js.\nForo de p5.js: Comunidad de usuarios de p5.js.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Biblioteca P5",
+      "Como usar un Proyecto p5.js en VSCode"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html",
+    "href": "eda/00_intro.html",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "En este documento, leeremos un conjunto de datos desde un archivo CSV, procesaremos y limpiaremos los datos directamente utilizando los métodos de pandas.\n\n\nImportamos pandas para manejar los datos del archivo CSV.\n\n\nCódigo\n# Importar la biblioteca pandas\nimport pandas as pd\nimport platformdirs\n\n\n\n\n\nUsamos el método pd.read_csv() de pandas para leer el archivo CSV y cargar los datos en un DataFrame. Asegúrate de reemplazar la ruta con el archivo CSV correcto.\n\n\nCódigo\n# Ruta al archivo CSV (reemplaza con la ruta correcta)\n# https://www.kaggle.com/datasets/shivamb/netflix-shows\ncsv_file_path = '../eda/netflix_titles.csv'\n\n# Leer el archivo CSV\ndf = pd.read_csv(csv_file_path)\ndf\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n0\ns1\nMovie\nDick Johnson Is Dead\nKirsten Johnson\nNaN\nUnited States\nSeptember 25, 2021\n2020\nPG-13\n90 min\nDocumentaries\nAs her father nears the end of his life, filmm...\n\n\n1\ns2\nTV Show\nBlood & Water\nNaN\nAma Qamata, Khosi Ngema, Gail Mabalane, Thaban...\nSouth Africa\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, TV Dramas, TV Mysteries\nAfter crossing paths at a party, a Cape Town t...\n\n\n2\ns3\nTV Show\nGanglands\nJulien Leclercq\nSami Bouajila, Tracy Gotoas, Samuel Jouy, Nabi...\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nCrime TV Shows, International TV Shows, TV Act...\nTo protect his family from a powerful drug lor...\n\n\n3\ns4\nTV Show\nJailbirds New Orleans\nNaN\nNaN\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nDocuseries, Reality TV\nFeuds, flirtations and toilet talk go down amo...\n\n\n4\ns5\nTV Show\nKota Factory\nNaN\nMayur More, Jitendra Kumar, Ranjan Raj, Alam K...\nIndia\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, Romantic TV Shows, TV ...\nIn a city of coaching centers known to train I...\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n419\ns420\nMovie\nChhota Bheem: Bheem vs Aliens\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2010\nTV-Y7\n69 min\nChildren & Family Movies, Sports Movies\nSpace invaders have kidnapped Dholakpur’s king...\n\n\n420\ns421\nMovie\nChhota Bheem: Dholakpur to Kathmandu\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2012\nTV-Y7\n70 min\nChildren & Family Movies\nBheem’s holiday in Nepal takes an unexpected t...\n\n\n421\ns422\nMovie\nChhota Bheem: Dus Pe Dus\nRajiv Chilaka, Owll Mina\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2014\nTV-Y7\n63 min\nChildren & Family Movies\nAfter a precious temple stone is stolen under ...\n\n\n422\ns423\nMovie\nChhota Bheem: Journey to Petra\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2011\nTV-Y7\n68 min\nChildren & Family Movies\nThe king has been away to meet an old friend, ...\n\n\n423\ns424\nMovie\nChhota Bheem: Master of Shaolin\nRajiv Chilaka\nPooja Punabi, Mausam, Julie Tejwani, Rupa Bhim...\nNaN\nJuly 22, 2021\n2011\nTV-Y7\n74 min\nChildren & Family Movies\nSummoned by a monk to help reclaim a temple fr...\n\n\n\n\n424 rows × 12 columns\n\n\n\n\n\n\nUtilizamos el método head() de pandas para mostrar las primeras filas del DataFrame y obtener una vista previa del conjunto de datos.\n\n\nCódigo\n# Mostrar las primeras 5 filas del conjunto de datos\ndf.head()\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n0\ns1\nMovie\nDick Johnson Is Dead\nKirsten Johnson\nNaN\nUnited States\nSeptember 25, 2021\n2020\nPG-13\n90 min\nDocumentaries\nAs her father nears the end of his life, filmm...\n\n\n1\ns2\nTV Show\nBlood & Water\nNaN\nAma Qamata, Khosi Ngema, Gail Mabalane, Thaban...\nSouth Africa\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, TV Dramas, TV Mysteries\nAfter crossing paths at a party, a Cape Town t...\n\n\n2\ns3\nTV Show\nGanglands\nJulien Leclercq\nSami Bouajila, Tracy Gotoas, Samuel Jouy, Nabi...\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nCrime TV Shows, International TV Shows, TV Act...\nTo protect his family from a powerful drug lor...\n\n\n3\ns4\nTV Show\nJailbirds New Orleans\nNaN\nNaN\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nDocuseries, Reality TV\nFeuds, flirtations and toilet talk go down amo...\n\n\n4\ns5\nTV Show\nKota Factory\nNaN\nMayur More, Jitendra Kumar, Ranjan Raj, Alam K...\nIndia\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, Romantic TV Shows, TV ...\nIn a city of coaching centers known to train I...\n\n\n\n\n\n\n\n\n\n\nEl método info() de pandas proporciona una descripción de las columnas del DataFrame, incluyendo los tipos de datos y si hay valores faltantes.\n\n\nCódigo\n# Mostrar información general del DataFrame\ndf.info()\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 424 entries, 0 to 423\nData columns (total 12 columns):\n #   Column        Non-Null Count  Dtype \n---  ------        --------------  ----- \n 0   show_id       424 non-null    object\n 1   type          424 non-null    object\n 2   title         424 non-null    object\n 3   director      296 non-null    object\n 4   cast          378 non-null    object\n 5   country       277 non-null    object\n 6   date_added    424 non-null    object\n 7   release_year  424 non-null    int64 \n 8   rating        424 non-null    object\n 9   duration      424 non-null    object\n 10  listed_in     424 non-null    object\n 11  description   424 non-null    object\ndtypes: int64(1), object(11)\nmemory usage: 39.9+ KB\n\n\n\n\n\nUtilizamos el método describe() de pandas para obtener estadísticas descriptivas de las columnas numéricas del DataFrame.\n\n\nCódigo\n# Mostrar estadísticas descriptivas del DataFrame\ndf.describe()\n\n\n\n\n\n\n\n\n\nrelease_year\n\n\n\n\ncount\n424.000000\n\n\nmean\n2013.757075\n\n\nstd\n9.974196\n\n\nmin\n1961.000000\n\n\n25%\n2010.000000\n\n\n50%\n2019.000000\n\n\n75%\n2021.000000\n\n\nmax\n2021.000000\n\n\n\n\n\n\n\n\n\n\nUsamos el método dropna() para eliminar las filas que contienen valores faltantes (NaN) en cualquier columna.\n\n\nCódigo\n# Eliminar filas con valores faltantes\ndf_cleaned = df.dropna()\n\n# Mostrar las primeras filas del DataFrame limpio\ndf_cleaned.head()\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n7\ns8\nMovie\nSankofa\nHaile Gerima\nKofi Ghanaba, Oyafunmike Ogunlano, Alexandra D...\nUnited States, Ghana, Burkina Faso, United Kin...\nSeptember 24, 2021\n1993\nTV-MA\n125 min\nDramas, Independent Movies, International Movies\nOn a photo shoot in Ghana, an American model s...\n\n\n8\ns9\nTV Show\nThe Great British Baking Show\nAndy Devonshire\nMel Giedroyc, Sue Perkins, Mary Berry, Paul Ho...\nUnited Kingdom\nSeptember 24, 2021\n2021\nTV-14\n9 Seasons\nBritish TV Shows, Reality TV\nA talented batch of amateur bakers face off in...\n\n\n9\ns10\nMovie\nThe Starling\nTheodore Melfi\nMelissa McCarthy, Chris O'Dowd, Kevin Kline, T...\nUnited States\nSeptember 24, 2021\n2021\nPG-13\n104 min\nComedies, Dramas\nA woman adjusting to life after a loss contend...\n\n\n12\ns13\nMovie\nJe Suis Karl\nChristian Schwochow\nLuna Wedler, Jannis Niewöhner, Milan Peschel, ...\nGermany, Czech Republic\nSeptember 23, 2021\n2021\nTV-MA\n127 min\nDramas, International Movies\nAfter most of her family is murdered in a terr...\n\n\n24\ns25\nMovie\nJeans\nS. Shankar\nPrashanth, Aishwarya Rai Bachchan, Sri Lakshmi...\nIndia\nSeptember 21, 2021\n1998\nTV-14\n166 min\nComedies, International Movies, Romantic Movies\nWhen the father of the man she loves insists t...\n\n\n\n\n\n\n\n\n\n\nFinalmente, mostramos el DataFrame después de haber eliminado las filas con valores faltantes para ver el resultado.\n\n\nCódigo\n# Mostrar el DataFrame limpio\ndf_cleaned\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n7\ns8\nMovie\nSankofa\nHaile Gerima\nKofi Ghanaba, Oyafunmike Ogunlano, Alexandra D...\nUnited States, Ghana, Burkina Faso, United Kin...\nSeptember 24, 2021\n1993\nTV-MA\n125 min\nDramas, Independent Movies, International Movies\nOn a photo shoot in Ghana, an American model s...\n\n\n8\ns9\nTV Show\nThe Great British Baking Show\nAndy Devonshire\nMel Giedroyc, Sue Perkins, Mary Berry, Paul Ho...\nUnited Kingdom\nSeptember 24, 2021\n2021\nTV-14\n9 Seasons\nBritish TV Shows, Reality TV\nA talented batch of amateur bakers face off in...\n\n\n9\ns10\nMovie\nThe Starling\nTheodore Melfi\nMelissa McCarthy, Chris O'Dowd, Kevin Kline, T...\nUnited States\nSeptember 24, 2021\n2021\nPG-13\n104 min\nComedies, Dramas\nA woman adjusting to life after a loss contend...\n\n\n12\ns13\nMovie\nJe Suis Karl\nChristian Schwochow\nLuna Wedler, Jannis Niewöhner, Milan Peschel, ...\nGermany, Czech Republic\nSeptember 23, 2021\n2021\nTV-MA\n127 min\nDramas, International Movies\nAfter most of her family is murdered in a terr...\n\n\n24\ns25\nMovie\nJeans\nS. Shankar\nPrashanth, Aishwarya Rai Bachchan, Sri Lakshmi...\nIndia\nSeptember 21, 2021\n1998\nTV-14\n166 min\nComedies, International Movies, Romantic Movies\nWhen the father of the man she loves insists t...\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n392\ns393\nMovie\nDjango Unchained\nQuentin Tarantino\nJamie Foxx, Christoph Waltz, Leonardo DiCaprio...\nUnited States\nJuly 24, 2021\n2012\nR\n165 min\nAction & Adventure, Dramas\nAccompanied by a German bounty hunter, a freed...\n\n\n393\ns394\nMovie\nA Second Chance: Rivals!\nClay Glen\nEmily Morris, Stella Shute, Eva Grados, India ...\nAustralia\nJuly 23, 2021\n2021\nPG\n91 min\nChildren & Family Movies, Sports Movies\nCrushed when she doesn't qualify for the Olymp...\n\n\n402\ns403\nMovie\nThe Last Letter From Your Lover\nAugustine Frizzell\nShailene Woodley, Felicity Jones, Callum Turne...\nUnited Kingdom\nJuly 23, 2021\n2021\nTV-MA\n111 min\nDramas, Romantic Movies\nAfter finding a trove of love letters from 196...\n\n\n410\ns411\nMovie\nChhota Bheem And The Broken Amulet\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nIndia\nJuly 22, 2021\n2013\nTV-Y7\n64 min\nChildren & Family Movies\nWhen a stranger tries to steal an amulet from ...\n\n\n415\ns416\nMovie\nChhota Bheem aur Krishna\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nIndia\nJuly 22, 2021\n2009\nTV-Y7\n68 min\nChildren & Family Movies\nCenturies after the end of a conqueror's rule,...\n\n\n\n\n188 rows × 12 columns\n\n\n\n\n\n\nLeer el archivo CSV: Usamos pd.read_csv() para leer el archivo CSV y cargar los datos en un DataFrame llamado df.\nMostrar las primeras filas: Usamos el método head() de pandas para mostrar una vista previa del conjunto de datos (primeras 5 filas).\nInformación general: Con df.info(), obtenemos información sobre el DataFrame, como el número de filas, columnas, tipos de datos y valores nulos.\nEstadísticas descriptivas: Usamos describe() para ver estadísticas como el promedio, desviación estándar, mínimo, máximo, etc., de las columnas numéricas.\nLimpieza del DataFrame: Con dropna(), eliminamos todas las filas que contienen valores faltantes.\nMostrar el DataFrame limpio: Finalmente, mostramos el DataFrame limpio para observar los cambios después de la eliminación de valores nulos.\n\n\n\n\n\nRuta del archivo: Asegúrate de ajustar la ruta del archivo CSV para que apunte al lugar correcto en tu sistema.\nSin métodos personalizados: El código ejecuta directamente los métodos de pandas sin encapsularlos en funciones adicionales, proporcionando un flujo claro y directo para trabajar con los datos.",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#importación-de-bibliotecas-necesarias",
+    "href": "eda/00_intro.html#importación-de-bibliotecas-necesarias",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "Importamos pandas para manejar los datos del archivo CSV.\n\n\nCódigo\n# Importar la biblioteca pandas\nimport pandas as pd\nimport platformdirs",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#leer-el-archivo-csv",
+    "href": "eda/00_intro.html#leer-el-archivo-csv",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "Usamos el método pd.read_csv() de pandas para leer el archivo CSV y cargar los datos en un DataFrame. Asegúrate de reemplazar la ruta con el archivo CSV correcto.\n\n\nCódigo\n# Ruta al archivo CSV (reemplaza con la ruta correcta)\n# https://www.kaggle.com/datasets/shivamb/netflix-shows\ncsv_file_path = '../eda/netflix_titles.csv'\n\n# Leer el archivo CSV\ndf = pd.read_csv(csv_file_path)\ndf\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n0\ns1\nMovie\nDick Johnson Is Dead\nKirsten Johnson\nNaN\nUnited States\nSeptember 25, 2021\n2020\nPG-13\n90 min\nDocumentaries\nAs her father nears the end of his life, filmm...\n\n\n1\ns2\nTV Show\nBlood & Water\nNaN\nAma Qamata, Khosi Ngema, Gail Mabalane, Thaban...\nSouth Africa\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, TV Dramas, TV Mysteries\nAfter crossing paths at a party, a Cape Town t...\n\n\n2\ns3\nTV Show\nGanglands\nJulien Leclercq\nSami Bouajila, Tracy Gotoas, Samuel Jouy, Nabi...\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nCrime TV Shows, International TV Shows, TV Act...\nTo protect his family from a powerful drug lor...\n\n\n3\ns4\nTV Show\nJailbirds New Orleans\nNaN\nNaN\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nDocuseries, Reality TV\nFeuds, flirtations and toilet talk go down amo...\n\n\n4\ns5\nTV Show\nKota Factory\nNaN\nMayur More, Jitendra Kumar, Ranjan Raj, Alam K...\nIndia\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, Romantic TV Shows, TV ...\nIn a city of coaching centers known to train I...\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n419\ns420\nMovie\nChhota Bheem: Bheem vs Aliens\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2010\nTV-Y7\n69 min\nChildren & Family Movies, Sports Movies\nSpace invaders have kidnapped Dholakpur’s king...\n\n\n420\ns421\nMovie\nChhota Bheem: Dholakpur to Kathmandu\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2012\nTV-Y7\n70 min\nChildren & Family Movies\nBheem’s holiday in Nepal takes an unexpected t...\n\n\n421\ns422\nMovie\nChhota Bheem: Dus Pe Dus\nRajiv Chilaka, Owll Mina\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2014\nTV-Y7\n63 min\nChildren & Family Movies\nAfter a precious temple stone is stolen under ...\n\n\n422\ns423\nMovie\nChhota Bheem: Journey to Petra\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nNaN\nJuly 22, 2021\n2011\nTV-Y7\n68 min\nChildren & Family Movies\nThe king has been away to meet an old friend, ...\n\n\n423\ns424\nMovie\nChhota Bheem: Master of Shaolin\nRajiv Chilaka\nPooja Punabi, Mausam, Julie Tejwani, Rupa Bhim...\nNaN\nJuly 22, 2021\n2011\nTV-Y7\n74 min\nChildren & Family Movies\nSummoned by a monk to help reclaim a temple fr...\n\n\n\n\n424 rows × 12 columns",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#mostrar-las-primeras-filas-del-dataframe",
+    "href": "eda/00_intro.html#mostrar-las-primeras-filas-del-dataframe",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "Utilizamos el método head() de pandas para mostrar las primeras filas del DataFrame y obtener una vista previa del conjunto de datos.\n\n\nCódigo\n# Mostrar las primeras 5 filas del conjunto de datos\ndf.head()\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n0\ns1\nMovie\nDick Johnson Is Dead\nKirsten Johnson\nNaN\nUnited States\nSeptember 25, 2021\n2020\nPG-13\n90 min\nDocumentaries\nAs her father nears the end of his life, filmm...\n\n\n1\ns2\nTV Show\nBlood & Water\nNaN\nAma Qamata, Khosi Ngema, Gail Mabalane, Thaban...\nSouth Africa\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, TV Dramas, TV Mysteries\nAfter crossing paths at a party, a Cape Town t...\n\n\n2\ns3\nTV Show\nGanglands\nJulien Leclercq\nSami Bouajila, Tracy Gotoas, Samuel Jouy, Nabi...\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nCrime TV Shows, International TV Shows, TV Act...\nTo protect his family from a powerful drug lor...\n\n\n3\ns4\nTV Show\nJailbirds New Orleans\nNaN\nNaN\nNaN\nSeptember 24, 2021\n2021\nTV-MA\n1 Season\nDocuseries, Reality TV\nFeuds, flirtations and toilet talk go down amo...\n\n\n4\ns5\nTV Show\nKota Factory\nNaN\nMayur More, Jitendra Kumar, Ranjan Raj, Alam K...\nIndia\nSeptember 24, 2021\n2021\nTV-MA\n2 Seasons\nInternational TV Shows, Romantic TV Shows, TV ...\nIn a city of coaching centers known to train I...",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#mostrar-información-general-del-dataframe",
+    "href": "eda/00_intro.html#mostrar-información-general-del-dataframe",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "El método info() de pandas proporciona una descripción de las columnas del DataFrame, incluyendo los tipos de datos y si hay valores faltantes.\n\n\nCódigo\n# Mostrar información general del DataFrame\ndf.info()\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 424 entries, 0 to 423\nData columns (total 12 columns):\n #   Column        Non-Null Count  Dtype \n---  ------        --------------  ----- \n 0   show_id       424 non-null    object\n 1   type          424 non-null    object\n 2   title         424 non-null    object\n 3   director      296 non-null    object\n 4   cast          378 non-null    object\n 5   country       277 non-null    object\n 6   date_added    424 non-null    object\n 7   release_year  424 non-null    int64 \n 8   rating        424 non-null    object\n 9   duration      424 non-null    object\n 10  listed_in     424 non-null    object\n 11  description   424 non-null    object\ndtypes: int64(1), object(11)\nmemory usage: 39.9+ KB",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#mostrar-estadísticas-descriptivas-del-dataframe",
+    "href": "eda/00_intro.html#mostrar-estadísticas-descriptivas-del-dataframe",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "Utilizamos el método describe() de pandas para obtener estadísticas descriptivas de las columnas numéricas del DataFrame.\n\n\nCódigo\n# Mostrar estadísticas descriptivas del DataFrame\ndf.describe()\n\n\n\n\n\n\n\n\n\nrelease_year\n\n\n\n\ncount\n424.000000\n\n\nmean\n2013.757075\n\n\nstd\n9.974196\n\n\nmin\n1961.000000\n\n\n25%\n2010.000000\n\n\n50%\n2019.000000\n\n\n75%\n2021.000000\n\n\nmax\n2021.000000",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#limpiar-el-dataframe-eliminando-filas-con-valores-faltantes",
+    "href": "eda/00_intro.html#limpiar-el-dataframe-eliminando-filas-con-valores-faltantes",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "Usamos el método dropna() para eliminar las filas que contienen valores faltantes (NaN) en cualquier columna.\n\n\nCódigo\n# Eliminar filas con valores faltantes\ndf_cleaned = df.dropna()\n\n# Mostrar las primeras filas del DataFrame limpio\ndf_cleaned.head()\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n7\ns8\nMovie\nSankofa\nHaile Gerima\nKofi Ghanaba, Oyafunmike Ogunlano, Alexandra D...\nUnited States, Ghana, Burkina Faso, United Kin...\nSeptember 24, 2021\n1993\nTV-MA\n125 min\nDramas, Independent Movies, International Movies\nOn a photo shoot in Ghana, an American model s...\n\n\n8\ns9\nTV Show\nThe Great British Baking Show\nAndy Devonshire\nMel Giedroyc, Sue Perkins, Mary Berry, Paul Ho...\nUnited Kingdom\nSeptember 24, 2021\n2021\nTV-14\n9 Seasons\nBritish TV Shows, Reality TV\nA talented batch of amateur bakers face off in...\n\n\n9\ns10\nMovie\nThe Starling\nTheodore Melfi\nMelissa McCarthy, Chris O'Dowd, Kevin Kline, T...\nUnited States\nSeptember 24, 2021\n2021\nPG-13\n104 min\nComedies, Dramas\nA woman adjusting to life after a loss contend...\n\n\n12\ns13\nMovie\nJe Suis Karl\nChristian Schwochow\nLuna Wedler, Jannis Niewöhner, Milan Peschel, ...\nGermany, Czech Republic\nSeptember 23, 2021\n2021\nTV-MA\n127 min\nDramas, International Movies\nAfter most of her family is murdered in a terr...\n\n\n24\ns25\nMovie\nJeans\nS. Shankar\nPrashanth, Aishwarya Rai Bachchan, Sri Lakshmi...\nIndia\nSeptember 21, 2021\n1998\nTV-14\n166 min\nComedies, International Movies, Romantic Movies\nWhen the father of the man she loves insists t...",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/00_intro.html#mostrar-el-dataframe-limpio",
+    "href": "eda/00_intro.html#mostrar-el-dataframe-limpio",
+    "title": "Lectura y procesamiento de datos desde un archivo CSV",
+    "section": "",
+    "text": "Finalmente, mostramos el DataFrame después de haber eliminado las filas con valores faltantes para ver el resultado.\n\n\nCódigo\n# Mostrar el DataFrame limpio\ndf_cleaned\n\n\n\n\n\n\n\n\n\nshow_id\ntype\ntitle\ndirector\ncast\ncountry\ndate_added\nrelease_year\nrating\nduration\nlisted_in\ndescription\n\n\n\n\n7\ns8\nMovie\nSankofa\nHaile Gerima\nKofi Ghanaba, Oyafunmike Ogunlano, Alexandra D...\nUnited States, Ghana, Burkina Faso, United Kin...\nSeptember 24, 2021\n1993\nTV-MA\n125 min\nDramas, Independent Movies, International Movies\nOn a photo shoot in Ghana, an American model s...\n\n\n8\ns9\nTV Show\nThe Great British Baking Show\nAndy Devonshire\nMel Giedroyc, Sue Perkins, Mary Berry, Paul Ho...\nUnited Kingdom\nSeptember 24, 2021\n2021\nTV-14\n9 Seasons\nBritish TV Shows, Reality TV\nA talented batch of amateur bakers face off in...\n\n\n9\ns10\nMovie\nThe Starling\nTheodore Melfi\nMelissa McCarthy, Chris O'Dowd, Kevin Kline, T...\nUnited States\nSeptember 24, 2021\n2021\nPG-13\n104 min\nComedies, Dramas\nA woman adjusting to life after a loss contend...\n\n\n12\ns13\nMovie\nJe Suis Karl\nChristian Schwochow\nLuna Wedler, Jannis Niewöhner, Milan Peschel, ...\nGermany, Czech Republic\nSeptember 23, 2021\n2021\nTV-MA\n127 min\nDramas, International Movies\nAfter most of her family is murdered in a terr...\n\n\n24\ns25\nMovie\nJeans\nS. Shankar\nPrashanth, Aishwarya Rai Bachchan, Sri Lakshmi...\nIndia\nSeptember 21, 2021\n1998\nTV-14\n166 min\nComedies, International Movies, Romantic Movies\nWhen the father of the man she loves insists t...\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n392\ns393\nMovie\nDjango Unchained\nQuentin Tarantino\nJamie Foxx, Christoph Waltz, Leonardo DiCaprio...\nUnited States\nJuly 24, 2021\n2012\nR\n165 min\nAction & Adventure, Dramas\nAccompanied by a German bounty hunter, a freed...\n\n\n393\ns394\nMovie\nA Second Chance: Rivals!\nClay Glen\nEmily Morris, Stella Shute, Eva Grados, India ...\nAustralia\nJuly 23, 2021\n2021\nPG\n91 min\nChildren & Family Movies, Sports Movies\nCrushed when she doesn't qualify for the Olymp...\n\n\n402\ns403\nMovie\nThe Last Letter From Your Lover\nAugustine Frizzell\nShailene Woodley, Felicity Jones, Callum Turne...\nUnited Kingdom\nJuly 23, 2021\n2021\nTV-MA\n111 min\nDramas, Romantic Movies\nAfter finding a trove of love letters from 196...\n\n\n410\ns411\nMovie\nChhota Bheem And The Broken Amulet\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nIndia\nJuly 22, 2021\n2013\nTV-Y7\n64 min\nChildren & Family Movies\nWhen a stranger tries to steal an amulet from ...\n\n\n415\ns416\nMovie\nChhota Bheem aur Krishna\nRajiv Chilaka\nVatsal Dubey, Julie Tejwani, Rupa Bhimani, Jig...\nIndia\nJuly 22, 2021\n2009\nTV-Y7\n68 min\nChildren & Family Movies\nCenturies after the end of a conqueror's rule,...\n\n\n\n\n188 rows × 12 columns\n\n\n\n\n\n\nLeer el archivo CSV: Usamos pd.read_csv() para leer el archivo CSV y cargar los datos en un DataFrame llamado df.\nMostrar las primeras filas: Usamos el método head() de pandas para mostrar una vista previa del conjunto de datos (primeras 5 filas).\nInformación general: Con df.info(), obtenemos información sobre el DataFrame, como el número de filas, columnas, tipos de datos y valores nulos.\nEstadísticas descriptivas: Usamos describe() para ver estadísticas como el promedio, desviación estándar, mínimo, máximo, etc., de las columnas numéricas.\nLimpieza del DataFrame: Con dropna(), eliminamos todas las filas que contienen valores faltantes.\nMostrar el DataFrame limpio: Finalmente, mostramos el DataFrame limpio para observar los cambios después de la eliminación de valores nulos.\n\n\n\n\n\nRuta del archivo: Asegúrate de ajustar la ruta del archivo CSV para que apunte al lugar correcto en tu sistema.\nSin métodos personalizados: El código ejecuta directamente los métodos de pandas sin encapsularlos en funciones adicionales, proporcionando un flujo claro y directo para trabajar con los datos.",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Lectura y procesamiento de datos desde un archivo CSV"
+    ]
+  },
+  {
+    "objectID": "eda/01_simple_api.html",
+    "href": "eda/01_simple_api.html",
+    "title": "Extracción de datos de la API REST Countries",
+    "section": "",
+    "text": "En este documento, extraeremos información de la API pública REST Countries, que no requiere una clave de API, y utilizaremos pandas para convertir directamente la respuesta JSON en un DataFrame.",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Extracción de datos de la API REST Countries"
+    ]
+  },
+  {
+    "objectID": "eda/01_simple_api.html#importación-de-bibliotecas-necesarias",
+    "href": "eda/01_simple_api.html#importación-de-bibliotecas-necesarias",
+    "title": "Extracción de datos de la API REST Countries",
+    "section": "1. Importación de bibliotecas necesarias",
+    "text": "1. Importación de bibliotecas necesarias\nPrimero, importamos las bibliotecas requests para realizar solicitudes HTTP y pandas para manejar los datos en formato tabular.\n\n\nCódigo\n# Importar las bibliotecas necesarias\nimport requests\nimport pandas as pd",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Extracción de datos de la API REST Countries"
+    ]
+  },
+  {
+    "objectID": "eda/01_simple_api.html#hacer-una-solicitud-a-la-api-y-obtener-datos",
+    "href": "eda/01_simple_api.html#hacer-una-solicitud-a-la-api-y-obtener-datos",
+    "title": "Extracción de datos de la API REST Countries",
+    "section": "2. Hacer una solicitud a la API y obtener datos",
+    "text": "2. Hacer una solicitud a la API y obtener datos\nHacemos una solicitud a la API REST Countries utilizando requests.get() y convertimos la respuesta en formato JSON.\n\n\nCódigo\n# Definir la URL de la API de REST Countries\nurl = \"https://restcountries.com/v3.1/all\"\n\n# Realizar la solicitud GET a la API\nresponse = requests.get(url)\n\n# Comprobar si la solicitud fue exitosa y convertir a JSON\nif response.status_code == 200:\n    data = response.json()\nelse:\n    data = None\n    print(\"No se pudieron obtener los datos.\")",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Extracción de datos de la API REST Countries"
+    ]
+  },
+  {
+    "objectID": "eda/01_simple_api.html#parsear-la-respuesta-json-a-un-dataframe-usando-pandas",
+    "href": "eda/01_simple_api.html#parsear-la-respuesta-json-a-un-dataframe-usando-pandas",
+    "title": "Extracción de datos de la API REST Countries",
+    "section": "3. Parsear la respuesta JSON a un DataFrame usando pandas",
+    "text": "3. Parsear la respuesta JSON a un DataFrame usando pandas\nUtilizamos pandas.json_normalize() para convertir la respuesta JSON en un DataFrame, extrayendo las columnas que nos interesan, como el nombre del país, la población, la región y la capital.\n\n\nCódigo\nif data:\n    # Parsear el JSON a un DataFrame usando pandas.json_normalize()\n    df = pd.json_normalize(\n        data, \n        record_path=None, \n        meta=None, \n        errors='ignore'\n    )\n\n    # Seleccionar solo las columnas que nos interesan\n    df_filtered = df[['name.common', 'population', 'region', 'capital']]\n\n    # Renombrar las columnas para mayor claridad\n    df_filtered.columns = ['Country', 'Population', 'Region', 'Capital']\n\n    # Mostrar las primeras filas del DataFrame\n    df_filtered.head()",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Extracción de datos de la API REST Countries"
+    ]
+  },
+  {
+    "objectID": "eda/01_simple_api.html#mostrar-información-general-y-estadísticas-descriptivas",
+    "href": "eda/01_simple_api.html#mostrar-información-general-y-estadísticas-descriptivas",
+    "title": "Extracción de datos de la API REST Countries",
+    "section": "4. Mostrar información general y estadísticas descriptivas",
+    "text": "4. Mostrar información general y estadísticas descriptivas\nUtilizamos los métodos de pandas para obtener información general y estadísticas descriptivas del DataFrame.\n\n\nCódigo\n# Mostrar información general del DataFrame\ndf_filtered.info()\n\n# Mostrar estadísticas descriptivas\ndf_filtered.describe()\n\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 250 entries, 0 to 249\nData columns (total 4 columns):\n #   Column      Non-Null Count  Dtype \n---  ------      --------------  ----- \n 0   Country     250 non-null    object\n 1   Population  250 non-null    int64 \n 2   Region      250 non-null    object\n 3   Capital     246 non-null    object\ndtypes: int64(1), object(3)\nmemory usage: 7.9+ KB\n\n\n\n\n\n\n\n\n\nPopulation\n\n\n\n\ncount\n2.500000e+02\n\n\nmean\n3.111089e+07\n\n\nstd\n1.296673e+08\n\n\nmin\n0.000000e+00\n\n\n25%\n2.210995e+05\n\n\n50%\n4.912244e+06\n\n\n75%\n1.902577e+07\n\n\nmax\n1.402112e+09",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Extracción de datos de la API REST Countries"
+    ]
+  },
+  {
+    "objectID": "eda/01_simple_api.html#mostrar-el-dataframe-completo-o-un-subconjunto",
+    "href": "eda/01_simple_api.html#mostrar-el-dataframe-completo-o-un-subconjunto",
+    "title": "Extracción de datos de la API REST Countries",
+    "section": "5. Mostrar el DataFrame completo o un subconjunto",
+    "text": "5. Mostrar el DataFrame completo o un subconjunto\nFinalmente, mostramos el DataFrame completo o un subconjunto de los datos extraídos.\n\n\nCódigo\n# Mostrar las primeras 10 filas del DataFrame\ndf_filtered.head(10)\n\n\n\n\n\n\n\n\n\nCountry\nPopulation\nRegion\nCapital\n\n\n\n\n0\nSouth Georgia\n30\nAntarctic\n[King Edward Point]\n\n\n1\nGrenada\n112519\nAmericas\n[St. George's]\n\n\n2\nSwitzerland\n8654622\nEurope\n[Bern]\n\n\n3\nSierra Leone\n7976985\nAfrica\n[Freetown]\n\n\n4\nHungary\n9749763\nEurope\n[Budapest]\n\n\n5\nTaiwan\n23503349\nAsia\n[Taipei]\n\n\n6\nWallis and Futuna\n11750\nOceania\n[Mata-Utu]\n\n\n7\nBarbados\n287371\nAmericas\n[Bridgetown]\n\n\n8\nPitcairn Islands\n56\nOceania\n[Adamstown]\n\n\n9\nIvory Coast\n26378275\nAfrica\n[Yamoussoukro]",
+    "crumbs": [
+      "C01 - Intro EDA",
+      "Intro",
+      "Extracción de datos de la API REST Countries"
+    ]
+  },
+  {
+    "objectID": "intro_github/00_consideraciones.html",
+    "href": "intro_github/00_consideraciones.html",
+    "title": "Consideraciones",
+    "section": "",
+    "text": "Se asume que el lector posee una cuenta de GitHub creada. Se asume que el lector ha instalado git en su máquina, asumiendo que se está usando Windows, esto deberia instalar git bash un emulador de bash el cual permite utilizar comandos de linux en windows para git.",
+    "crumbs": [
+      "C10 - Usando Github en Windows",
+      "Consideraciones"
+    ]
+  },
+  {
+    "objectID": "intro_github/02_ssh_key.html",
+    "href": "intro_github/02_ssh_key.html",
+    "title": "SSH",
+    "section": "",
+    "text": "Para utilizar SSH con github, debemos primero generar el par de llaves, luego agregarla a nuestro agente ssh y finalmente agregarla a GitHub.\n\nCrear una llave SSH\nPara generar un par de llave privada/publica ssh, podemos usar OpenSSH, abriendo primero Git Bash e ingresando los siguientes comandos:\nGenerar llave ssh: ssh-keygen -t ed25519 -C \"tu_email@ejemplo.com\", esto creará un par de llaves usando el email proporcionado. \n&gt; Generating public/private ALGORITHM key pair.\nCuando se pida ingresar el archivo en que se guardará la llave, podemos presionar enter para guardarla en la ubicación por defecto o podemos escribir la ruta/nombre para los archivos.\n&gt; Enter file in which to save the key (/c/Users/NOMBRE/.ssh/nombre_llave):[Press enter]\nTambien es posible asignar una contraseña, cuando se pida ingresar una passphrase podemos ingresar una contraseña o presionar enter para dejarlo vacío.\n&gt; Enter passphrase (empty for no passphrase): [Type a passphrase]\n&gt; Enter same passphrase again: [Type passphrase again]\n\n\nAgregar una llave al agente SSH\n\nLuego de abrir una PowerShell como administrador, primero debemos verificar que un agente ssh esté en ejecución de la siguiente forma:\n\nGet-Service -Name ssh-agent | Set-Service -StartupType Manual\nStart-Service ssh-agent\nPara mas información sobre agentes ssh y cómo iniciarlo automáticamente puede visitar la documentacion de GitHub.\n\nEn una terminal sin permisos de administrador, podemos añadir nuestra llave privada al agente ssh:\n\nssh-add c:/Users/NOMBRE/.ssh/nombre_llave\n\n\nAgregar una llave a GitHub\nLuego de tener todo esto configurado, podemos agregar nuestra llave publica a la interfaz de GitHub.\n\nCopiamos la llave publica.\nEn la esquina superior derecha de GitHub, nos vamos a Settings.\nEn la sección de Acceso, nos dirigimos a SSH and GPG keys..\nClickeamos New SSH key.\nEn el campo Title podemos añadir una descripción para la llave, por ejemplo “laptop personal” o “desktop casa”.\nSeleccionamos el tipo de llave (Autenticación o Firma).\nEn el campo Key, pegamos la lalve que copiamos previamente.\nClickeamos Add SSH key.\nPuede que GitHub pida confirmación de acceso a la cuenta, esto se puede hacer de multiples maneras que deberiamos tener si hemos configurado nuestra autenticación de dos pasos.\n\nPara información sobre firma de commits puede revisar ésta documentación.\n\n\nUsando la llave para trabajar con un repositorio\nPara utilizar nuestra llave ssh para clonar y hacer commits a nuestro repositorio podemos usar el mismo comando git clone que usamos con HTTPS, pero ésta vez usaremos el link sssh que provee GitHub.",
+    "crumbs": [
+      "C10 - Usando Github en Windows",
+      "Métodos",
+      "SSH"
+    ]
+  },
+  {
+    "objectID": "tm_p5/05_codigo_snake_con_gestos.html",
+    "href": "tm_p5/05_codigo_snake_con_gestos.html",
+    "title": "Explicación del Código del Juego de la Serpiente en p5.js (Con gestos)",
+    "section": "",
+    "text": "Este código implementa un juego de la serpiente, donde el usuario puede controlar la dirección de la serpiente utilizando gestos capturados por la cámara o, alternativamente, mediante las teclas de flecha del teclado. A continuación se describe cómo funciona el código en detalle.\n\n\nlet imageModelURL = \"https://teachablemachine.withgoogle.com/models/rfrmQGqz_/\";\nlet keyboard_control = false;\nlet speed = 5;\n\nimageModelURL: Esta variable contiene la URL del modelo de Teachable Machine que se utilizará para el reconocimiento de gestos. Este modelo será cargado más adelante en el código.\nkeyboard_control: Define si la serpiente se controla con gestos (false) o con el teclado (true).\nspeed: Establece la velocidad del juego. Un valor más bajo significa que la serpiente se moverá más rápido.\n\n\n\n\nfunction preload() {\n  classifier = ml5.imageClassifier(imageModelURL + \"model.json\");\n}\n\npreload(): Esta función es parte del ciclo de p5.js y se ejecuta antes de setup(). Aquí se carga el modelo de Teachable Machine especificado por imageModelURL. El modelo se utilizará para clasificar las imágenes capturadas por la cámara y determinar la dirección en la que debe moverse la serpiente.\n\n\n\n\nfunction setup() {\n  createCanvas(640, 480);\n  video = createCapture(VIDEO);\n  video.size(320, 240);\n  video.hide();\n  \n  flippedVideo = ml5.flipImage(video);\n  classifyVideo();\n  \n  w = floor(width / rez);\n  h = floor(height / rez);\n  snake = new Snake();\n  foodLocation();\n}\n\nsetup():\n\nSe crea un Canvas de 640x480 píxeles para el juego.\nSe captura el video de la cámara y se ajusta su tamaño a 320x240 píxeles. Este video se oculta porque solo se utiliza para la clasificación.\nml5.flipImage(video): Invierte la imagen del video horizontalmente para que los gestos reflejen movimientos naturales.\nclassifyVideo(): Inicia el proceso de clasificación de video, lo que permite que el modelo detecte gestos en tiempo real.\nSe inicializa la serpiente en el centro del Canvas y se coloca la comida en una posición aleatoria.\n\n\n\n\n\nfunction classifyVideo() {\n  flippedVideo = ml5.flipImage(video);\n  classifier.classify(flippedVideo, gotResult);\n}\n\nclassifyVideo():\n\nVuelve a invertir la imagen del video.\nUtiliza el clasificador (classifier) para analizar el video invertido y determinar el gesto capturado. El resultado se maneja en la función gotResult.\n\n\n\n\n\nfunction gotResult(error, results) {\n  if (error) {\n    console.error(error);\n    return;\n  }\n  label = results[0].label;\n  controlSnake();\n  classifyVideo();\n}\n\ngotResult():\n\nSi ocurre un error durante la clasificación, se muestra en la consola.\nSi no hay error, se actualiza la etiqueta (label) con el resultado de la clasificación, que indica el gesto detectado (por ejemplo, “UP”, “DOWN”).\nSe llama a la función controlSnake() para ajustar la dirección de la serpiente según el gesto detectado.\nSe repite el proceso de clasificación para capturar el siguiente fotograma del video.\n\n\n\n\n\nfunction controlSnake() {\n  if (!keyboard_control) {\n    if (label === \"UP\") {\n      snake.setDir(0, -1);\n    } else if (label === \"RIGHT\") {\n      snake.setDir(1, 0);\n    } else if (label === \"LEFT\") {\n      snake.setDir(-1, 0);\n    } else if (label === \"DOWN\") {\n      snake.setDir(0, 1);\n    }\n  }\n}\n\ncontrolSnake():\n\nSi el control del teclado está desactivado (keyboard_control == false), la dirección de la serpiente se ajusta en función de la etiqueta (label) detectada por el modelo. Por ejemplo, si la etiqueta es “UP”, la serpiente se moverá hacia arriba.\n\n\n\n\n\nfunction draw() {\n  background(220);\n  if (!keyboard_control) {\n    image(flippedVideo, 0, 0, 160, 120);\n    textSize(32);\n    fill(255);\n    stroke(0);\n    text(label, 10, 40);\n  }\n\n  scale(rez);\n  if (snake.eat(food)) {\n    foodLocation();\n    snake.update();\n  }\n  if (frameCount % speed == 0) {\n    snake.update();\n  }\n  snake.show();\n\n  if (snake.endGame()) {\n    print(\"END GAME\");\n    background(255, 0, 0);\n    noLoop();\n  }\n\n  noStroke();\n  fill(255, 0, 0);\n  rect(food.x, food.y, 1, 1);\n}\n\ndraw():\n\nEl Canvas se refresca en cada fotograma.\nSi el control del teclado está desactivado, se muestra la imagen del video invertido junto con la etiqueta del gesto detectado.\nLa serpiente se escala y se dibuja en el Canvas.\nSi la serpiente come la comida, se genera una nueva ubicación para la comida, y la serpiente crece.\nLa velocidad del juego se controla mediante la variable speed, actualizando la posición de la serpiente en función del número de fotogramas.\nSi la serpiente choca con el borde o consigo misma, el juego termina.\n\n\n\n\n\nclass Snake {\n  constructor() {\n    this.body = [];\n    this.body[0] = createVector(floor(w/2), floor(h/2));\n    this.xdir = 0;\n    this.ydir = 0;\n    this.len = 0;\n  }\n\n  setDir(x, y) {\n    this.xdir = x;\n    this.ydir = y;\n  }\n\n  update() {\n    let head = this.body[this.body.length-1].copy();\n    this.body.shift();\n    head.x += this.xdir;\n    head.y += this.ydir;\n    this.body.push(head);\n  }\n\n  grow() {\n    let head = this.body[this.body.length-1].copy();\n    this.len++;\n    this.body.push(head);\n  }\n\n  endGame() {\n    let x = this.body[this.body.length-1].x;\n    let y = this.body[this.body.length-1].y;\n    if(x &gt; w-1 || x &lt; 0 || y &gt; h-1 || y &lt; 0) {\n       return true;\n    }\n    for(let i = 0; i &lt; this.body.length-1; i++) {\n      let part = this.body[i];\n      if(part.x == x && part.y == y) {\n          return true;\n      }\n    }\n    return false;\n  }\n\n  eat(pos) {\n    let x = this.body[this.body.length-1].x;\n    let y = this.body[this.body.length-1].y;\n    if(x == pos.x && y == pos.y) {\n      this.grow();\n      return true;\n    }\n    return false;\n  }\n\n  show() {\n    for(let i = 0; i &lt; this.body.length; i) {\n      fill(0);\n      noStroke();\n      rect(this.body[i].x, this.body[i].y, 1, 1);\n    }\n  }\n}\n\nSnake: Esta clase define la serpiente en el juego.\n\nConstructor: Inicializa la serpiente con un solo segmento ubicado en el centro del Canvas.\nsetDir(x, y): Cambia la dirección de la serpiente según los valores proporcionados para x e y.\nupdate(): Mueve la serpiente en la dirección actual, eliminando el segmento más antiguo y añadiendo uno nuevo en la posición actual de la cabeza.\ngrow(): Añade un nuevo segmento al cuerpo de la serpiente cada vez que come.\nendGame(): Verifica si la serpiente ha chocado con el borde del Canvas o consigo misma, en cuyo caso el juego termina.\neat(pos): Determina si la serpiente ha comido la comida, comprobando si la posición de la cabeza coincide con la de la comida.\nshow(): Dibuja cada segmento del cuerpo de la serpiente en el Canvas.\n\n\n\n\n\nPuedes descargar el código completo acá: Código fuente.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Modelos TM + P5",
+      "Explicación del Código del Juego de la Serpiente en p5.js (Con gestos)"
+    ]
+  },
+  {
+    "objectID": "tm_p5/05_codigo_snake_con_gestos.html#explicación-del-código",
+    "href": "tm_p5/05_codigo_snake_con_gestos.html#explicación-del-código",
+    "title": "Explicación del Código del Juego de la Serpiente en p5.js (Con gestos)",
+    "section": "",
+    "text": "Este código implementa un juego de la serpiente, donde el usuario puede controlar la dirección de la serpiente utilizando gestos capturados por la cámara o, alternativamente, mediante las teclas de flecha del teclado. A continuación se describe cómo funciona el código en detalle.\n\n\nlet imageModelURL = \"https://teachablemachine.withgoogle.com/models/rfrmQGqz_/\";\nlet keyboard_control = false;\nlet speed = 5;\n\nimageModelURL: Esta variable contiene la URL del modelo de Teachable Machine que se utilizará para el reconocimiento de gestos. Este modelo será cargado más adelante en el código.\nkeyboard_control: Define si la serpiente se controla con gestos (false) o con el teclado (true).\nspeed: Establece la velocidad del juego. Un valor más bajo significa que la serpiente se moverá más rápido.\n\n\n\n\nfunction preload() {\n  classifier = ml5.imageClassifier(imageModelURL + \"model.json\");\n}\n\npreload(): Esta función es parte del ciclo de p5.js y se ejecuta antes de setup(). Aquí se carga el modelo de Teachable Machine especificado por imageModelURL. El modelo se utilizará para clasificar las imágenes capturadas por la cámara y determinar la dirección en la que debe moverse la serpiente.\n\n\n\n\nfunction setup() {\n  createCanvas(640, 480);\n  video = createCapture(VIDEO);\n  video.size(320, 240);\n  video.hide();\n  \n  flippedVideo = ml5.flipImage(video);\n  classifyVideo();\n  \n  w = floor(width / rez);\n  h = floor(height / rez);\n  snake = new Snake();\n  foodLocation();\n}\n\nsetup():\n\nSe crea un Canvas de 640x480 píxeles para el juego.\nSe captura el video de la cámara y se ajusta su tamaño a 320x240 píxeles. Este video se oculta porque solo se utiliza para la clasificación.\nml5.flipImage(video): Invierte la imagen del video horizontalmente para que los gestos reflejen movimientos naturales.\nclassifyVideo(): Inicia el proceso de clasificación de video, lo que permite que el modelo detecte gestos en tiempo real.\nSe inicializa la serpiente en el centro del Canvas y se coloca la comida en una posición aleatoria.\n\n\n\n\n\nfunction classifyVideo() {\n  flippedVideo = ml5.flipImage(video);\n  classifier.classify(flippedVideo, gotResult);\n}\n\nclassifyVideo():\n\nVuelve a invertir la imagen del video.\nUtiliza el clasificador (classifier) para analizar el video invertido y determinar el gesto capturado. El resultado se maneja en la función gotResult.\n\n\n\n\n\nfunction gotResult(error, results) {\n  if (error) {\n    console.error(error);\n    return;\n  }\n  label = results[0].label;\n  controlSnake();\n  classifyVideo();\n}\n\ngotResult():\n\nSi ocurre un error durante la clasificación, se muestra en la consola.\nSi no hay error, se actualiza la etiqueta (label) con el resultado de la clasificación, que indica el gesto detectado (por ejemplo, “UP”, “DOWN”).\nSe llama a la función controlSnake() para ajustar la dirección de la serpiente según el gesto detectado.\nSe repite el proceso de clasificación para capturar el siguiente fotograma del video.\n\n\n\n\n\nfunction controlSnake() {\n  if (!keyboard_control) {\n    if (label === \"UP\") {\n      snake.setDir(0, -1);\n    } else if (label === \"RIGHT\") {\n      snake.setDir(1, 0);\n    } else if (label === \"LEFT\") {\n      snake.setDir(-1, 0);\n    } else if (label === \"DOWN\") {\n      snake.setDir(0, 1);\n    }\n  }\n}\n\ncontrolSnake():\n\nSi el control del teclado está desactivado (keyboard_control == false), la dirección de la serpiente se ajusta en función de la etiqueta (label) detectada por el modelo. Por ejemplo, si la etiqueta es “UP”, la serpiente se moverá hacia arriba.\n\n\n\n\n\nfunction draw() {\n  background(220);\n  if (!keyboard_control) {\n    image(flippedVideo, 0, 0, 160, 120);\n    textSize(32);\n    fill(255);\n    stroke(0);\n    text(label, 10, 40);\n  }\n\n  scale(rez);\n  if (snake.eat(food)) {\n    foodLocation();\n    snake.update();\n  }\n  if (frameCount % speed == 0) {\n    snake.update();\n  }\n  snake.show();\n\n  if (snake.endGame()) {\n    print(\"END GAME\");\n    background(255, 0, 0);\n    noLoop();\n  }\n\n  noStroke();\n  fill(255, 0, 0);\n  rect(food.x, food.y, 1, 1);\n}\n\ndraw():\n\nEl Canvas se refresca en cada fotograma.\nSi el control del teclado está desactivado, se muestra la imagen del video invertido junto con la etiqueta del gesto detectado.\nLa serpiente se escala y se dibuja en el Canvas.\nSi la serpiente come la comida, se genera una nueva ubicación para la comida, y la serpiente crece.\nLa velocidad del juego se controla mediante la variable speed, actualizando la posición de la serpiente en función del número de fotogramas.\nSi la serpiente choca con el borde o consigo misma, el juego termina.\n\n\n\n\n\nclass Snake {\n  constructor() {\n    this.body = [];\n    this.body[0] = createVector(floor(w/2), floor(h/2));\n    this.xdir = 0;\n    this.ydir = 0;\n    this.len = 0;\n  }\n\n  setDir(x, y) {\n    this.xdir = x;\n    this.ydir = y;\n  }\n\n  update() {\n    let head = this.body[this.body.length-1].copy();\n    this.body.shift();\n    head.x += this.xdir;\n    head.y += this.ydir;\n    this.body.push(head);\n  }\n\n  grow() {\n    let head = this.body[this.body.length-1].copy();\n    this.len++;\n    this.body.push(head);\n  }\n\n  endGame() {\n    let x = this.body[this.body.length-1].x;\n    let y = this.body[this.body.length-1].y;\n    if(x &gt; w-1 || x &lt; 0 || y &gt; h-1 || y &lt; 0) {\n       return true;\n    }\n    for(let i = 0; i &lt; this.body.length-1; i++) {\n      let part = this.body[i];\n      if(part.x == x && part.y == y) {\n          return true;\n      }\n    }\n    return false;\n  }\n\n  eat(pos) {\n    let x = this.body[this.body.length-1].x;\n    let y = this.body[this.body.length-1].y;\n    if(x == pos.x && y == pos.y) {\n      this.grow();\n      return true;\n    }\n    return false;\n  }\n\n  show() {\n    for(let i = 0; i &lt; this.body.length; i) {\n      fill(0);\n      noStroke();\n      rect(this.body[i].x, this.body[i].y, 1, 1);\n    }\n  }\n}\n\nSnake: Esta clase define la serpiente en el juego.\n\nConstructor: Inicializa la serpiente con un solo segmento ubicado en el centro del Canvas.\nsetDir(x, y): Cambia la dirección de la serpiente según los valores proporcionados para x e y.\nupdate(): Mueve la serpiente en la dirección actual, eliminando el segmento más antiguo y añadiendo uno nuevo en la posición actual de la cabeza.\ngrow(): Añade un nuevo segmento al cuerpo de la serpiente cada vez que come.\nendGame(): Verifica si la serpiente ha chocado con el borde del Canvas o consigo misma, en cuyo caso el juego termina.\neat(pos): Determina si la serpiente ha comido la comida, comprobando si la posición de la cabeza coincide con la de la comida.\nshow(): Dibuja cada segmento del cuerpo de la serpiente en el Canvas.\n\n\n\n\n\nPuedes descargar el código completo acá: Código fuente.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Modelos TM + P5",
+      "Explicación del Código del Juego de la Serpiente en p5.js (Con gestos)"
+    ]
+  },
+  {
+    "objectID": "tm_p5/02_codigo_clasificador.html",
+    "href": "tm_p5/02_codigo_clasificador.html",
+    "title": "Código Clasificador día/noche",
+    "section": "",
+    "text": "Esta aplicación captura video en tiempo real desde la cámara del usuario y utiliza un modelo de aprendizaje automático, cargado desde Teachable Machine, para clasificar cada cuadro del video como “día” o “noche”. El resultado de la clasificación se muestra en la pantalla junto con un emoji representativo: un sol para “día” y una luna para “noche”. Además, la aplicación ofrece un botón que permite reiniciar la cámara, reiniciando la captura de video y volviendo a clasificar el entorno. Toda la interfaz está diseñada para actualizarse en tiempo real, proporcionando una experiencia interactiva y visualmente intuitiva para el usuario.\n\n1. Definición de Variables\nlet video;\nlet classifier;\nlet modelLoaded = 'https://teachablemachine.withgoogle.com/models/bXy2kDNi/';\nlet label = 'esperando...';\nlet resetButton;\n\nvideo: Esta variable guardará la captura de video en vivo desde la cámara.\nclassifier: Guardará el clasificador de imágenes que se utilizará para identificar si es “día” o “noche”.\nmodelLoaded: Es la URL donde se encuentra el modelo de aprendizaje automático que vamos a utilizar.\nlabel: Almacena la etiqueta (texto) que indica si es “día” o “noche”. Inicialmente se establece como “esperando…”.\nresetButton: Esta variable guardará el botón que se usará para reiniciar la cámara.\n\n\n\n2. Cargar el Modelo\nfunction preload() {\n  classifier = ml5.imageClassifier(modelLoaded);\n}\n\npreload(): Es una función que se ejecuta antes que cualquier otra cosa en el programa. Aquí, se carga el modelo de aprendizaje automático desde la URL que definimos antes en modelLoaded y se guarda en classifier.\n\n\n\n3. Configurar el Entorno\nfunction setup() {\n  createCanvas(640, 520); // Ajustar la altura del lienzo para que se ajuste al video\n  \n  // Crear el video\n  video = createCapture(VIDEO);\n  video.size(640, 480); // Ajustar el tamaño del video para que se ajuste al ancho del lienzo\n  video.hide();\n\n  // PASO 2: Comenzar a clasificar\n  classifyVideo();\n}\n\nsetup(): Esta función se ejecuta una vez al principio del programa.\n\ncreateCanvas(640, 520): Crea un espacio (lienzo) de 640x520 píxeles en donde se mostrará el video y otros elementos.\nvideo = createCapture(VIDEO): Inicia la captura de video desde la cámara.\nvideo.size(640, 480): Ajusta el tamaño del video para que encaje dentro del lienzo.\nvideo.hide(): Oculta el elemento HTML del video, ya que lo vamos a dibujar manualmente en el lienzo.\nclassifyVideo(): Inicia el proceso de clasificación del video en vivo.\n\n\n\n\n4. Clasificar el Video\nfunction classifyVideo() {\n  classifier.classify(video, gotResults);\n}\n\nclassifyVideo(): Esta función utiliza el clasificador (classifier) para analizar el video y determinar si es “día” o “noche”. Cuando se obtienen resultados, se llama a la función gotResults().\n\n\n\n5. Dibujar el Video y la Etiqueta\nfunction draw() {\n  // Dibujar el video\n  image(video, 0, 0);\n\n  // PASO 4: Dibujar la etiqueta\n  textSize(30);\n  textAlign(CENTER, CENTER);\n  fill(255);\n  text(label, width / 2, height - 16);\n\n  // Elegir un emoji, el \"predeterminado\" es un marcador de posición\n  let emoji = \"🫷\"; // Emoji predeterminado\n  if (label == \"nighttime\") {\n    emoji = \"☽\"; // Emoji para la noche\n  } else if (label == \"daytime\") {\n    emoji = \"🌞\"; // Emoji para el día\n  }\n\n  // Dibujar el emoji\n  textSize(256);\n  text(emoji, width / 2, height / 2);\n}\n\ndraw(): Esta función se ejecuta continuamente (muchas veces por segundo) y se encarga de dibujar en el lienzo.\n\nimage(video, 0, 0): Dibuja el video en vivo en la esquina superior izquierda del lienzo.\ntext(label, width / 2, height - 16): Dibuja la etiqueta (por ejemplo, “día” o “noche”) centrada en la parte inferior del lienzo.\ntext(emoji, width / 2, height / 2): Dibuja un emoji grande en el centro del lienzo. El emoji cambia según si la etiqueta indica “día” o “noche”.\n\n\n\n\n6. Obtener los Resultados\nfunction gotResults(error, results) {\n  // Si algo salió mal\n  if (error) {\n    console.error(error);\n    return;\n  }\n  // Actualizar la etiqueta con el resultado del clasificador\n  label = results[0].label;\n}\n\ngotResults(): Esta función recibe los resultados de la clasificación. Si hay un error, lo muestra en la consola. Si la clasificación es exitosa, actualiza la etiqueta (label) con el resultado, que puede ser “día” o “noche”.\n\n\n\n7. Reiniciar la Cámara\nfunction resetCamera() {\n  video.remove();  // Eliminar la captura de video actual\n  video = createCapture(VIDEO); // Reiniciar la captura de video\n  video.size(640, 480); // Asegurar que el nuevo video tenga el tamaño correcto\n  video.hide();\n  classifyVideo();  // Reiniciar la clasificación\n}\n\nresetCamera(): Esta función se usa para reiniciar la captura de video. Elimina la captura actual y la reinicia, asegurándose de que el nuevo video tenga el tamaño correcto, y luego reinicia el proceso de clasificación.\n\n\n\nResumen\nEste código toma un video en vivo desde la cámara, lo procesa usando un modelo de aprendizaje automático, y determina si la escena capturada es “día” o “noche”, mostrando un emoji correspondiente en el centro del video. Es un ejemplo simple pero poderoso de cómo se puede usar la programación para interactuar con tecnología de aprendizaje automático en tiempo real.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Modelos TM + P5",
+      "Código Clasificador día/noche"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/00_intro.html",
+    "href": "techeable-machines/00_intro.html",
+    "title": "Introducción a Teachable Machine de Google",
+    "section": "",
+    "text": "Teachable Machine es una herramienta desarrollada por Google que permite a cualquier persona, sin necesidad de conocimientos de programación, crear modelos de aprendizaje automático de forma sencilla e intuitiva. Esta herramienta está diseñada para democratizar el acceso a la inteligencia artificial, permitiendo a usuarios de todos los niveles de experiencia experimentar con la creación y entrenamiento de modelos que pueden reconocer patrones en imágenes, sonidos o poses.\n\n\n\nTeachable Machine",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Introducción a Teachable Machine de Google"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/00_intro.html#qué-es-teachable-machine",
+    "href": "techeable-machines/00_intro.html#qué-es-teachable-machine",
+    "title": "Introducción a Teachable Machine de Google",
+    "section": "",
+    "text": "Teachable Machine es una herramienta desarrollada por Google que permite a cualquier persona, sin necesidad de conocimientos de programación, crear modelos de aprendizaje automático de forma sencilla e intuitiva. Esta herramienta está diseñada para democratizar el acceso a la inteligencia artificial, permitiendo a usuarios de todos los niveles de experiencia experimentar con la creación y entrenamiento de modelos que pueden reconocer patrones en imágenes, sonidos o poses.\n\n\n\nTeachable Machine",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Introducción a Teachable Machine de Google"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/00_intro.html#cómo-funciona",
+    "href": "techeable-machines/00_intro.html#cómo-funciona",
+    "title": "Introducción a Teachable Machine de Google",
+    "section": "¿Cómo Funciona?",
+    "text": "¿Cómo Funciona?\nTeachable Machine funciona mediante un proceso simple de tres pasos: Entrenar, Evaluar y Exportar. Aquí te explicamos cada uno de ellos:\n\nEntrenar:\n\nLos usuarios crean clases y proporcionan ejemplos para cada una, ya sea subiendo archivos, utilizando la cámara o el micrófono. Por ejemplo, podrías entrenar un modelo para reconocer diferentes objetos al mostrarle imágenes de cada uno.\nLa herramienta utiliza estos ejemplos para aprender y formar un modelo de aprendizaje automático que pueda reconocer nuevas entradas similares.\n\nEvaluar:\n\nUna vez que el modelo está entrenado, puedes probarlo inmediatamente utilizando nuevas entradas. Por ejemplo, si entrenaste un modelo para reconocer imágenes de gatos y perros, puedes probarlo mostrando nuevas imágenes y ver si el modelo las clasifica correctamente.\nLa evaluación se realiza en tiempo real, permitiendo ajustar y mejorar el modelo de manera iterativa.\n\nExportar:\n\nDespués de entrenar y evaluar tu modelo, Teachable Machine te permite exportarlo para su uso en proyectos más amplios. Puedes descargar el modelo y utilizarlo en aplicaciones web, dispositivos móviles, u otros entornos de desarrollo.\nLa exportación es compatible con varias plataformas, incluyendo TensorFlow.js, lo que facilita la integración en diferentes proyectos.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Introducción a Teachable Machine de Google"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/00_intro.html#aplicaciones-de-teachable-machine",
+    "href": "techeable-machines/00_intro.html#aplicaciones-de-teachable-machine",
+    "title": "Introducción a Teachable Machine de Google",
+    "section": "Aplicaciones de Teachable Machine",
+    "text": "Aplicaciones de Teachable Machine\nTeachable Machine se utiliza en una amplia variedad de aplicaciones y proyectos. Aquí algunos ejemplos de cómo puede ser utilizado:\n\nEducación: Profesores y estudiantes pueden usar Teachable Machine para aprender sobre inteligencia artificial de manera práctica, creando proyectos interactivos que expliquen conceptos complejos de forma accesible.\nProyectos Creativos: Artistas y creadores pueden integrar modelos entrenados en Teachable Machine en instalaciones de arte, música generativa, o aplicaciones interactivas, donde las respuestas se basan en imágenes, sonidos o movimientos capturados en tiempo real.\nPrototipos Rápidos: Desarrolladores y diseñadores pueden usar la herramienta para crear rápidamente prototipos de aplicaciones que requieren reconocimiento de patrones, como aplicaciones de clasificación de imágenes o interfaces interactivas que responden a gestos.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Introducción a Teachable Machine de Google"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/00_intro.html#ejemplos-de-uso",
+    "href": "techeable-machines/00_intro.html#ejemplos-de-uso",
+    "title": "Introducción a Teachable Machine de Google",
+    "section": "Ejemplos de Uso",
+    "text": "Ejemplos de Uso\n\nClasificación de Imágenes: Puedes entrenar un modelo para diferenciar entre diferentes tipos de frutas, y luego usarlo en una aplicación que identifique la fruta que estás sosteniendo frente a la cámara.\nReconocimiento de Sonidos: Entrena un modelo para reconocer diferentes sonidos, como aplausos o silbidos, y utiliza esos sonidos como desencadenantes para acciones específicas en un proyecto de arte interactivo.\nDetección de Poses: Utiliza la herramienta para crear un modelo que detecte diferentes poses corporales, ideal para aplicaciones de fitness que necesitan monitorear y corregir posturas en tiempo real.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Introducción a Teachable Machine de Google"
+    ]
+  },
+  {
+    "objectID": "techeable-machines/00_intro.html#recursos-y-enlaces",
+    "href": "techeable-machines/00_intro.html#recursos-y-enlaces",
+    "title": "Introducción a Teachable Machine de Google",
+    "section": "Recursos y Enlaces",
+    "text": "Recursos y Enlaces\n\nPágina Principal de Teachable Machine: Visita el sitio oficial para comenzar a crear tus propios modelos.",
+    "crumbs": [
+      "C00 - Intro a Modelos Pre-Entrenados",
+      "Teachable Machines",
+      "Introducción a Teachable Machine de Google"
+    ]
+  },
+  {
+    "objectID": "exploracion_de_datos/spotify/spotify.html",
+    "href": "exploracion_de_datos/spotify/spotify.html",
+    "title": "Exploración de Datos (spotify api)",
+    "section": "",
+    "text": "Las requests http pueden tener distintos métodos de autenticación, a continuación veremos cómo hacer requests a una api usando tokens de acceso, para ello estaremos usando la api de Spotify.\nSiguiendo los pasos descritos en la documentación, crearemos nuestra cuenta, configuraremos nuestro dashboard, crearemos una app, ingresaremos nombre, descripción y URL de redirección (pueden usar https://example.com) y elegiremos “Web API” en las opciones de api.\nUna vez que demos a guardar, nos redirigirá a nuestra página de la app que acabamos de crear. Para obtener nuestro token de acceso, debemos ir a Settings en nuestra app, aqui podremos encontrar una Client ID y un Client secret el cual podemos ver haciendo click en el hyperlink del mismo nombre.\nUtilizando estos dos elementos, podemos obtener un token de acceso valido por una hora:\n\nimport requests\n\n#Nuestras credenciales\nclient_id = \"5ced241e4bda44c18c9145e6dae1aea2\"\nclient_secret = \"c1e19a1b83164fdb9990015db5691f00\"\n\n#URL para obtencion de tokens\nurl = \"https://accounts.spotify.com/api/token\"\n#Headers necesarios para la request\nheaders = {\n    \"Content-Type\": \"application/x-www-form-urlencoded\"\n}\n#Datos a enviar en la request, aqui van las credenciales\ndata = {\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": client_id,\n    \"client_secret\": client_secret\n}\n\n#Hacemos la request\nresponse = requests.post(url, headers=headers, data=data)\n\n#Guardamos el token\naccess_token = response.json().get(\"access_token\")\n\n#Mostramos el resultado\nprint(access_token)\n\nBQBwVSebUFoAUGuryV6dpJkGOHMJMIaVzcRm7cZBR2KEPz4MIa5DU2Fx94jNNPATsMYxf01tIPvTVO92E-OpS3lGq3-fl_dkJEsZJS0AV2yH96Sd9-4\n\n\nEsto nos devolverá como respuesta nuestro token de acceso, el cual será valido por una hora y podemos utilizar de la sigueinte manera para obtener la informacion de un artista:\n\n#Biblioteca para formatear json, sólo necesaria por claridad\nimport json\n\n#Necesitamos la id del artista para poder obtener su información. Para ésto podemos irnos a un artista en spotify, clickear los tres puntos y copiar su id.\nartist_id = \"4Z8W4fKeB5YxbusRsdQVPb\"\nurl_artist = f\"https://api.spotify.com/v1/artists/{artist_id}\"\nheaders_artist = {\n    \"Authorization\": f\"Bearer {access_token}\"\n}\n\nresponse_artist = requests.get(url_artist, headers=headers_artist)\n\nprint(json.dumps(response_artist.json(), indent=4))\n\n{\n    \"external_urls\": {\n        \"spotify\": \"https://open.spotify.com/artist/4Z8W4fKeB5YxbusRsdQVPb\"\n    },\n    \"followers\": {\n        \"href\": null,\n        \"total\": 10618841\n    },\n    \"genres\": [\n        \"alternative rock\",\n        \"art rock\",\n        \"melancholia\",\n        \"oxford indie\",\n        \"permanent wave\",\n        \"rock\"\n    ],\n    \"href\": \"https://api.spotify.com/v1/artists/4Z8W4fKeB5YxbusRsdQVPb\",\n    \"id\": \"4Z8W4fKeB5YxbusRsdQVPb\",\n    \"images\": [\n        {\n            \"url\": \"https://i.scdn.co/image/ab6761610000e5eba03696716c9ee605006047fd\",\n            \"height\": 640,\n            \"width\": 640\n        },\n        {\n            \"url\": \"https://i.scdn.co/image/ab67616100005174a03696716c9ee605006047fd\",\n            \"height\": 320,\n            \"width\": 320\n        },\n        {\n            \"url\": \"https://i.scdn.co/image/ab6761610000f178a03696716c9ee605006047fd\",\n            \"height\": 160,\n            \"width\": 160\n        }\n    ],\n    \"name\": \"Radiohead\",\n    \"popularity\": 84,\n    \"type\": \"artist\",\n    \"uri\": \"spotify:artist:4Z8W4fKeB5YxbusRsdQVPb\"\n}\n\n\nDe esta forma podemos utilizar nuestro token para realizar requests a la API de Spotify. Para explorar los distintos endpoints y requests que se pueden hacer, podemos revisar la documentacion de Spotify.",
+    "crumbs": [
+      "C12 - Exploración de Datos",
+      "API Spotify",
+      "Exploración de Datos (spotify api)"
+    ]
+  }
+]
