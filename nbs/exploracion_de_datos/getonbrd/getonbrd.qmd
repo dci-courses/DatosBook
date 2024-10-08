@@ -1,0 +1,75 @@
+---
+title: "Exploración de Datos (getonbrd api)"
+description: "Ejemplo de extracción de datos de una api"
+format: html
+jypyter: python3
+---
+
+[Getonbrd](https://getonbrd.com/) es una página que permite a sus usuarios buscar y publicar trabajos en Latino America, tiene información sobre trabajos de mas de 12.000 compañias.
+
+A continuación veremos cómo usar su [API](https://api-doc.getonbrd.com/) para obtener datos los cuales podemos parsear y analizar usando otras herramientas.
+
+
+### Request básica
+Para la creación de peticiones http usarémos la biblioteca de python llamada [requests](https://pypi.org/project/requests/), la cual nos permite hacer peticiones simplemente con la url de la api a la que queremos llamar. (La biblioteca incluye muchas otras opciones, pero por brevedad, sólo observaremos las funcionalidades básicas)
+
+```{python}
+#Importamos la biblioteca
+import requests
+
+#Definimos la URL a la que queremos hacer peticiones
+url = "https://www.getonbrd.com/api/v0/categories?per_page=10&page=1"
+
+#Hacemos la peticion y la guardamos en una variable
+response = requests.get(url)
+
+#Obtenemos el json de la respuesta
+response.json()
+```
+
+Esto nos dará como respuesta la lista de categorias que getonbrd ofrece, los muchos otros endpoints están explicados con gran detalle en su [API](https://api-doc.getonbrd.com/).
+
+### Indexado de JSON
+Algo a tener en cuenta al momento de parsear respuestas https es que, al ser JSON, pueden ser tratadas como diccionarios/objetos/arrays.
+Por ejemplo, si quisieramos obtener sólo la primera categoría de la respuesta:
+
+```{python}
+import requests
+
+url = "https://www.getonbrd.com/api/v0/categories?per_page=10&page=1"
+
+#Podemos reducir la asignación y formato de los datos en una linea
+response = requests.get(url).json()
+
+#Tratamos el JSON como un objeto, podemos indexarlo como tal
+primera_categoria = response['data'][0]['attributes']['name']
+
+primera_categoria
+```
+
+De esta manera podemos parsear y obtener exactamente lo que nosotros queramos de las peticiones, lo que nos permite luego pasarlo como parámetro a otras herramientas de análisis.
+
+### Guardado a archivo
+
+Por último veremos como guardar la información a un archivo, el cual luego podremos utilizar con otras herramientas.
+
+```{python}
+import requests, json
+
+url = "https://www.getonbrd.com/api/v0/categories?per_page=10&page=1"
+
+response = requests.get(url).json()
+
+#Nos aseguramos de que lo que estamos intenando guardar sea un diccionario (json)
+if isinstance(response, dict):
+    #Guardamos los datos en un archivo json
+    with open('./categorias.json', 'w', encoding='utf-8') as file:
+        json.dump(response, file, ensure_ascii=False, indent=4)
+```
+
+Con esto deberiamos ser capaces de obtener todos los datos que querramos de cualquier API.
+
+### Otros tutoriales utiles
+
+- [Más sobre parseo de JSON](https://medium.com/@datajournal/how-to-parse-json-data-with-python-99069a405e2b)
+- [Variables dentro de una String](https://builtin.com/articles/python-variable-in-string)
