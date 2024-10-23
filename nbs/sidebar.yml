@@ -60,3 +60,11 @@ website:
           - section: API Spotify
             contents:
               - exploracion_de_datos/spotify/spotify.qmd
+      - section: C13 - NLP
+        contents:
+          - section: Clasificación de texto
+            contents:
+              - "nlp/00_predicciones.ipynb"
+          - section: Procesamiento de texto
+            contents:
+              - "nlp/01_clasificacion_de_texto.ipynb"
