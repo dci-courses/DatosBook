@@ -74,4 +74,10 @@ website:
         contents:
           - section: Ejemplo 1
             contents:
-              - association-rules/01_ejemplo_1.1.qmd
+              - "association-rules/01_ejemplo_1.1.qmd"
+          - section: Ejemplo 2
+            contents:
+              - "association-rules/02_ejemplo_1.2.ipynb"
+          - section: Ejercicio
+            contents:
+              - "association-rules/03_ejercicio.ipynb"
