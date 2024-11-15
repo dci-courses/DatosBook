@@ -68,3 +68,10 @@ website:
           - section: Procesamiento de texto
             contents:
               - "nlp/01_clasificacion_de_texto.ipynb"
+
+
+      - section: C14 - Association Rules
+        contents:
+          - section: Ejemplo 1
+            contents:
+              - "nbs/association-rules/01_ejemplo_1.1.qmd"

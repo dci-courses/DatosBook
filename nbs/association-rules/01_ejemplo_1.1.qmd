@@ -1,0 +1,90 @@
+Aquí está el archivo Quarto Markdown (QMD) con **todo el contenido junto**, como lo prefieres, sin separarlo con marcadores adicionales:
+
+```markdown
+---
+title: "Introducción a las Reglas de Asociación"
+description: "Ejemplo didáctico de minería de datos para reglas de asociación"
+format: html
+jupyter: python3
+---
+
+Las reglas de asociación son una técnica de minería de datos que permite descubrir relaciones interesantes entre variables en grandes conjuntos de datos. Estas reglas son especialmente útiles en el análisis de datos de transacciones, como los registros de ventas en un supermercado. Vamos a crear un ejemplo didáctico para entender cómo funcionan.
+
+**Ítem (Item)**: Un ítem es un producto o artículo individual que se vende en una transacción. En el contexto de las reglas de asociación, un conjunto de ítems se refiere a uno o más productos que se compran juntos en una transacción.
+
+**Soporte (Support)**: Es la proporción de transacciones que contienen un conjunto de ítems específico. Ayuda a identificar cuán común es un conjunto de ítems en el conjunto de datos.
+   
+$$
+\text{Soporte} = \frac{\text{Número de transacciones que contienen el conjunto de ítems}}{\text{Número total de transacciones}}
+$$
+
+El soporte mide la frecuencia con la que un conjunto de ítems aparece en el conjunto de datos. Es útil porque nos ayuda a identificar cuáles combinaciones de productos son comunes en nuestras transacciones. Por ejemplo, si el soporte de "leche y pan" es alto, significa que estos productos se compran juntos con frecuencia.
+
+**Confianza (Confidence)**: Es la proporción de transacciones que contienen el conjunto de ítems A que también contienen el conjunto de ítems B. Indica la probabilidad de que B se compre cuando A se compra.
+   
+$$
+\text{Confianza}(A \rightarrow B) = \frac{\text{Soporte}(A \cup B)}{\text{Soporte}(A)}
+$$
+
+La confianza mide la probabilidad de que el ítem B sea comprado cuando el ítem A ya ha sido comprado. Es útil para entender la fuerza de la regla de asociación. Por ejemplo, una confianza del 75% para la regla "leche $\rightarrow$ pan" significa que el 75% de las veces que los clientes compran leche, también compran pan.
+
+**Lift**: Mide la relación entre la ocurrencia de A y B. Indica cuánto más probable es que B se compre cuando A se compra, en comparación con la probabilidad de comprar B sin A.
+   
+$$
+\text{Lift}(A \rightarrow B) = \frac{\text{Confianza}(A \rightarrow B)}{\text{Soporte}(B)}
+$$
+
+El lift mide la relación entre la ocurrencia de A y B en comparación con su ocurrencia esperada si fueran independientes. Un lift mayor a 1 indica que A y B ocurren juntos más a menudo de lo esperado si fueran independientes. Es útil para identificar relaciones significativas entre productos. Por ejemplo, si el lift de "leche $\rightarrow$ pan" es 1.125, significa que los clientes que compran leche son 1.125 veces más propensos a comprar pan que el promedio de todos los clientes.
+
+Imaginemos que gestionas un pequeño supermercado y tienes los datos de las transacciones de los últimos meses. Quieres analizar estos datos para descubrir patrones en las compras de tus clientes, es decir, qué productos suelen comprarse juntos.
+
+Supongamos que tenemos las siguientes transacciones:
+
+- Transacción 1: Leche, Pan, Mantequilla
+- Transacción 2: Leche, Pan
+- Transacción 3: Leche, Manzana
+- Transacción 4: Pan, Mantequilla 
+- Transacción 5: Leche, Pan, Mantequilla, Manzana 
+- Transacción 6: Manzana, Mantequilla
+
+```{python}
+# Matriz de transacciones
+import pandas as pd
+
+data = {
+    'Leche': [1, 1, 1, 0, 1, 0],
+    'Pan': [1, 1, 0, 1, 1, 0],
+    'Mantequilla': [1, 0, 0, 1, 1, 1],
+    'Manzana': [0, 0, 1, 0, 1, 1]
+}
+
+transacciones = pd.DataFrame(data, index=[f'T{i}' for i in range(1, 7)])
+transacciones
+```
+
+Calculamos el soporte de cada producto:
+
+```{python}
+# Cálculo del soporte
+soporte = transacciones.sum() / len(transacciones)
+soporte
+```
+
+Creamos reglas básicas:
+
+```{python}
+# Cálculo de confianza y lift para Leche -> Pan
+soporte_leche_pan = (transacciones['Leche'] & transacciones['Pan']).sum() / len(transacciones)
+confianza_leche_pan = soporte_leche_pan / soporte['Leche']
+lift_leche_pan = confianza_leche_pan / soporte['Pan']
+
+{
+    'Confianza (Leche -> Pan)': confianza_leche_pan,
+    'Lift (Leche -> Pan)': lift_leche_pan
+}
+```
+
+La regla $\{Leche\} \rightarrow \{Pan\}$ con una confianza de 0.75 significa que el 75% de las veces que los clientes compran leche, también compran pan. Un lift de 1.125 indica una relación positiva entre la compra de leche y pan.
+```
+
+Este formato es un único bloque fluido sin dividirse en secciones adicionales o marcadores. Todo está integrado para que se lea de principio a fin sin interrupciones.
