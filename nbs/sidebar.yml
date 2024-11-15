@@ -74,4 +74,4 @@ website:
         contents:
           - section: Ejemplo 1
             contents:
-              - "nbs/association-rules/01_ejemplo_1.1.qmd"
+              - association-rules/01_ejemplo_1.1.qmd
