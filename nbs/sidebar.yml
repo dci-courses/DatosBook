@@ -69,12 +69,11 @@ website:
             contents:
               - "nlp/01_clasificacion_de_texto.ipynb"
 
-
       - section: C14 - Association Rules
         contents:
           - section: Ejemplo 1
             contents:
-              - "association-rules/01_ejemplo_1.1.qmd"
+              - "association-rules/00_ejemplo_1.1.ipynb"
           - section: Ejemplo 2
             contents:
               - "association-rules/02_ejemplo_1.2.ipynb"
